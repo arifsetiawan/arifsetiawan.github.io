@@ -9,8 +9,7 @@
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="Starting to blog with octopress! markdown is fun! First time push, github pages not showing my blogs content. Trying again
-">
+  <meta name="description" content="Starting to blog with octopress! blogging with markdown is fun! First time push, github pages not showing my blogs content. Trying again Steps on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,6 +31,18 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45905282-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
@@ -92,9 +103,70 @@
   </header>
 
 
-<div class="entry-content"><p>Starting to blog with octopress! markdown is fun!</p>
+<div class="entry-content"><p>Starting to blog with octopress! blogging with markdown is fun!</p>
 
 <p>First time push, github pages not showing my blogs content. Trying again</p>
+
+<h2>Steps on blogging with Octopress</h2>
+
+<p>(So I don&rsquo;t always google)</p>
+
+<!-- more -->
+
+
+<p>Notes copied from <a href="http://octopress.org/docs/blogging/">octopress docs</a></p>
+
+<h3>New article</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["This is awesome article title!"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>edit headers, add categories. Example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># One category
+</span><span class='line'>categories: Code
+</span><span class='line'> 
+</span><span class='line'># Multiple categories example 1
+</span><span class='line'>categories: [Code, C++]
+</span><span class='line'> 
+</span><span class='line'># Multiple categories example 2
+</span><span class='line'>categories:
+</span><span class='line'>- Code
+</span><span class='line'>- C++</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>New Pages</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_page[super-awesome]
+</span><span class='line'># creates /source/super-awesome/index.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Content</h3>
+
+<p>Inserting <code>&lt;!-- more --&gt;</code> will prevent the post content below this mark from being displayed on the index page for the blog posts</p>
+
+<h3>Generate, Preview, Publish</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake generate   # Generates posts and pages into the public directory
+</span><span class='line'>bundle exec rake preview    # Watches, and mounts a webserver at http://localhost:4000
+</span><span class='line'>bundle exec rake deploy     # Deploy to git</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -125,7 +197,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arifsetiawan.github.io/blog/2013/11/21/hello-world/" data-via="" data-counturl="http://arifsetiawan.github.io/blog/2013/11/21/hello-world/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arifsetiawan.github.io/blog/2013/11/21/hello-world/" data-via="ken121f" data-counturl="http://arifsetiawan.github.io/blog/2013/11/21/hello-world/" >Tweet</a>
   
   
   
@@ -138,6 +210,12 @@
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -171,6 +249,22 @@
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'n_arif_setiawan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://arifsetiawan.github.io/blog/2013/11/21/hello-world/';
+        var disqus_url = 'http://arifsetiawan.github.io/blog/2013/11/21/hello-world/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
