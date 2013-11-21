@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Infinite Squares]]></title>
   <link href="http://arifsetiawan.github.io/atom.xml" rel="self"/>
   <link href="http://arifsetiawan.github.io/"/>
-  <updated>2013-11-21T13:46:57+07:00</updated>
+  <updated>2013-11-21T14:02:18+07:00</updated>
   <id>http://arifsetiawan.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Nurul Arif Setiawan]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -19,6 +19,8 @@
     <updated>2013-11-21T13:43:28+07:00</updated>
     <id>http://arifsetiawan.github.io/blog/2013/11/21/hello-world</id>
     <content type="html"><![CDATA[<p>Starting to blog with octopress! markdown is fun!</p>
+
+<p>First time push, github pages not showing my blogs content. Trying again</p>
 ]]></content>
   </entry>
   
