@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite Squares]]></title>
   <link href="http://infinite.cymbidium.co.id/atom.xml" rel="self"/>
   <link href="http://infinite.cymbidium.co.id/"/>
-  <updated>2013-11-21T15:50:05+07:00</updated>
+  <updated>2013-11-21T16:29:09+07:00</updated>
   <id>http://infinite.cymbidium.co.id/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -19,8 +19,6 @@
     <updated>2013-11-21T13:43:28+07:00</updated>
     <id>http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world</id>
     <content type="html"><![CDATA[<p>Starting to blog with octopress! blogging with markdown is fun!</p>
-
-<p>First time push, github pages not showing my blogs content. Trying again</p>
 
 <h2>Steps on blogging with Octopress</h2>
 
