@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://arifsetiawan.github.io/sitemap.xml 
+Sitemap: http://infinite.cymbidium.co.id/sitemap.xml 
