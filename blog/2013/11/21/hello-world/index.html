@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Node.js Project Base Template - Infinite Squares</title>
+  <title>Hello Octopress - Infinite Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="There are many Node.js starting template, and after working couple times with Expressjs, I also ended up creating my own base template. You can check &hellip;">
+  <meta name="description" content="Starting to blog with octopress! blogging with markdown is fun! Steps on blogging with Octopress (So I don&rsquo;t always google) Notes copied from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://infinite.cymbidium.co.id/blog/2014/09/09/nodejs-project-base-template">
+  <link rel="canonical" href="http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite Squares" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Node.js Project Base Template</h1>
+      <h1 class="entry-title">Hello Octopress</h1>
     
     
       <p class="meta">
@@ -96,34 +96,74 @@
   
 
 
-<time datetime="2014-09-09T15:11:00+07:00" pubdate data-updated="true">Sep 9<span>th</span>, 2014</time>
+<time datetime="2013-11-21T13:43:28+07:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>There are many Node.js starting template, and after working couple times with <a href="http://expressjs.com/">Expressjs</a>, I also ended up creating my own base template. You can check it out <a href="https://github.com/arifsetiawan/node-base">here</a>.</p>
+<div class="entry-content"><p>Starting to blog with octopress! blogging with markdown is fun!</p>
 
-<p>Base template ideally support your workflow and it has some structure to organize your code. My base template is by no means a full working project like <a href="http://sailsjs.org/">sailsjs</a>, it just a bunch of codes that I would like to be readily available when I started a Node.js project. I will evolve.</p>
+<h2>Steps on blogging with Octopress</h2>
 
-<h2>Components</h2>
+<p>(So I don&rsquo;t always google)</p>
 
-<ul>
-<li>MongoDB as database</li>
-<li>Passport to manage authentication with session stored in MongoDB</li>
-<li>Formidable for multipart post</li>
-<li>Swig as templating engine</li>
-<li>Generic MongoDB query</li>
-<li>Front end components
+<!-- more -->
 
-<ul>
-<li>Bootstrap</li>
-<li>Font awesome</li>
-<li>jQuery</li>
-</ul>
-</li>
-</ul>
+
+<p>Notes copied from <a href="http://octopress.org/docs/blogging/">octopress docs</a></p>
+
+<h3>New article</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["This is awesome article title!"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>edit headers, add categories. Example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># One category
+</span><span class='line'>categories: Code
+</span><span class='line'> 
+</span><span class='line'># Multiple categories example 1
+</span><span class='line'>categories: [Code, C++]
+</span><span class='line'> 
+</span><span class='line'># Multiple categories example 2
+</span><span class='line'>categories:
+</span><span class='line'>- Code
+</span><span class='line'>- C++</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>New Pages</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_page[super-awesome]
+</span><span class='line'># creates /source/super-awesome/index.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Content</h3>
+
+<p>Inserting <code>&lt;!-- more --&gt;</code> will prevent the post content below this mark from being displayed on the index page for the blog posts</p>
+
+<h3>Generate, Preview, Publish</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake generate   # Generates posts and pages into the public directory
+</span><span class='line'>bundle exec rake preview    # Watches, and mounts a webserver at http://localhost:4000
+</span><span class='line'>bundle exec rake deploy     # Deploy to git</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -147,7 +187,7 @@
   
 
 
-<time datetime="2014-09-09T15:11:00+07:00" pubdate data-updated="true">Sep 9<span>th</span>, 2014</time>
+<time datetime="2013-11-21T13:43:28+07:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
       
 
 <span class="categories">
@@ -161,7 +201,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://infinite.cymbidium.co.id/blog/2014/09/09/nodejs-project-base-template/" data-via="ken121f" data-counturl="http://infinite.cymbidium.co.id/blog/2014/09/09/nodejs-project-base-template/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world/" data-via="ken121f" data-counturl="http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world/" >Tweet</a>
   
   
   
@@ -170,8 +210,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/21/hello-world/" title="Previous Post: Hello Octopress">&laquo; Hello Octopress</a>
       
+        <a class="basic-alignment right" href="/blog/2014/09/09/nodejs-project-base-template/" title="Next Post: Node.js project base template">Node.js project base template &raquo;</a>
       
     </p>
   </footer>
@@ -244,8 +284,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://infinite.cymbidium.co.id/blog/2014/09/09/nodejs-project-base-template/';
-        var disqus_url = 'http://infinite.cymbidium.co.id/blog/2014/09/09/nodejs-project-base-template/';
+        var disqus_identifier = 'http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world/';
+        var disqus_url = 'http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world/';
         var disqus_script = 'embed.js';
       
     (function () {

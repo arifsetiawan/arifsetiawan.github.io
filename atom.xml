@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite Squares]]></title>
   <link href="http://infinite.cymbidium.co.id/atom.xml" rel="self"/>
   <link href="http://infinite.cymbidium.co.id/"/>
-  <updated>2014-09-09T15:57:35+07:00</updated>
+  <updated>2014-09-09T16:05:47+07:00</updated>
   <id>http://infinite.cymbidium.co.id/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -21,6 +21,95 @@
     <content type="html"><![CDATA[<p>There are many Node.js starting template, and after working couple times with <a href="http://expressjs.com/">Expressjs</a>, I also ended up creating my own base template. You can check it out <a href="https://github.com/arifsetiawan/node-base">here</a>.</p>
 
 <p>Base template ideally support your workflow and it has some structure to organize your code. My base template is by no means a full working project like <a href="http://sailsjs.org/">sailsjs</a>, it just a bunch of codes that I would like to be readily available when I started a Node.js project. I will evolve.</p>
+
+<h2>Components</h2>
+
+<ul>
+<li>MongoDB as database</li>
+<li>Passport to manage authentication with session stored in MongoDB</li>
+<li>Formidable for multipart post</li>
+<li>Swig as templating engine</li>
+<li>Generic MongoDB query</li>
+<li>Front end components
+
+<ul>
+<li>Bootstrap</li>
+<li>Font awesome</li>
+<li>jQuery</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello Octopress]]></title>
+    <link href="http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world/"/>
+    <updated>2013-11-21T13:43:28+07:00</updated>
+    <id>http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world</id>
+    <content type="html"><![CDATA[<p>Starting to blog with octopress! blogging with markdown is fun!</p>
+
+<h2>Steps on blogging with Octopress</h2>
+
+<p>(So I don&rsquo;t always google)</p>
+
+<!-- more -->
+
+
+<p>Notes copied from <a href="http://octopress.org/docs/blogging/">octopress docs</a></p>
+
+<h3>New article</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["This is awesome article title!"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>edit headers, add categories. Example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># One category
+</span><span class='line'>categories: Code
+</span><span class='line'> 
+</span><span class='line'># Multiple categories example 1
+</span><span class='line'>categories: [Code, C++]
+</span><span class='line'> 
+</span><span class='line'># Multiple categories example 2
+</span><span class='line'>categories:
+</span><span class='line'>- Code
+</span><span class='line'>- C++</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>New Pages</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_page[super-awesome]
+</span><span class='line'># creates /source/super-awesome/index.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Content</h3>
+
+<p>Inserting <code>&lt;!-- more --&gt;</code> will prevent the post content below this mark from being displayed on the index page for the blog posts</p>
+
+<h3>Generate, Preview, Publish</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake generate   # Generates posts and pages into the public directory
+</span><span class='line'>bundle exec rake preview    # Watches, and mounts a webserver at http://localhost:4000
+</span><span class='line'>bundle exec rake deploy     # Deploy to git</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
