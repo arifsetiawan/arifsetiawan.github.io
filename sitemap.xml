@@ -1,27 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://infinite.cymbidium.co.id/blog/2013/11/21/hello-world/</loc>
+        <loc>http://blog.infinitesquares.net/blog/2013/11/21/hello-world/</loc>
         <lastmod>2014-09-09T16:05:16+07:00</lastmod>
     </url>
     <url>
-        <loc>http://infinite.cymbidium.co.id/blog/2014/09/09/nodejs-project-base-template/</loc>
+        <loc>http://blog.infinitesquares.net/blog/2014/09/09/nodejs-project-base-template/</loc>
         <lastmod>2014-09-09T16:28:59+07:00</lastmod>
     </url>
     <url>
-        <loc>http://infinite.cymbidium.co.id/blog/archives/</loc>
+        <loc>http://blog.infinitesquares.net/blog/archives/</loc>
         <lastmod>2014-09-09T16:28:59+07:00</lastmod>
     </url>
     <url>
-        <loc>http://infinite.cymbidium.co.id/blog/categories/</loc>
+        <loc>http://blog.infinitesquares.net/blog/categories/</loc>
         <lastmod>2014-09-09T16:19:33+07:00</lastmod>
     </url>
     <url>
-        <loc>http://infinite.cymbidium.co.id/</loc>
+        <loc>http://blog.infinitesquares.net/</loc>
         <lastmod>2014-09-09T16:28:59+07:00</lastmod>
     </url>
     <url>
-        <loc>http://infinite.cymbidium.co.id/robots.txt</loc>
+        <loc>http://blog.infinitesquares.net/robots.txt</loc>
         <lastmod>2013-11-21T13:30:34+07:00</lastmod>
     </url>
 </urlset>

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://infinite.cymbidium.co.id/sitemap.xml 
+Sitemap: http://blog.infinitesquares.net/sitemap.xml 
