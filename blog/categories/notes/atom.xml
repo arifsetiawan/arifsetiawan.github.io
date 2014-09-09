@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Infinite Squares]]></title>
-  <link href="http://infinite.cymbidium.co.id/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Notes | Infinite Squares]]></title>
+  <link href="http://infinite.cymbidium.co.id/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://infinite.cymbidium.co.id/"/>
   <updated>2014-09-09T15:13:25+07:00</updated>
   <id>http://infinite.cymbidium.co.id/</id>
