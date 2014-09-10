@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Notes | Infinite Squares]]></title>
+  <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-10T14:37:52+07:00</updated>
+  <updated>2014-09-10T16:36:09+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -36,7 +36,7 @@
 <li><code>git add .</code> &ndash;> add updated files into staging</li>
 <li><code>git commit -am "commit message"</code> &ndash;> commit staging</li>
 <li><code>git push REMOTE BRANCH</code> &ndash;> push to remote</li>
-<li><code>git fetch</code> &ndash;> get update from remote</li>
+<li><code>git fetch REMOTE</code> &ndash;> get update from remote</li>
 <li><code>git merge REMOTE/BRANCH</code> &ndash;> merge with remote branch</li>
 <li><code>git pull REMOTE BRANCH</code> &ndash;> fetch and merge from remote branch</li>
 <li><code>git rm --cached FILE</code> &ndash;> remove file from git cache</li>
@@ -50,8 +50,9 @@
 <ul>
 <li><code>git checkout SHA</code> &ndash;> checkout the commit SHA</li>
 <li><code>git diff --name-status SHA1 SHA2</code> &ndash;> check what file is changed between two commits</li>
-<li><code>git reset HEAD -- .</code> clear staging</li>
-<li><code>git merge --abort</code> cancel merge</li>
+<li><code>git reset HEAD -- .</code> &ndash;> clear staging</li>
+<li><code>git merge --abort</code> &ndash;> cancel merge</li>
+<li><code>git reset --hard HEAD~1</code> &ndash;> nuke the last commit</li>
 </ul>
 
 
