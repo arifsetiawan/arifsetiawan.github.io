@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-09T17:18:05+07:00</updated>
+  <updated>2014-09-10T14:37:52+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -14,11 +14,60 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Github Commands]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/10/github-commands/"/>
+    <updated>2014-09-10T14:15:37+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/09/10/github-commands</id>
+    <content type="html"><![CDATA[<p><a href="http://git-scm.com/">Git</a> is very powerful distributed revision control. It has lots of commands but I only use several of them. I often forget some of the rarely used git commands so I make notes here.</p>
+
+<ul>
+<li><code>git clone REPOURL LOCALFOLDER</code> &ndash;> obviously to clone</li>
+<li><code>git status</code> &ndash;> get status of what files are modified, added or deleted</li>
+</ul>
+
+
+<!-- more -->
+
+
+<ul>
+<li><code>git log</code> &ndash;> get commit log</li>
+<li><code>git checkout -b NEWBRANCH</code> &ndash;> create new branch from existing</li>
+<li><code>git checkout BRANCH</code> &ndash;> checkout the branch.</li>
+<li><code>git add .</code> &ndash;> add updated files into staging</li>
+<li><code>git commit -am "commit message"</code> &ndash;> commit staging</li>
+<li><code>git push REMOTE BRANCH</code> &ndash;> push to remote</li>
+<li><code>git fetch</code> &ndash;> get update from remote</li>
+<li><code>git merge REMOTE/BRANCH</code> &ndash;> merge with remote branch</li>
+<li><code>git pull REMOTE BRANCH</code> &ndash;> fetch and merge from remote branch</li>
+<li><code>git rm --cached FILE</code> &ndash;> remove file from git cache</li>
+<li><code>git rm -r --cached FOLDER</code> &ndash;> remove folder from git cache</li>
+<li><code>git checkout -- .</code> &ndash;> reset all current changes</li>
+</ul>
+
+
+<p>Here are some not-so-common git command that I found out based on necessity</p>
+
+<ul>
+<li><code>git checkout SHA</code> &ndash;> checkout the commit SHA</li>
+<li><code>git diff --name-status SHA1 SHA2</code> &ndash;> check what file is changed between two commits</li>
+<li><code>git reset HEAD -- .</code> clear staging</li>
+<li><code>git merge --abort</code> cancel merge</li>
+</ul>
+
+
+<p>I will add more when I found out other git commands</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Node.js Project Base Template]]></title>
     <link href="http://blog.infinitesquares.net/blog/2014/09/09/nodejs-project-base-template/"/>
     <updated>2014-09-09T15:11:00+07:00</updated>
     <id>http://blog.infinitesquares.net/blog/2014/09/09/nodejs-project-base-template</id>
     <content type="html"><![CDATA[<p>There are many Node.js starting template, and after working couple times with <a href="http://expressjs.com/">Expressjs</a>, I also ended up creating my own base template. You can check it out <a href="https://github.com/arifsetiawan/node-base">here</a>.</p>
+
+<!-- more -->
+
 
 <p>Base template ideally support your workflow and it has some structure to organize your code. My base template is not meant to be a full fledged framework like <a href="http://sailsjs.org/">sailsjs</a>, it just a bunch of codes that I would like to be readily available when I started a Node.js project. As I work more with Node.js, my base template will be evolving.</p>
 
