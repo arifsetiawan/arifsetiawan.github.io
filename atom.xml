@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-10T16:36:09+07:00</updated>
+  <updated>2014-09-11T16:28:18+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -53,6 +53,8 @@
 <li><code>git reset HEAD -- .</code> &ndash;> clear staging</li>
 <li><code>git merge --abort</code> &ndash;> cancel merge</li>
 <li><code>git reset --hard HEAD~1</code> &ndash;> nuke the last commit</li>
+<li><code>git branch -a</code> &ndash;> list all branch remote and local</li>
+<li><code>git branch -r</code> &ndash;> list remote branch</li>
 </ul>
 
 
