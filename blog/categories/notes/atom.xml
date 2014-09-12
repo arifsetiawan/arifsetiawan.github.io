@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-11T16:28:18+07:00</updated>
+  <updated>2014-09-12T13:11:19+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -55,6 +55,10 @@
 <li><code>git reset --hard HEAD~1</code> &ndash;> nuke the last commit</li>
 <li><code>git branch -a</code> &ndash;> list all branch remote and local</li>
 <li><code>git branch -r</code> &ndash;> list remote branch</li>
+<li><code>git branch -m &lt;oldname&gt; &lt;newname&gt;</code> &ndash;> rename any branch</li>
+<li><code>git branch -m &lt;newname&gt;</code> &ndash;> rename current branch</li>
+<li><code>git push origin newname</code> &ndash;> push new branch to remote</li>
+<li><code>git push origin :oldname</code> &ndash;> remove old branch from remote</li>
 </ul>
 
 
