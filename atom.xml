@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-12T13:11:19+07:00</updated>
+  <updated>2014-09-15T14:07:39+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -57,9 +57,34 @@
 <li><code>git branch -r</code> &ndash;> list remote branch</li>
 <li><code>git branch -m &lt;oldname&gt; &lt;newname&gt;</code> &ndash;> rename any branch</li>
 <li><code>git branch -m &lt;newname&gt;</code> &ndash;> rename current branch</li>
+<li><code>git branch -d &lt;branch&gt;</code> &ndash;> delete branch</li>
 <li><code>git push origin newname</code> &ndash;> push new branch to remote</li>
 <li><code>git push origin :oldname</code> &ndash;> remove old branch from remote</li>
+<li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
+<li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
 </ul>
+
+
+<p>Replace master branch</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// on development machine
+</span><span class='line'>git branch -m master old-master
+</span><span class='line'>git branch -m newbranch master
+</span><span class='line'>git push -f origin master
+</span><span class='line'>
+</span><span class='line'>// on deployment machine
+</span><span class='line'>git branch -m master old-master
+</span><span class='line'>git fetch
+</span><span class='line'>git checkout master</span></code></pre></td></tr></table></div></figure>
 
 
 <p>I will add more when I found out other git commands</p>

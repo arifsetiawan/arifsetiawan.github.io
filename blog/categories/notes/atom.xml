@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-12T13:11:19+07:00</updated>
+  <updated>2014-09-15T14:07:39+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -57,10 +57,26 @@
 <li><code>git branch -r</code> &ndash;> list remote branch</li>
 <li><code>git branch -m &lt;oldname&gt; &lt;newname&gt;</code> &ndash;> rename any branch</li>
 <li><code>git branch -m &lt;newname&gt;</code> &ndash;> rename current branch</li>
+<li><code>git branch -d &lt;branch&gt;</code> &ndash;> delete branch</li>
 <li><code>git push origin newname</code> &ndash;> push new branch to remote</li>
 <li><code>git push origin :oldname</code> &ndash;> remove old branch from remote</li>
+<li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
+<li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
 </ul>
 
+
+<p>Replace master branch
+```
+// on development machine
+git branch -m master old-master
+git branch -m newbranch master
+git push -f origin master</p>
+
+<p>// on deployment machine
+git branch -m master old-master
+git fetch
+git checkout master
+```</p>
 
 <p>I will add more when I found out other git commands</p>
 ]]></content>
