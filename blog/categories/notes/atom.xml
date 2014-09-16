@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-15T14:07:39+07:00</updated>
+  <updated>2014-09-16T10:41:17+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu Server Setup]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/"/>
+    <updated>2014-09-16T10:19:45+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup</id>
+    <content type="html"><![CDATA[<p>When I started new Ubuntu machine on <a href="http://azure.microsoft.com/en-us/">Azure</a> or <a href="https://www.digitalocean.com/">DigitalOcean</a>, I usually install some applications such as <a href="http://nodejs.org/">Node.js</a>, <a href="http://www.mongodb.org/">MongoDB</a> and <a href="http://nginx.org/">Nginx</a> and <a href="http://git-scm.com/">Git</a>. To make things easier, I created a shell script that will do all that process.</p>
+
+<!-- more -->
+
+
+<p>```</p>
+
+<h1>!/bin/sh</h1>
+
+<h1>update</h1>
+
+<p>sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y install build-essential libssl-dev</p>
+
+<h1>nodejs</h1>
+
+<p>sudo add-apt-repository -y ppa:chris-lea/node.js</p>
+
+<h1>nginx</h1>
+
+<p>sudo add-apt-repository -y ppa:nginx/stable</p>
+
+<h1>mongodb</h1>
+
+<p>sudo apt-key adv &mdash;keyserver hkp://keyserver.ubuntu.com:80 &mdash;recv 7F0CEB10
+echo &lsquo;deb <a href="http://downloads-distro.mongodb.org/repo/ubuntu-upstart">http://downloads-distro.mongodb.org/repo/ubuntu-upstart</a> dist 10gen&rsquo; | sudo tee /etc/apt/sources.list.d/mongodb.list</p>
+
+<h1>git</h1>
+
+<p>sudo add-apt-repository -y ppa:git-core/ppa</p>
+
+<h1>update repo</h1>
+
+<p>sudo apt-get update
+sudo apt-get dist-upgrade</p>
+
+<h1>install</h1>
+
+<p>sudo apt-get -y install nodejs nginx mongodb-org git ufw</p>
+
+<h1>start mongod</h1>
+
+<p>sudo service mongod start
+```</p>
+
+<p>Using <a href="https://www.docker.com/">docker</a> would be nice.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Github Commands]]></title>

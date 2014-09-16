@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Notes - Infinite | Squares</title>
+  <title>Ubuntu Server Setup - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="Category: Notes">
+  <meta name="description" content="When I started new Ubuntu machine on Azure or DigitalOcean, I usually install some applications such as Node.js, MongoDB and Nginx and Git. To make &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.netblog/categories/notes">
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -80,81 +80,158 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Notes</h1>
+    
+      <h1 class="entry-title">Ubuntu Server Setup</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-16T10:19:45+07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
+
+
+<div class="entry-content"><p>When I started new Ubuntu machine on <a href="http://azure.microsoft.com/en-us/">Azure</a> or <a href="https://www.digitalocean.com/">DigitalOcean</a>, I usually install some applications such as <a href="http://nodejs.org/">Node.js</a>, <a href="http://www.mongodb.org/">MongoDB</a> and <a href="http://nginx.org/">Nginx</a> and <a href="http://git-scm.com/">Git</a>. To make things easier, I created a shell script that will do all that process.</p>
+
+<!-- more -->
 
 
 
-  
-  <h2>2014</h2>
 
-<article>
-  
-<h1><a href="/blog/2014/09/16/ubuntu-server-setup/">Ubuntu Server Setup</a></h1>
-<time datetime="2014-09-16T10:19:45+07:00" pubdate><span class='month'>Sep</span> <span class='day'>16</span> <span class='year'>2014</span></time>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># !/bin/sh
+</span><span class='line'># update
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get -y upgrade
+</span><span class='line'>sudo apt-get -y install build-essential libssl-dev
+</span><span class='line'>
+</span><span class='line'># nodejs
+</span><span class='line'>sudo add-apt-repository -y ppa:chris-lea/node.js
+</span><span class='line'>
+</span><span class='line'># nginx
+</span><span class='line'>sudo add-apt-repository -y ppa:nginx/stable
+</span><span class='line'>
+</span><span class='line'># mongodb
+</span><span class='line'>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+</span><span class='line'>echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+</span><span class='line'>
+</span><span class='line'># git
+</span><span class='line'>sudo add-apt-repository -y ppa:git-core/ppa
+</span><span class='line'>
+</span><span class='line'># update repo
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get dist-upgrade
+</span><span class='line'>
+</span><span class='line'># install
+</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw
+</span><span class='line'>
+</span><span class='line'># start mongod
+</span><span class='line'>sudo service mongod start</span></code></pre></td></tr></table></div></figure>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/notes/'>Notes</a></span>
-</footer>
 
+<p></p>
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/09/10/github-commands/">Github Commands</a></h1>
-<time datetime="2014-09-10T14:15:37+07:00" pubdate><span class='month'>Sep</span> <span class='day'>10</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/notes/'>Notes</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/09/09/nodejs-project-base-template/">Node.js Project Base Template</a></h1>
-<time datetime="2014-09-09T15:11:00+07:00" pubdate><span class='month'>Sep</span> <span class='day'>09</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/notes/'>Notes</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/11/21/hello-world/">Hello Octopress</a></h1>
-<time datetime="2013-11-21T13:43:28+07:00" pubdate><span class='month'>Nov</span> <span class='day'>21</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/notes/'>Notes</a></span>
-</footer>
-
-
-</article>
-
+<p>Using <a href="https://www.docker.com/">docker</a> would be nice.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Nurul Arif Setiawan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-16T10:19:45+07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/notes/'>Notes</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/10/github-commands/" title="Previous Post: Github commands">&laquo; Github commands</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -225,7 +302,10 @@
       var disqus_shortname = 'infinitesquares';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

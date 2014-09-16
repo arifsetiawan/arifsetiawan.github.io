@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-15T14:07:39+07:00</updated>
+  <updated>2014-09-16T10:41:17+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu Server Setup]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/"/>
+    <updated>2014-09-16T10:19:45+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup</id>
+    <content type="html"><![CDATA[<p>When I started new Ubuntu machine on <a href="http://azure.microsoft.com/en-us/">Azure</a> or <a href="https://www.digitalocean.com/">DigitalOcean</a>, I usually install some applications such as <a href="http://nodejs.org/">Node.js</a>, <a href="http://www.mongodb.org/">MongoDB</a> and <a href="http://nginx.org/">Nginx</a> and <a href="http://git-scm.com/">Git</a>. To make things easier, I created a shell script that will do all that process.</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># !/bin/sh
+</span><span class='line'># update
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get -y upgrade
+</span><span class='line'>sudo apt-get -y install build-essential libssl-dev
+</span><span class='line'>
+</span><span class='line'># nodejs
+</span><span class='line'>sudo add-apt-repository -y ppa:chris-lea/node.js
+</span><span class='line'>
+</span><span class='line'># nginx
+</span><span class='line'>sudo add-apt-repository -y ppa:nginx/stable
+</span><span class='line'>
+</span><span class='line'># mongodb
+</span><span class='line'>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+</span><span class='line'>echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+</span><span class='line'>
+</span><span class='line'># git
+</span><span class='line'>sudo add-apt-repository -y ppa:git-core/ppa
+</span><span class='line'>
+</span><span class='line'># update repo
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get dist-upgrade
+</span><span class='line'>
+</span><span class='line'># install
+</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw
+</span><span class='line'>
+</span><span class='line'># start mongod
+</span><span class='line'>sudo service mongod start</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Using <a href="https://www.docker.com/">docker</a> would be nice.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Github Commands]]></title>
