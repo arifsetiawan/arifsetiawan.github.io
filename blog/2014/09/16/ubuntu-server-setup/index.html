@@ -142,6 +142,9 @@
 <span class='line-number'>26</span>
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'># !/bin/sh
 </span><span class='line'># update
 </span><span class='line'>sudo apt-get update
@@ -161,12 +164,15 @@
 </span><span class='line'># git
 </span><span class='line'>sudo add-apt-repository -y ppa:git-core/ppa
 </span><span class='line'>
+</span><span class='line'># redis
+</span><span class='line'>sudo add-apt-repository -y ppa:rwky/redis
+</span><span class='line'>
 </span><span class='line'># update repo
 </span><span class='line'>sudo apt-get update
 </span><span class='line'>sudo apt-get dist-upgrade
 </span><span class='line'>
 </span><span class='line'># install
-</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw
+</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw redis-server
 </span><span class='line'>
 </span><span class='line'># start mongod
 </span><span class='line'>sudo service mongod start</span></code></pre></td></tr></table></div></figure>
@@ -250,7 +256,7 @@
 <section class="twitter2">
   <h1>
     <a href="https://twitter.com/ken121f">
-      <img src="/images/twitter_64.png" width="32" height="32">
+      <img src="/images/logo.png" width="32" height="32">
       ken121f
     </a>
   </h1>
@@ -266,6 +272,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/20/know-your-npm/">Know Your Npm</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/17/resizing-mongodb-data-disk/">Resizing MongoDB Data Disk</a>
       </li>
     
@@ -279,10 +289,6 @@
     
       <li class="post">
         <a href="/blog/2014/09/09/nodejs-project-base-template/">Node.js Project Base Template</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/21/hello-world/">Hello Octopress</a>
       </li>
     
   </ul>

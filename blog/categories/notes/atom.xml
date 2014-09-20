@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-18T11:10:46+07:00</updated>
+  <updated>2014-09-20T19:35:05+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -50,6 +50,10 @@ echo &lsquo;deb <a href="http://downloads-distro.mongodb.org/repo/ubuntu-upstart
 
 <p>sudo add-apt-repository -y ppa:git-core/ppa</p>
 
+<h1>redis</h1>
+
+<p>sudo add-apt-repository -y ppa:rwky/redis</p>
+
 <h1>update repo</h1>
 
 <p>sudo apt-get update
@@ -57,7 +61,7 @@ sudo apt-get dist-upgrade</p>
 
 <h1>install</h1>
 
-<p>sudo apt-get -y install nodejs nginx mongodb-org git ufw</p>
+<p>sudo apt-get -y install nodejs nginx mongodb-org git ufw redis-server</p>
 
 <h1>start mongod</h1>
 
@@ -117,6 +121,8 @@ sudo apt-get dist-upgrade</p>
 <li><code>git push origin :oldname</code> &ndash;> remove old branch from remote</li>
 <li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
 <li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
+<li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
+<li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
 </ul>
 
 
@@ -132,6 +138,12 @@ git branch -m master old-master
 git fetch
 git checkout master
 ```</p>
+
+<p>Delete history of a file. This is useful if you accidentally included a file that should not be included (contains sensitive information)</p>
+
+<p><code>
+git filter-branch --index-filter 'git update-index --remove FILENAME' STARTING-REV-SHA1..HEAD
+</code></p>
 
 <p>I will add more when I found out other git commands</p>
 ]]></content>

@@ -151,6 +151,8 @@
 <li><code>git push origin :oldname</code> &ndash;> remove old branch from remote</li>
 <li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
 <li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
+<li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
+<li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
 </ul>
 
 
@@ -174,6 +176,12 @@
 </span><span class='line'>git branch -m master old-master
 </span><span class='line'>git fetch
 </span><span class='line'>git checkout master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Delete history of a file. This is useful if you accidentally included a file that should not be included (contains sensitive information)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git filter-branch --index-filter 'git update-index --remove FILENAME' STARTING-REV-SHA1..HEAD</span></code></pre></td></tr></table></div></figure>
 
 
 <p>I will add more when I found out other git commands</p>
@@ -252,7 +260,7 @@
 <section class="twitter2">
   <h1>
     <a href="https://twitter.com/ken121f">
-      <img src="/images/twitter_64.png" width="32" height="32">
+      <img src="/images/logo.png" width="32" height="32">
       ken121f
     </a>
   </h1>
@@ -268,6 +276,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/20/know-your-npm/">Know Your Npm</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/17/resizing-mongodb-data-disk/">Resizing MongoDB Data Disk</a>
       </li>
     
@@ -281,10 +293,6 @@
     
       <li class="post">
         <a href="/blog/2014/09/09/nodejs-project-base-template/">Node.js Project Base Template</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/21/hello-world/">Hello Octopress</a>
       </li>
     
   </ul>

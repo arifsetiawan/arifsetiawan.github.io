@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-18T11:10:46+07:00</updated>
+  <updated>2014-09-20T19:35:05+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Know Your Npm]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/"/>
+    <updated>2014-09-20T17:19:15+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm</id>
+    <content type="html"><![CDATA[<p><a href="https://www.npmjs.org/">NPM (Node Packaged Modules)</a> is indespensable part of <a href="http://nodejs.org/">Node.js</a> ecosystem. Knowing how to use npm is really important when working on Node.js project. Some of the npm commands :</p>
+
+<ul>
+<li><code>npm init</code> &ndash;> create package.json file to start a Node.js project</li>
+<li><code>npm install MODULENAME --save</code> &ndash;> install module and save to dependencies in package.json</li>
+<li><code>npm install MODULENAME --save-dev</code> &ndash;> install module and save to devDependencies in package.json</li>
+<li><code>npm install --production</code> &ndash;> skip devDependencies install</li>
+<li><code>npm shrinkwrap</code> &ndash;> lock modules version dependency for the app</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Resizing MongoDB Data Disk]]></title>
@@ -105,6 +123,9 @@
 <span class='line-number'>26</span>
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'># !/bin/sh
 </span><span class='line'># update
 </span><span class='line'>sudo apt-get update
@@ -124,12 +145,15 @@
 </span><span class='line'># git
 </span><span class='line'>sudo add-apt-repository -y ppa:git-core/ppa
 </span><span class='line'>
+</span><span class='line'># redis
+</span><span class='line'>sudo add-apt-repository -y ppa:rwky/redis
+</span><span class='line'>
 </span><span class='line'># update repo
 </span><span class='line'>sudo apt-get update
 </span><span class='line'>sudo apt-get dist-upgrade
 </span><span class='line'>
 </span><span class='line'># install
-</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw
+</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw redis-server
 </span><span class='line'>
 </span><span class='line'># start mongod
 </span><span class='line'>sudo service mongod start</span></code></pre></td></tr></table></div></figure>
@@ -190,6 +214,8 @@
 <li><code>git push origin :oldname</code> &ndash;> remove old branch from remote</li>
 <li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
 <li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
+<li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
+<li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
 </ul>
 
 
@@ -213,6 +239,12 @@
 </span><span class='line'>git branch -m master old-master
 </span><span class='line'>git fetch
 </span><span class='line'>git checkout master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Delete history of a file. This is useful if you accidentally included a file that should not be included (contains sensitive information)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git filter-branch --index-filter 'git update-index --remove FILENAME' STARTING-REV-SHA1..HEAD</span></code></pre></td></tr></table></div></figure>
 
 
 <p>I will add more when I found out other git commands</p>
