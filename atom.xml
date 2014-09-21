@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-21T08:22:55+07:00</updated>
+  <updated>2014-09-21T08:40:58+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -42,13 +42,13 @@
 
 <p>Sample <code>flatten-packages -i</code> output</p>
 
-<p><img src="http://blog.infinitesquares.net/images/flatten_node_modules_small.png" title="Flatten small" alt="Flatten small" /></p>
+<p><img src="http://blog.infinitesquares.net/posts/images/flatten_node_modules_small.png" title="Flatten small" alt="Flatten small" /></p>
 
 <p>From 17 modules into 73 modules. I can live with that</p>
 
 <p>Now consider this</p>
 
-<p><img src="http://blog.infinitesquares.net/images/flatten_node_modules_big.png" title="Flatten big" alt="Flatten big" /></p>
+<p><img src="http://blog.infinitesquares.net/posts/images/flatten_node_modules_big.png" title="Flatten big" alt="Flatten big" /></p>
 
 <p>8 layers deep of node_modules with 514 duplicates! If I flatten it, my node_modules folder with explode from 33 modules into 271 modules!</p>
 
