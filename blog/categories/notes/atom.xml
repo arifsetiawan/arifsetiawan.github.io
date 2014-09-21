@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-21T09:52:54+07:00</updated>
+  <updated>2014-09-21T15:47:25+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -69,116 +69,6 @@ sudo apt-get dist-upgrade</p>
 ```</p>
 
 <p>Using <a href="https://www.docker.com/">docker</a> would be nice.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Github Commands]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2014/09/10/github-commands/"/>
-    <updated>2014-09-10T14:15:37+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2014/09/10/github-commands</id>
-    <content type="html"><![CDATA[<p><a href="http://git-scm.com/">Git</a> is very powerful distributed revision control. It has lots of commands but I only use several of them. I often forget some of the rarely used git commands so I make notes here.</p>
-
-<ul>
-<li><code>git clone REPOURL LOCALFOLDER</code> &ndash;> obviously to clone</li>
-<li><code>git status</code> &ndash;> get status of what files are modified, added or deleted</li>
-</ul>
-
-
-<!-- more -->
-
-
-<ul>
-<li><code>git log</code> &ndash;> get commit log</li>
-<li><code>git checkout -b NEWBRANCH</code> &ndash;> create new branch from existing</li>
-<li><code>git checkout BRANCH</code> &ndash;> checkout the branch.</li>
-<li><code>git add .</code> &ndash;> add updated files into staging</li>
-<li><code>git commit -am "commit message"</code> &ndash;> commit staging</li>
-<li><code>git push REMOTE BRANCH</code> &ndash;> push to remote</li>
-<li><code>git fetch REMOTE</code> &ndash;> get update from remote</li>
-<li><code>git merge REMOTE/BRANCH</code> &ndash;> merge with remote branch</li>
-<li><code>git pull REMOTE BRANCH</code> &ndash;> fetch and merge from remote branch</li>
-<li><code>git rm --cached FILE</code> &ndash;> remove file from git cache</li>
-<li><code>git rm -r --cached FOLDER</code> &ndash;> remove folder from git cache</li>
-<li><code>git checkout -- .</code> &ndash;> reset all current changes</li>
-</ul>
-
-
-<p>Here are some not-so-common git command that I found out based on necessity</p>
-
-<ul>
-<li><code>git checkout SHA</code> &ndash;> checkout the commit SHA</li>
-<li><code>git diff --name-status SHA1 SHA2</code> &ndash;> check what file is changed between two commits</li>
-<li><code>git reset HEAD -- .</code> &ndash;> clear staging</li>
-<li><code>git merge --abort</code> &ndash;> cancel merge</li>
-<li><code>git reset --hard HEAD~1</code> &ndash;> nuke the last commit</li>
-<li><code>git branch -a</code> &ndash;> list all branch remote and local</li>
-<li><code>git branch -r</code> &ndash;> list remote branch</li>
-<li><code>git branch -m &lt;oldname&gt; &lt;newname&gt;</code> &ndash;> rename any branch</li>
-<li><code>git branch -m &lt;newname&gt;</code> &ndash;> rename current branch</li>
-<li><code>git branch -d &lt;branch&gt;</code> &ndash;> delete branch</li>
-<li><code>git push origin newname</code> &ndash;> push new branch to remote</li>
-<li><code>git push origin :oldname</code> &ndash;> remove old branch from remote</li>
-<li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
-<li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
-<li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
-<li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
-</ul>
-
-
-<p>Replace master branch
-```
-// on development machine
-git branch -m master old-master
-git branch -m newbranch master
-git push -f origin master</p>
-
-<p>// on deployment machine
-git branch -m master old-master
-git fetch
-git checkout master
-```</p>
-
-<p>Delete history of a file. This is useful if you accidentally included a file that should not be included (contains sensitive information)</p>
-
-<p><code>
-git filter-branch --index-filter 'git update-index --remove FILENAME' STARTING-REV-SHA1..HEAD
-</code></p>
-
-<p>I will add more when I found out other git commands</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Node.js Project Base Template]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2014/09/09/nodejs-project-base-template/"/>
-    <updated>2014-09-09T15:11:00+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2014/09/09/nodejs-project-base-template</id>
-    <content type="html"><![CDATA[<p>There are many Node.js starting template, and after working couple times with <a href="http://expressjs.com/">Expressjs</a>, I also ended up creating my own base template. You can check it out <a href="https://github.com/arifsetiawan/node-base">here</a>.</p>
-
-<!-- more -->
-
-
-<p>Base template ideally support your workflow and it has some structure to organize your code. My base template is not meant to be a full fledged framework like <a href="http://sailsjs.org/">sailsjs</a>, it just a bunch of codes that I would like to be readily available when I started a Node.js project. As I work more with Node.js, my base template will be evolving.</p>
-
-<h2>Components</h2>
-
-<ul>
-<li>MongoDB as database</li>
-<li>Passport to manage authentication with session stored in MongoDB</li>
-<li>Formidable for multipart post</li>
-<li>Swig as templating engine</li>
-<li>Generic MongoDB query</li>
-<li>Front end components
-
-<ul>
-<li>Bootstrap</li>
-<li>Font awesome</li>
-<li>jQuery</li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   

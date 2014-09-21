@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Resizing MongoDB Data Disk - Infinite | Squares</title>
+  <title>Category: Nodejs - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="I received a message saying the are issue in our Node.js app running on Azure: Can&rsquo;t take a write lock while out of disk space. The issue is &hellip;">
+  <meta name="description" content="Category: Nodejs">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk">
+  <link rel="canonical" href="http://blog.infinitesquares.netblog/categories/nodejs">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -80,136 +80,64 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Resizing MongoDB Data Disk</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-17T06:19:00+07:00" pubdate data-updated="true">Sep 17<span>th</span>, 2014</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Nodejs</h1>
     
   </header>
-
-
-<div class="entry-content"><p>I received a message saying the are issue in our Node.js app running on Azure: Can&rsquo;t take a write lock while out of disk space. The issue is clear enough: our MongoDB data disk is run out. I will outlined steps how we can resize MongoDB data disk. Well, it&rsquo;s not actually that hard. Simplified steps are :</p>
-
-<!-- more -->
-
-
-<ul>
-<li>Prepare bigger data disk</li>
-<li>Copy all old MongoDB data from old disk to new one</li>
-<li>Update MongoDB config</li>
-<li>Restart MongoDB service</li>
-</ul>
-
-
-<p>Start with preparing bigger disk space. On Azure, follow this tutorial on <a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-how-to-attach-disk/">How to Attach a Data Disk to a Linux Virtual Machine</a></p>
-
-<p>Then create MongoDB data folder and make sure to change ownership of the folder to mongod or you will have write access issue.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir /mongodata
-</span><span class='line'>$ sudo chown -R mongod:mongod /mongodata</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Copy all old data to new folder</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp -r /oldmongodata /mongodata</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Use option <code>-v</code> if you want to see the copying progree, or if you forget to do that use this command</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ watch ls -lah /mongodata</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When copy completed, open MongoDb config file (usually in <code>/etc/mongod.conf</code>) and update the dbpath to the new data folder.</p>
-
-<p>Restart the service</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongod start</span></code></pre></td></tr></table></div></figure>
-
-
-<p>While the resizing MongoDB data disk is quite simple, disk run out issue should not be happening during production server deployment. One possible approach to minimize the risk is to create reporting daemon (or use third party service) to monitor server stats.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Nurul Arif Setiawan</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2014</h2>
+
+<article>
+  
+<h1><a href="/blog/2014/09/21/flatten-node-modules/">Flatten Node_modules</a></h1>
+<time datetime="2014-09-21T05:45:42+07:00" pubdate><span class='month'>Sep</span> <span class='day'>21</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>Nodejs</a></span>
+</footer>
 
 
-<time datetime="2014-09-17T06:19:00+07:00" pubdate data-updated="true">Sep 17<span>th</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/mongodb/'>MongoDB</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/09/16/ubuntu-server-setup/" title="Previous Post: Ubuntu server setup">&laquo; Ubuntu server setup</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/09/20/know-your-npm/" title="Next Post: Know your npm">Know your npm &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<article>
+  
+<h1><a href="/blog/2014/09/20/know-your-npm/">Know Your Npm</a></h1>
+<time datetime="2014-09-20T17:19:15+07:00" pubdate><span class='month'>Sep</span> <span class='day'>20</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>Nodejs</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2014/09/09/nodejs-project-base-template/">Node.js Project Base Template</a></h1>
+<time datetime="2014-09-09T15:11:00+07:00" pubdate><span class='month'>Sep</span> <span class='day'>09</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>Nodejs</a></span>
+</footer>
+
+
+</article>
+
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -286,10 +214,7 @@
       var disqus_shortname = 'infinitesquares';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

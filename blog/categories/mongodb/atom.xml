@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MongoDB | Infinite | Squares]]></title>
+  <link href="http://blog.infinitesquares.net/blog/categories/mongodb/atom.xml" rel="self"/>
+  <link href="http://blog.infinitesquares.net/"/>
+  <updated>2014-09-21T15:47:25+07:00</updated>
+  <id>http://blog.infinitesquares.net/</id>
+  <author>
+    <name><![CDATA[Nurul Arif Setiawan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resizing MongoDB Data Disk]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/"/>
+    <updated>2014-09-17T06:19:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk</id>
+    <content type="html"><![CDATA[<p>I received a message saying the are issue in our Node.js app running on Azure: Can&rsquo;t take a write lock while out of disk space. The issue is clear enough: our MongoDB data disk is run out. I will outlined steps how we can resize MongoDB data disk. Well, it&rsquo;s not actually that hard. Simplified steps are :</p>
+
+<!-- more -->
+
+
+<ul>
+<li>Prepare bigger data disk</li>
+<li>Copy all old MongoDB data from old disk to new one</li>
+<li>Update MongoDB config</li>
+<li>Restart MongoDB service</li>
+</ul>
+
+
+<p>Start with preparing bigger disk space. On Azure, follow this tutorial on <a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-how-to-attach-disk/">How to Attach a Data Disk to a Linux Virtual Machine</a></p>
+
+<p>Then create MongoDB data folder and make sure to change ownership of the folder to mongod or you will have write access issue.</p>
+
+<p><code>
+$ mkdir /mongodata
+$ sudo chown -R mongod:mongod /mongodata
+</code></p>
+
+<p>Copy all old data to new folder</p>
+
+<p><code>
+$ sudo cp -r /oldmongodata /mongodata
+</code></p>
+
+<p>Use option <code>-v</code> if you want to see the copying progree, or if you forget to do that use this command</p>
+
+<p><code>
+$ watch ls -lah /mongodata
+</code></p>
+
+<p>When copy completed, open MongoDb config file (usually in <code>/etc/mongod.conf</code>) and update the dbpath to the new data folder.</p>
+
+<p>Restart the service</p>
+
+<p><code>
+$ sudo service mongod start
+</code></p>
+
+<p>While the resizing MongoDB data disk is quite simple, disk run out issue should not be happening during production server deployment. One possible approach to minimize the risk is to create reporting daemon (or use third party service) to monitor server stats.</p>
+]]></content>
+  </entry>
+  
+</feed>
