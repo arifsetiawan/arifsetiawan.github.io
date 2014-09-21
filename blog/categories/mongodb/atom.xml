@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Mongodb | Infinite | Squares]]></title>
+  <title><![CDATA[Category: MongoDB | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-21T16:22:25+07:00</updated>
+  <updated>2014-09-21T16:24:32+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
