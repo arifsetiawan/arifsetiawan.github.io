@@ -113,6 +113,9 @@
 
 <p>Yes, it is a headache to see deeply nested node_modules. You got more headache when you see that there are some duplicated node_modules pop out elsewhere. Well, the headache part is subjective my opinion.</p>
 
+<!-- more -->
+
+
 <p>I think <a href="https://www.npmjs.org/">npm</a> is designed to work in fire and forget style, when you install a module, you don&rsquo;t have to think dependencies hell where some modules require one module with different version number. If you install the latest, then other module simply break. You can&rsquo;t control that other modules author might choose to ignore if their modules dependency is updated with breaking changes. The solution is thet each module has its own <code>node_modules</code> and each module in <code>node_modules</code> has its own <code>node_modules</code> and so on.</p>
 
 <p>A while ago, I wrote a Node.js module named <strong>flatten-packages</strong> that will flatten your node_modules into one level and removing all duplicates by aggressiely delete old version when new one is found. You can find the project on <a href="https://github.com/arifsetiawan/flatten">github</a>. There are things to consider when using <strong>flatten-packages</strong>:</p>

@@ -116,34 +116,12 @@
 
 <p>Yes, it is a headache to see deeply nested node_modules. You got more headache when you see that there are some duplicated node_modules pop out elsewhere. Well, the headache part is subjective my opinion.</p>
 
-<p>I think <a href="https://www.npmjs.org/">npm</a> is designed to work in fire and forget style, when you install a module, you don&rsquo;t have to think dependencies hell where some modules require one module with different version number. If you install the latest, then other module simply break. You can&rsquo;t control that other modules author might choose to ignore if their modules dependency is updated with breaking changes. The solution is thet each module has its own <code>node_modules</code> and each module in <code>node_modules</code> has its own <code>node_modules</code> and so on.</p>
-
-<p>A while ago, I wrote a Node.js module named <strong>flatten-packages</strong> that will flatten your node_modules into one level and removing all duplicates by aggressiely delete old version when new one is found. You can find the project on <a href="https://github.com/arifsetiawan/flatten">github</a>. There are things to consider when using <strong>flatten-packages</strong>:</p>
-
-<ul>
-<li>Your node_modules folder might explode with numbers of previously nested node_modules.</li>
-<li>Version changes might break some of your dependency</li>
-<li>You might be confused when trying to relate your package.json with exploded node_modules</li>
-</ul>
-
-
-<p>With <code>flatten-packages -i</code> command, you can get summary of your node_modules hierarcy.</p>
-
-<p>Sample <code>flatten-packages -i</code> output</p>
-
-<p><img src="/images/flatten_node_modules_small.png" title="Flatten small" alt="Flatten small" /></p>
-
-<p>From 17 modules into 73 modules. I can live with that</p>
-
-<p>Now consider this</p>
-
-<p><img src="/images/flatten_node_modules_big.png" title="Flatten big" alt="Flatten big" /></p>
-
-<p>8 layers deep of node_modules with 514 duplicates! If I flatten it, my node_modules folder with explode from 33 modules into 271 modules!</p>
-
-<p>As I have said before, with npm you shouldn&rsquo;t worry about those deeply nested node_modules which cause <a href="https://github.com/joyent/node/issues/6960">Windows issue when filename has more than 260 characters</a> and modules duplicates (514 in above case) that eat up your disk space (disk is cheap now). It&rsquo;s just unlucky for me to work on Windows with ony 10 GB to spare. That what causes my headache.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/09/21/flatten-node-modules/">Read on &rarr;</a>
+    </footer>
   
 
 
