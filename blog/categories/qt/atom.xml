@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Qt | Infinite | Squares]]></title>
+  <link href="http://blog.infinitesquares.net/blog/categories/qt/atom.xml" rel="self"/>
+  <link href="http://blog.infinitesquares.net/"/>
+  <updated>2014-09-22T09:03:59+07:00</updated>
+  <id>http://blog.infinitesquares.net/</id>
+  <author>
+    <name><![CDATA[Nurul Arif Setiawan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resumable Download and Upload With Qt]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/21/resumable-download-and-upload-with-qt/"/>
+    <updated>2014-09-21T21:37:51+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/09/21/resumable-download-and-upload-with-qt</id>
+    <content type="html"><![CDATA[<p><a href="http://qt-project.org/">Qt</a> is one of my favorite C++ framework. It provides great IDE, GUI components that easy to use and its signal slot mechanism is powerful. I did a lot of work with Qt a while back and wrote some Qt apps for Symbian and Meego (It&rsquo;s unfortunate that both platform is dead now). I can say that coding with Qt is fun.</p>
+
+<!-- more -->
+
+
+<p>One of the project that I did required a resumable download and upload. How we can have a a resumable download and upload client?</p>
+
+<h2>Resumable download</h2>
+
+<p>The code is available <a href="https://github.com/arifsetiawan/qt-download-plugin">here</a></p>
+
+<p>The key part in resumable download is HTTP header <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#range-request-header"><code>Range</code></a>. Range header allow us to request only part of an entity, starting from specified bytes. Example of Range header.</p>
+
+<p><code>
+Range: bytes=500-999
+</code></p>
+
+<p>When we received bytes of the file, we store those bytes into a file. If connection stopped and we want to resume, we simply get the size of downloaded part and continue from there by specifying the start bytes. See <a href="https://github.com/arifsetiawan/qt-download-plugin/blob/master/downloadplugin.cpp#L184-L187">here</a> for the relevant part of the code.</p>
+
+<h2>Resumable upload</h2>
+
+<p>The code is available <a href="https://github.com/arifsetiawan/qt-upload-plugin">here</a></p>
+
+<p>To enable resumable upload we have to use new approach on the server side too. Simply user standard HTTP POST with <code>Content-Type: multipart/form-data</code> just doesn&rsquo;t cut it. One protocol that specify how we can create reliable and resumable file upload is <a href="http://tus.io/">tus</a>. The tl;dr is</p>
+
+<ul>
+<li>POST to create new file with file size included in header, server will create the file id and sent it back</li>
+<li>HEAD to get current file size, server will return <code>offset</code> value on response header</li>
+<li>PATCH to send file data start from <code>offset</code> value. Client will upload file in several chunks.</li>
+</ul>
+
+
+<h2>Both in one application</h2>
+
+<p>You can see both download and upload plugin integrated in one sample application <a href="https://github.com/arifsetiawan/qt-plugin-host">here</a>. Note that to test resumable upload with tus, you should prepare you own tus server. You can choose several tus server implementation from <a href="http://tus.io/implementations.html">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>

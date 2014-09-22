@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ubuntu Server Setup - Infinite | Squares</title>
+  <title>Resumable Download and Upload With Qt - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="When I started new Ubuntu machine on Azure or DigitalOcean, I usually install some applications such as Node.js, MongoDB and Nginx and Git. To make &hellip;">
+  <meta name="description" content="Qt is one of my favorite C++ framework. It provides great IDE, GUI components that easy to use and its signal slot mechanism is powerful. I did a lot &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup">
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/21/resumable-download-and-upload-with-qt">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Ubuntu Server Setup</h1>
+      <h1 class="entry-title">Resumable Download and Upload With Qt</h1>
     
     
       <p class="meta">
@@ -100,87 +100,48 @@
   
 
 
-<time datetime="2014-09-16T10:19:45+07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+<time datetime="2014-09-21T21:37:51+07:00" pubdate data-updated="true">Sep 21<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>When I started new Ubuntu machine on <a href="http://azure.microsoft.com/en-us/">Azure</a> or <a href="https://www.digitalocean.com/">DigitalOcean</a>, I usually install some applications such as <a href="http://nodejs.org/">Node.js</a>, <a href="http://www.mongodb.org/">MongoDB</a> and <a href="http://nginx.org/">Nginx</a> and <a href="http://git-scm.com/">Git</a>. To make things easier, I created a shell script that will do all that process.</p>
+<div class="entry-content"><p><a href="http://qt-project.org/">Qt</a> is one of my favorite C++ framework. It provides great IDE, GUI components that easy to use and its signal slot mechanism is powerful. I did a lot of work with Qt a while back and wrote some Qt apps for Symbian and Meego (It&rsquo;s unfortunate that both platform is dead now). I can say that coding with Qt is fun.</p>
 
 <!-- more -->
 
 
+<p>One of the project that I did required a resumable download and upload. How we can have a a resumable download and upload client?</p>
 
+<h2>Resumable download</h2>
+
+<p>The code is available <a href="https://github.com/arifsetiawan/qt-download-plugin">here</a></p>
+
+<p>The key part in resumable download is HTTP header <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#range-request-header"><code>Range</code></a>. Range header allow us to request only part of an entity, starting from specified bytes. Example of Range header.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># !/bin/sh
-</span><span class='line'># update
-</span><span class='line'>sudo apt-get update
-</span><span class='line'>sudo apt-get -y upgrade
-</span><span class='line'>sudo apt-get -y install build-essential libssl-dev
-</span><span class='line'>
-</span><span class='line'># nodejs
-</span><span class='line'>sudo add-apt-repository -y ppa:chris-lea/node.js
-</span><span class='line'>
-</span><span class='line'># nginx
-</span><span class='line'>sudo add-apt-repository -y ppa:nginx/stable
-</span><span class='line'>
-</span><span class='line'># mongodb
-</span><span class='line'>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-</span><span class='line'>echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-</span><span class='line'>
-</span><span class='line'># git
-</span><span class='line'>sudo add-apt-repository -y ppa:git-core/ppa
-</span><span class='line'>
-</span><span class='line'># redis
-</span><span class='line'>sudo add-apt-repository -y ppa:rwky/redis
-</span><span class='line'>
-</span><span class='line'># update repo
-</span><span class='line'>sudo apt-get update
-</span><span class='line'>sudo apt-get dist-upgrade
-</span><span class='line'>
-</span><span class='line'># install
-</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw redis-server
-</span><span class='line'>
-</span><span class='line'># start mongod
-</span><span class='line'>sudo service mongod start</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Range: bytes=500-999</span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
+<p>When we received bytes of the file, we store those bytes into a file. If connection stopped and we want to resume, we simply get the size of downloaded part and continue from there by specifying the start bytes. See <a href="https://github.com/arifsetiawan/qt-download-plugin/blob/master/downloadplugin.cpp#L184-L187">here</a> for the relevant part of the code.</p>
 
-<p>Using <a href="https://www.docker.com/">docker</a> would be nice.</p>
+<h2>Resumable upload</h2>
+
+<p>The code is available <a href="https://github.com/arifsetiawan/qt-upload-plugin">here</a></p>
+
+<p>To enable resumable upload we have to use new approach on the server side too. Simply user standard HTTP POST with <code>Content-Type: multipart/form-data</code> just doesn&rsquo;t cut it. One protocol that specify how we can create reliable and resumable file upload is <a href="http://tus.io/">tus</a>. The tl;dr is</p>
+
+<ul>
+<li>POST to create new file with file size included in header, server will create the file id and sent it back</li>
+<li>HEAD to get current file size, server will return <code>offset</code> value on response header</li>
+<li>PATCH to send file data start from <code>offset</code> value. Client will upload file in several chunks.</li>
+</ul>
+
+
+<h2>Both in one application</h2>
+
+<p>You can see both download and upload plugin integrated in one sample application <a href="https://github.com/arifsetiawan/qt-plugin-host">here</a>. Note that to test resumable upload with tus, you should prepare you own tus server. You can choose several tus server implementation from <a href="http://tus.io/implementations.html">here</a></p>
 </div>
 
 
@@ -203,12 +164,12 @@
   
 
 
-<time datetime="2014-09-16T10:19:45+07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+<time datetime="2014-09-21T21:37:51+07:00" pubdate data-updated="true">Sep 21<span>st</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/notes/'>Notes</a>
+    <a class='category' href='/blog/categories/qt/'>Qt</a>
   
 </span>
 
@@ -217,7 +178,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/21/resumable-download-and-upload-with-qt/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/21/resumable-download-and-upload-with-qt/" >Tweet</a>
   
   
   
@@ -226,10 +187,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/09/10/github-commands/" title="Previous Post: Github commands">&laquo; Github commands</a>
+        <a class="basic-alignment left" href="/blog/2014/09/21/flatten-node-modules/" title="Previous Post: Flatten node_modules">&laquo; Flatten node_modules</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/17/resizing-mongodb-data-disk/" title="Next Post: Resizing MongoDB data disk">Resizing MongoDB data disk &raquo;</a>
       
     </p>
   </footer>
@@ -317,8 +276,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/';
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/21/resumable-download-and-upload-with-qt/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/21/resumable-download-and-upload-with-qt/';
         var disqus_script = 'embed.js';
       
     (function () {
