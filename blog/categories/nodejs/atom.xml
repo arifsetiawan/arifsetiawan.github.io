@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-22T09:03:59+07:00</updated>
+  <updated>2014-09-30T10:48:45+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -69,6 +69,8 @@
 <li><code>npm install MODULENAME --save-dev</code> &ndash;> install module and save to devDependencies in package.json</li>
 <li><code>npm install --production</code> &ndash;> skip devDependencies install</li>
 <li><code>npm shrinkwrap</code> &ndash;> lock modules version dependency for the app</li>
+<li><code>npm view -g --depth=0</code> &ndash;> list global installed modules</li>
+<li><code>npm view MODULENAME</code> &ndash;> view module metadata on npmjs registry, you can check available versions</li>
 </ul>
 
 ]]></content>

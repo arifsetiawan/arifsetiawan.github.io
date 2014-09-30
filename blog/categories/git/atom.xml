@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-22T09:03:59+07:00</updated>
+  <updated>2014-09-30T10:48:45+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -83,7 +83,9 @@ git checkout master
 <p>Delete history of a file. This is useful if you accidentally included a file that should not be included (contains sensitive information)</p>
 
 <p><code>
-git filter-branch --index-filter 'git update-index --remove FILENAME' STARTING-REV-SHA1..HEAD
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch FILENAME' --prune-empty --tag-name-filter cat -- --all
+git push --force --verbose --dry-run
+git push --force
 </code></p>
 
 <p>I will add more when I found out other git commands</p>

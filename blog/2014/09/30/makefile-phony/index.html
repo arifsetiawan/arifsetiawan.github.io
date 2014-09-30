@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Know Your Npm - Infinite | Squares</title>
+  <title>Makefile .PHONY - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="NPM (Node Packaged Modules) is indespensable part of Node.js ecosystem. Knowing how to use npm is really important when working on Node.js project. &hellip;">
+  <meta name="description" content="Currently I am working on a Node.js module to abstract cloud storage interaction with filesystem idioms. My partner in the project suggested to use &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm">
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/30/makefile-phony">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Know Your Npm</h1>
+      <h1 class="entry-title">Makefile .PHONY</h1>
     
     
       <p class="meta">
@@ -100,25 +100,83 @@
   
 
 
-<time datetime="2014-09-20T17:19:15+07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2014</time>
+<time datetime="2014-09-30T10:29:21+07:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="https://www.npmjs.org/">NPM (Node Packaged Modules)</a> is indespensable part of <a href="http://nodejs.org/">Node.js</a> ecosystem. Knowing how to use npm is really important when working on Node.js project. Some of the npm commands :</p>
+<div class="entry-content"><p>Currently I am working on a Node.js module to abstract cloud storage interaction with filesystem idioms. My partner in the project suggested to use Makefile for running test scripts. So I created following Makefile</p>
 
-<ul>
-<li><code>npm init</code> &ndash;> create package.json file to start a Node.js project</li>
-<li><code>npm install MODULENAME --save</code> &ndash;> install module and save to dependencies in package.json</li>
-<li><code>npm install MODULENAME --save-dev</code> &ndash;> install module and save to devDependencies in package.json</li>
-<li><code>npm install --production</code> &ndash;> skip devDependencies install</li>
-<li><code>npm shrinkwrap</code> &ndash;> lock modules version dependency for the app</li>
-<li><code>npm view -g --depth=0</code> &ndash;> list global installed modules</li>
-<li><code>npm view MODULENAME</code> &ndash;> view module metadata on npmjs registry, you can check available versions</li>
-</ul>
+<!-- more -->
 
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>TESTS = test/*.js
+</span><span class='line'>REPORTER = dot
+</span><span class='line'>
+</span><span class='line'>test:
+</span><span class='line'>  @NODE_ENV=test ./node_modules/.bin/mocha \
+</span><span class='line'>    --require should \
+</span><span class='line'>    --reporter $(REPORTER) \
+</span><span class='line'>    --timeout 5000 \
+</span><span class='line'>    $(TESTS)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When I run <code>make test</code> I always got following response</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ make test
+</span><span class='line'>make: `test' is up to date.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, what is the problem?</p>
+
+<p>Apparently I have a folder named <code>test</code> (which contains all of test scripts). When I run <code>make test</code>, then Make command will be executed againts the <code>test</code> folder.</p>
+
+<p>Enter .PHONY</p>
+
+<p>If you have same command name and file/folder name on your project and you want to execute the command in Makefile, then you have to add .PHONY to tell the compiler to execute the command Makefile. The special rule .PHONY tells Make which targets are not files.</p>
+
+<p>So update the Makefile to</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>TESTS = test/*.js
+</span><span class='line'>REPORTER = dot
+</span><span class='line'>
+</span><span class='line'>test:
+</span><span class='line'>  @NODE_ENV=test ./node_modules/.bin/mocha \
+</span><span class='line'>    --require should \
+</span><span class='line'>    --reporter $(REPORTER) \
+</span><span class='line'>    --timeout 5000 \
+</span><span class='line'>    $(TESTS)
+</span><span class='line'>
+</span><span class='line'>.PHONY: test</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the tests are running</p>
 </div>
 
 
@@ -141,12 +199,12 @@
   
 
 
-<time datetime="2014-09-20T17:19:15+07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2014</time>
+<time datetime="2014-09-30T10:29:21+07:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/nodejs/'>Nodejs</a>
+    <a class='category' href='/blog/categories/notes/'>Notes</a>
   
 </span>
 
@@ -155,7 +213,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/30/makefile-phony/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/30/makefile-phony/" >Tweet</a>
   
   
   
@@ -164,10 +222,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/09/17/resizing-mongodb-data-disk/" title="Previous Post: Resizing MongoDB data disk">&laquo; Resizing MongoDB data disk</a>
+        <a class="basic-alignment left" href="/blog/2014/09/21/resumable-download-and-upload-with-qt/" title="Previous Post: Resumable download and upload with Qt">&laquo; Resumable download and upload with Qt</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/21/flatten-node-modules/" title="Next Post: Flatten node_modules">Flatten node_modules &raquo;</a>
       
     </p>
   </footer>
@@ -255,8 +311,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/';
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/30/makefile-phony/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/30/makefile-phony/';
         var disqus_script = 'embed.js';
       
     (function () {

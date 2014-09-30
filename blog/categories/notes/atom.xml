@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-22T09:03:59+07:00</updated>
+  <updated>2014-09-30T10:48:45+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Makefile .PHONY]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/30/makefile-phony/"/>
+    <updated>2014-09-30T10:29:21+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/09/30/makefile-phony</id>
+    <content type="html"><![CDATA[<p>Currently I am working on a Node.js module to abstract cloud storage interaction with filesystem idioms. My partner in the project suggested to use Makefile for running test scripts. So I created following Makefile</p>
+
+<!-- more -->
+
+
+<p>```
+TESTS = test/*.js
+REPORTER = dot</p>
+
+<p>test:
+  @NODE_ENV=test ./node_modules/.bin/mocha \</p>
+
+<pre><code>--require should \
+--reporter $(REPORTER) \
+--timeout 5000 \
+$(TESTS)
+</code></pre>
+
+<p>```</p>
+
+<p>When I run <code>make test</code> I always got following response</p>
+
+<p><code>
+$ make test
+make: `test' is up to date.
+</code></p>
+
+<p>So, what is the problem?</p>
+
+<p>Apparently I have a folder named <code>test</code> (which contains all of test scripts). When I run <code>make test</code>, then Make command will be executed againts the <code>test</code> folder.</p>
+
+<p>Enter .PHONY</p>
+
+<p>If you have same command name and file/folder name on your project and you want to execute the command in Makefile, then you have to add .PHONY to tell the compiler to execute the command Makefile. The special rule .PHONY tells Make which targets are not files.</p>
+
+<p>So update the Makefile to</p>
+
+<p>```
+TESTS = test/*.js
+REPORTER = dot</p>
+
+<p>test:
+  @NODE_ENV=test ./node_modules/.bin/mocha \</p>
+
+<pre><code>--require should \
+--reporter $(REPORTER) \
+--timeout 5000 \
+$(TESTS)
+</code></pre>
+
+<p>.PHONY: test
+```</p>
+
+<p>And the tests are running</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu Server Setup]]></title>
