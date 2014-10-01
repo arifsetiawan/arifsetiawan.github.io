@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-09-30T10:48:45+07:00</updated>
+  <updated>2014-10-01T11:46:37+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Friendly Node.js Error Message]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/10/01/friendly-nodejs-error-message/"/>
+    <updated>2014-10-01T11:21:23+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/10/01/friendly-nodejs-error-message</id>
+    <content type="html"><![CDATA[<p>While working with Node.js, I used <code>fs</code> module often. One function that I used frequently is <code>fs.exists()</code> to check if the file is there before doing any processing. Today, I read through Node.js <code>fs</code> documentation and found the following :</p>
+
+<!-- more -->
+
+
+<blockquote><p>fs.exists() is an anachronism and exists only for historical reasons. There should almost never be a reason to use it in your own code.</p>
+
+<p>In particular, checking if a file exists before opening it is an anti-pattern that leaves you vulnerable to race conditions: another process may remove the file between the calls to fs.exists() and fs.open(). Just open the file and handle the error when it&rsquo;s not there.</p></blockquote>
+
+<p>It make sense. Suppose we want to get file stat using <code>fs.stat()</code>, just call the function and see the error code. If the file is not exists, then you will have this error :</p>
+
+<p><code>
+{ [Error: ENOENT, stat 'c:\Users\ArifSetiawan\Repository\CymbRef\cmd\somefile']
+  errno: 34,
+  code: 'ENOENT',
+  path: 'c:\\Users\\ArifSetiawan\\Repository\\CymbRef\\cmd\\somefile' }
+</code></p>
+
+<p>Node.js use POSIX codes to denote errors and its <a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/errno.h.html">a long list</a>. How do you translate the error <strong>ENOENT</strong> into friendly error message. Do you even know that <strong>ENOENT</strong> means <code>No such file or directory</code>?</p>
+
+<p>Lucky for us, Rod Vagg (<a href="https://github.com/rvagg">rvagg</a>) has created a node modules which give description for all kinds of errno in Node.js named <a href="https://github.com/rvagg/node-errno">errno</a>. Using example from the readme :</p>
+
+<p>```
+var fs = require(&lsquo;fs&rsquo;);
+var errno = require(&lsquo;errno&rsquo;);</p>
+
+<p>function errmsg(err) {</p>
+
+<pre><code>var str = 'Error: '
+// if it's a libuv error then get the description from errno
+if (errno.errno[err.errno]) {
+    str += errno.errno[err.errno].description
+} else {
+    str += err.message
+}
+
+// if it's a `fs` error then it'll have a 'path' property
+if (err.path) {
+    str += ' [' + err.path + ']'
+}
+return str
+</code></pre>
+
+<p>}</p>
+
+<p>fs.stat(&lsquo;filenotexists&rsquo;, function(err, stats) {
+  console.error(errmsg(err));
+})
+```</p>
+
+<p>We can have human friendly readable error</p>
+
+<p><code>
+Error: no such file or directory [c:\Users\ArifSetiawan\Repository\CymbRef\cmd\filenotexists]
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Flatten Node_modules]]></title>

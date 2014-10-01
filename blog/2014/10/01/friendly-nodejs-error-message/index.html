@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Know Your Npm - Infinite | Squares</title>
+  <title>Friendly Node.js Error Message - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="NPM (Node Packaged Modules) is indespensable part of Node.js ecosystem. Knowing how to use npm is really important when working on Node.js project. &hellip;">
+  <meta name="description" content="While working with Node.js, I used fs module often. One function that I used frequently is fs.exists() to check if the file is there before doing any &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm">
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/10/01/friendly-nodejs-error-message">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Know Your Npm</h1>
+      <h1 class="entry-title">Friendly Node.js Error Message</h1>
     
     
       <p class="meta">
@@ -100,24 +100,88 @@
   
 
 
-<time datetime="2014-09-20T17:19:15+07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2014</time>
+<time datetime="2014-10-01T11:21:23+07:00" pubdate data-updated="true">Oct 1<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="https://www.npmjs.org/">NPM (Node Packaged Modules)</a> is indespensable part of <a href="http://nodejs.org/">Node.js</a> ecosystem. Knowing how to use npm is really important when working on Node.js project. Some of the npm commands :</p>
+<div class="entry-content"><p>While working with Node.js, I used <code>fs</code> module often. One function that I used frequently is <code>fs.exists()</code> to check if the file is there before doing any processing. Today, I read through Node.js <code>fs</code> documentation and found the following :</p>
 
-<ul>
-<li><code>npm init</code> &ndash;> create package.json file to start a Node.js project</li>
-<li><code>npm install MODULENAME --save</code> &ndash;> install module and save to dependencies in package.json</li>
-<li><code>npm install MODULENAME --save-dev</code> &ndash;> install module and save to devDependencies in package.json</li>
-<li><code>npm install --production</code> &ndash;> skip devDependencies install</li>
-<li><code>npm shrinkwrap</code> &ndash;> lock modules version dependency for the app</li>
-<li><code>npm view -g --depth=0</code> &ndash;> list global installed modules</li>
-<li><code>npm view MODULENAME</code> &ndash;> view module metadata on npmjs registry, you can check available versions</li>
-</ul>
+<!-- more -->
+
+
+<blockquote><p>fs.exists() is an anachronism and exists only for historical reasons. There should almost never be a reason to use it in your own code.</p>
+
+<p>In particular, checking if a file exists before opening it is an anti-pattern that leaves you vulnerable to race conditions: another process may remove the file between the calls to fs.exists() and fs.open(). Just open the file and handle the error when it&rsquo;s not there.</p></blockquote>
+
+<p>It make sense. Suppose we want to get file stat using <code>fs.stat()</code>, just call the function and see the error code. If the file is not exists, then you will have this error :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{ [Error: ENOENT, stat 'c:\Users\ArifSetiawan\Repository\CymbRef\cmd\somefile']
+</span><span class='line'>  errno: 34,
+</span><span class='line'>  code: 'ENOENT',
+</span><span class='line'>  path: 'c:\\Users\\ArifSetiawan\\Repository\\CymbRef\\cmd\\somefile' }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Node.js use POSIX codes to denote errors and its <a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/errno.h.html">a long list</a>. How do you translate the error <strong>ENOENT</strong> into friendly error message. Do you even know that <strong>ENOENT</strong> means <code>No such file or directory</code>?</p>
+
+<p>Lucky for us, Rod Vagg (<a href="https://github.com/rvagg">rvagg</a>) has created a node modules which give description for all kinds of errno in Node.js named <a href="https://github.com/rvagg/node-errno">errno</a>. Using example from the readme :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var fs = require('fs');
+</span><span class='line'>var errno = require('errno');
+</span><span class='line'>
+</span><span class='line'>function errmsg(err) {
+</span><span class='line'>    var str = 'Error: '
+</span><span class='line'>    // if it's a libuv error then get the description from errno
+</span><span class='line'>    if (errno.errno[err.errno]) {
+</span><span class='line'>        str += errno.errno[err.errno].description
+</span><span class='line'>    } else {
+</span><span class='line'>        str += err.message
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // if it's a `fs` error then it'll have a 'path' property
+</span><span class='line'>    if (err.path) {
+</span><span class='line'>        str += ' [' + err.path + ']'
+</span><span class='line'>    }
+</span><span class='line'>    return str
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>fs.stat('filenotexists', function(err, stats) {
+</span><span class='line'>  console.error(errmsg(err));
+</span><span class='line'>})</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can have human friendly readable error</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error: no such file or directory [c:\Users\ArifSetiawan\Repository\CymbRef\cmd\filenotexists]</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -141,7 +205,7 @@
   
 
 
-<time datetime="2014-09-20T17:19:15+07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2014</time>
+<time datetime="2014-10-01T11:21:23+07:00" pubdate data-updated="true">Oct 1<span>st</span>, 2014</time>
       
 
 <span class="categories">
@@ -155,7 +219,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/10/01/friendly-nodejs-error-message/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/10/01/friendly-nodejs-error-message/" >Tweet</a>
   
   
   
@@ -164,10 +228,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/09/17/resizing-mongodb-data-disk/" title="Previous Post: Resizing MongoDB data disk">&laquo; Resizing MongoDB data disk</a>
+        <a class="basic-alignment left" href="/blog/2014/09/30/makefile-phony/" title="Previous Post: Makefile .PHONY">&laquo; Makefile .PHONY</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/21/flatten-node-modules/" title="Next Post: Flatten node_modules">Flatten node_modules &raquo;</a>
       
     </p>
   </footer>
@@ -255,8 +317,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/';
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/10/01/friendly-nodejs-error-message/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/10/01/friendly-nodejs-error-message/';
         var disqus_script = 'embed.js';
       
     (function () {
