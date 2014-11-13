@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MongoDB | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-11-13T09:42:20+07:00</updated>
+  <updated>2014-11-13T10:11:34+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Add User to MongoDB]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/11/11/add-user-to-mongodb/"/>
+    <updated>2014-11-11T09:41:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/11/11/add-user-to-mongodb</id>
+    <content type="html"><![CDATA[<p>MongoDB is easy enough to use that you don&rsquo;t even have to think about adding user when start using it. This could lead to a problem down the road when you are need to open your database access to public internet. And also the provided free version do not support SSL!. But that is another issue.</p>
+
+<p>For now, lets take note on how we can start adding user (and password) to protect our database access.</p>
+
+<!-- more -->
+
+
+<h3>Add admin</h3>
+
+<p>First you want to start add admin user which can manage other users</p>
+
+<p><code>
+$ mongo
+</code></p>
+
+<p>then in Mongo shell</p>
+
+<p>```</p>
+
+<blockquote><p>use admin
+```</p></blockquote>
+
+<p>```</p>
+
+<blockquote><p>db.createUser(
+  {</p>
+
+<pre><code>user: "admin",
+pwd: "adminpass",
+roles:
+[
+  {
+    role: "userAdminAnyDatabase",
+    db: "admin"
+  }
+]
+</code></pre>
+
+<p>  }
+)
+```</p></blockquote>
+
+<p>Then exit shell by <code>Ctrl+C</code> or type <code>exit</code></p>
+
+<h3>Enable auth on MongoD</h3>
+
+<p>edit the mongo conf file with
+<code>
+$ sudo nano /etc/mongod.conf
+</code></p>
+
+<p>Uncomment this line
+<code>
+auth=true
+</code></p>
+
+<p>If you want to access from other machine change the line
+<code>
+bind_ip=127.0.0.1
+</code>
+to
+<code>
+bind_ip=0.0.0.0
+</code></p>
+
+<p>More protection is necessary in production servers. I will explore this later.</p>
+
+<p>Then restart mongod
+<code>
+$ sudo service mongod restart
+</code></p>
+
+<h3>Add user to the database</h3>
+
+<p>Open Mongo shell</p>
+
+<p><code>
+$ mongo
+</code></p>
+
+<p>```</p>
+
+<blockquote><p>use admin
+db.auth(&ldquo;admin&rdquo;,&ldquo;pwd:"adminpass&rdquo;)
+```</p></blockquote>
+
+<p>Add new database and its user</p>
+
+<p>```</p>
+
+<blockquote><p>use newdb
+db.createUser(
+  {</p>
+
+<pre><code>user: "user",
+pwd: "pass",
+roles:
+[
+  {
+    role: "dbOwner",
+    db: "newdb"
+  }
+]
+</code></pre>
+
+<p>  }
+)
+db.auth(&ldquo;user&rdquo;,&ldquo;pass&rdquo;)
+show collections
+```</p></blockquote>
+
+<p>There you have it. Now your MongoDB is user-password protected. Its a small step but necessary.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Resizing MongoDB Data Disk]]></title>

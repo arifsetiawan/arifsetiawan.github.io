@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-11-13T09:42:20+07:00</updated>
+  <updated>2014-11-13T10:11:34+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Issues on Using Iisnode on Windows 7]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/"/>
+    <updated>2014-11-13T07:16:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7</id>
+    <content type="html"><![CDATA[<p>I started to use <a href="http://sailsjs.org/">sailsjs</a> in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of the time I just can&rsquo;t. So I went to install IIS and iisnode on my Windows 7 machine to test the sailsjs on IIS deployment on local dev machine. Maybe I can figure out what went wrong. But what I found is series on errors when trying to run simple iisnode example.</p>
+
+<!-- more -->
+
+
+<p>So the example can be accessed on <a href="http://localhost/node">http://localhost/node</a></p>
+
+<h3>Error #1. 500.19 with Error Code 0x80070021</h3>
+
+<p>This happened whn I tried to click on of the example on <a href="http://localhost/node">http://localhost/node</a> page</p>
+
+<p>Description</p>
+
+<blockquote><p>Config Error  This configuration section cannot be used at this path. This happens when the section is locked at a parent level. Locking is either by default (overrideModeDefault=&ldquo;Deny&rdquo;), or set explicitly by a location tag with overrideMode=&ldquo;Deny&rdquo; or the legacy allowOverride=&ldquo;false&rdquo;.</p></blockquote>
+
+<p>I spent hours trying to resolve this error. This <a href="https://github.com/tjanczuk/iisnode/issues/52">issue</a> suggested to <strong>Set the Handler Mappings to Read/Write</strong>. I checked and its set correctly but still no luck.</p>
+
+<p>Then I fount this <a href="http://www.codeproject.com/Questions/390725/HTTP-Error-Internal-Server-Error">question</a> which linked to this <a href="http://www.donnfelker.com/iis-7-this-configuration-section-cannot-be-used-at-this-path/">blog</a>.</p>
+
+<p>So following the answer :</p>
+
+<ol>
+<li>Open the applicationHost.config file, located here: %windir%\system32\inetsrv\config\applicationHost.config</li>
+<li>Edit the &ldquo;handlers&rdquo; section.</li>
+<li>Change this line:</li>
+</ol>
+
+
+<p><code>
+  &lt;section name=”handlers” overrideModeDefault=”Deny” /&gt;
+  To:
+  &lt;section name=”handlers” overrideModeDefault=”Allow” /&gt;
+</code></p>
+
+<p>Now its working. I can click one of the example. Lets go to <a href="http://localhost/node/helloworld/readme.htm">helloworld</a></p>
+
+<h3>Error #2. Nodejs path issue</h3>
+
+<p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a></p>
+
+<p>Description</p>
+
+<blockquote><p>The iisnode module is unable to start the node.exe process. Make sure the node.exe executable is available at the location specified in the system.webServer/iisnode/@nodeProcessCommandLine element of web.config. By default node.exe is expected in one of the directories listed in the PATH environment variable.</p></blockquote>
+
+<p>This one is easy, I use nodist which put node.exe on non default PATH. Add this line to <code>web.config</code></p>
+
+<p>```</p>
+
+<pre><code>&lt;iisnode
+  nodeProcessCommandLine="&amp;quot;C:\Users\ArifSetiawan\Repository\nodist\bin\node.exe&amp;quot;" 
+/&gt;
+</code></pre>
+
+<p>```</p>
+
+<h3>Error #3. 500.1000 with Error Code 0x00000005</h3>
+
+<p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a>. New error.</p>
+
+<p>I spent another hours on this one. I tried to install ASP, ASP.NET and .NET Extensibility Features on IIS. Then running <code>aspnet_regiis.exe -i</code>. But still have the error!</p>
+
+<p>Any thoughts?</p>
+
+<p>As for me, I will just use Linux box. It&rsquo;s a shame because Azure Website scalability is a big plus!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Friendly Node.js Error Message]]></title>
