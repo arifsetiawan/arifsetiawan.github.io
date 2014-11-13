@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-11-13T07:29:09+07:00</updated>
+  <updated>2014-11-13T09:42:20+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -25,7 +25,7 @@
 
 <p>So the example can be accessed on <a href="http://localhost/node">http://localhost/node</a></p>
 
-<h3>500.19 with Error Code 0x80070021</h3>
+<h3>Error #1. 500.19 with Error Code 0x80070021</h3>
 
 <p>This happened whn I tried to click on of the example on <a href="http://localhost/node">http://localhost/node</a> page</p>
 
@@ -56,7 +56,7 @@
 
 <p>Now its working. I can click one of the example. Lets go to <a href="http://localhost/node/helloworld/readme.htm">helloworld</a></p>
 
-<h3>Nodejs path issue</h3>
+<h3>Error #2. Nodejs path issue</h3>
 
 <p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a></p>
 
@@ -74,7 +74,7 @@
 </span><span class='line'>/&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>500.1000 with Error Code 0x00000005</h3>
+<h3>Error #3. 500.1000 with Error Code 0x00000005</h3>
 
 <p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a>. New error.</p>
 
@@ -83,6 +83,154 @@
 <p>Any thoughts?</p>
 
 <p>As for me, I will just use Linux box. It&rsquo;s a shame because Azure Website scalability is a big plus!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Add User to MongoDB]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/11/11/add-user-to-mongodb/"/>
+    <updated>2014-11-11T09:41:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/11/11/add-user-to-mongodb</id>
+    <content type="html"><![CDATA[<p>MongoDB is easy enough to use that you don&rsquo;t even have to think about adding user when start using it. This could lead to a problem down the road when you are need to open your database access to public internet. And also the provided free version do not support SSL!. But that is another issue.</p>
+
+<p>For now, lets take note on how we can start adding user (and password) to protect our database access.</p>
+
+<!-- more -->
+
+
+<h3>Add admin</h3>
+
+<p>First you want to start add admin user which can manage other users</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mongo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then in Mongo shell</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; use admin</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; db.createUser(
+</span><span class='line'>  {
+</span><span class='line'>    user: "admin",
+</span><span class='line'>    pwd: "adminpass",
+</span><span class='line'>    roles:
+</span><span class='line'>    [
+</span><span class='line'>      {
+</span><span class='line'>        role: "userAdminAnyDatabase",
+</span><span class='line'>        db: "admin"
+</span><span class='line'>      }
+</span><span class='line'>    ]
+</span><span class='line'>  }
+</span><span class='line'>)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then exit shell by <code>Ctrl+C</code> or type <code>exit</code></p>
+
+<h3>Enable auth on MongoD</h3>
+
+<p>edit the mongo conf file with</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo nano /etc/mongod.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Uncomment this line</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>auth=true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to access from other machine change the line</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bind_ip=127.0.0.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bind_ip=0.0.0.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More protection is necessary in production servers. I will explore this later.</p>
+
+<p>Then restart mongod</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongod restart</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Add user to the database</h3>
+
+<p>Open Mongo shell</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mongo</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; use admin
+</span><span class='line'>&gt; db.auth("admin","pwd:"adminpass")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add new database and its user</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; use newdb
+</span><span class='line'>&gt; db.createUser(
+</span><span class='line'>  {
+</span><span class='line'>    user: "user",
+</span><span class='line'>    pwd: "pass",
+</span><span class='line'>    roles:
+</span><span class='line'>    [
+</span><span class='line'>      {
+</span><span class='line'>        role: "dbOwner",
+</span><span class='line'>        db: "newdb"
+</span><span class='line'>      }
+</span><span class='line'>    ]
+</span><span class='line'>  }
+</span><span class='line'>)
+</span><span class='line'>&gt; db.auth("user","pass")
+</span><span class='line'>&gt; show collections</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There you have it. Now your MongoDB is user-password protected. Its a small step but necessary.</p>
 ]]></content>
   </entry>
   
