@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-10-01T11:46:37+07:00</updated>
+  <updated>2014-11-13T07:22:47+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -29,7 +29,7 @@
 
 <p>It make sense. Suppose we want to get file stat using <code>fs.stat()</code>, just call the function and see the error code. If the file is not exists, then you will have this error :</p>
 
-<p><code>
+<p><code>javascript
 { [Error: ENOENT, stat 'c:\Users\ArifSetiawan\Repository\CymbRef\cmd\somefile']
   errno: 34,
   code: 'ENOENT',
@@ -40,7 +40,7 @@
 
 <p>Lucky for us, Rod Vagg (<a href="https://github.com/rvagg">rvagg</a>) has created a node modules which give description for all kinds of errno in Node.js named <a href="https://github.com/rvagg/node-errno">errno</a>. Using example from the readme :</p>
 
-<p>```
+<p>``` javascript
 var fs = require(&lsquo;fs&rsquo;);
 var errno = require(&lsquo;errno&rsquo;);</p>
 
@@ -70,7 +70,7 @@ return str
 
 <p>We can have human friendly readable error</p>
 
-<p><code>
+<p><code>plain
 Error: no such file or directory [c:\Users\ArifSetiawan\Repository\CymbRef\cmd\filenotexists]
 </code></p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-10-01T11:46:37+07:00</updated>
+  <updated>2014-11-13T07:22:47+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Issues on Using Iisnode on Windows 7]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/"/>
+    <updated>2014-11-13T07:16:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7</id>
+    <content type="html"><![CDATA[<p>I started to use <a href="http://sailsjs.org/">sailsjs</a> in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of the time I just can&rsquo;t. So I went to install IIS and iisnode on my Windows 7 machine to test the sailsjs on IIS deployment on local dev machine. Maybe I can figure out what went wrong. But what I found is series on errors when trying to run simple iisnode example.</p>
+
+<!-- more -->
+
+
+<p>So the example can be accessed on <a href="http://localhost/node">http://localhost/node</a></p>
+
+<h3>500.19 with Error Code 0x80070021</h3>
+
+<p>This happened whn I tried to click on of the example on <a href="http://localhost/node">http://localhost/node</a> page</p>
+
+<p>Description</p>
+
+<blockquote><p>Config Error  This configuration section cannot be used at this path. This happens when the section is locked at a parent level. Locking is either by default (overrideModeDefault=&ldquo;Deny&rdquo;), or set explicitly by a location tag with overrideMode=&ldquo;Deny&rdquo; or the legacy allowOverride=&ldquo;false&rdquo;.</p></blockquote>
+
+<p>I spent hours trying to resolve this error. This <a href="https://github.com/tjanczuk/iisnode/issues/52">issue</a> suggested to <strong>Set the Handler Mappings to Read/Write</strong>. I checked and its set correctly but still no luck.</p>
+
+<p>Then I fount this <a href="http://www.codeproject.com/Questions/390725/HTTP-Error-Internal-Server-Error">question</a> which linked to this <a href="http://www.donnfelker.com/iis-7-this-configuration-section-cannot-be-used-at-this-path/">blog</a>.</p>
+
+<p>So following the answer :</p>
+
+<ol>
+<li>Open the applicationHost.config file, located here: %windir%\system32\inetsrv\config\applicationHost.config</li>
+<li>Edit the &ldquo;handlers&rdquo; section.</li>
+<li>Change this line:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;section name=”handlers” overrideModeDefault=”Deny” /&gt;
+</span><span class='line'>  To:
+</span><span class='line'>  &lt;section name=”handlers” overrideModeDefault=”Allow” /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now its working. I can click one of the example. Lets go to <a href="http://localhost/node/helloworld/readme.htm">helloworld</a></p>
+
+<h3>Nodejs path issue</h3>
+
+<p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a></p>
+
+<p>Description</p>
+
+<blockquote><p>The iisnode module is unable to start the node.exe process. Make sure the node.exe executable is available at the location specified in the system.webServer/iisnode/@nodeProcessCommandLine element of web.config. By default node.exe is expected in one of the directories listed in the PATH environment variable.</p></blockquote>
+
+<p>This one is easy, I use nodist which put node.exe on non default PATH. Add this line to <code>web.config</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;iisnode
+</span><span class='line'>  nodeProcessCommandLine="&quot;C:\Users\ArifSetiawan\Repository\nodist\bin\node.exe&quot;" 
+</span><span class='line'>/&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>500.1000 with Error Code 0x00000005</h3>
+
+<p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a>. New error.</p>
+
+<p>I spent another hours on this one. I tried to install ASP, ASP.NET and .NET Extensibility Features on IIS. Then running <code>aspnet_regiis.exe -i</code>. But still have the error!</p>
+
+<p>Any thoughts?</p>
+
+<p>As for me, I will just use Linux box. It&rsquo;s a shame because Azure Website scalability is a big plus!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Friendly Node.js Error Message]]></title>
@@ -29,21 +102,22 @@
 
 <p>It make sense. Suppose we want to get file stat using <code>fs.stat()</code>, just call the function and see the error code. If the file is not exists, then you will have this error :</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{ [Error: ENOENT, stat 'c:\Users\ArifSetiawan\Repository\CymbRef\cmd\somefile']
-</span><span class='line'>  errno: 34,
-</span><span class='line'>  code: 'ENOENT',
-</span><span class='line'>  path: 'c:\\Users\\ArifSetiawan\\Repository\\CymbRef\\cmd\\somefile' }</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span> <span class="p">[</span><span class="nb">Error</span><span class="o">:</span> <span class="nx">ENOENT</span><span class="p">,</span> <span class="nx">stat</span> <span class="s1">&#39;c:\Users\ArifSetiawan\Repository\CymbRef\cmd\somefile&#39;</span><span class="p">]</span>
+</span><span class='line'>  <span class="nx">errno</span><span class="o">:</span> <span class="mi">34</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;ENOENT&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;c:\\Users\\ArifSetiawan\\Repository\\CymbRef\\cmd\\somefile&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Node.js use POSIX codes to denote errors and its <a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/errno.h.html">a long list</a>. How do you translate the error <strong>ENOENT</strong> into friendly error message. Do you even know that <strong>ENOENT</strong> means <code>No such file or directory</code>?</p>
 
 <p>Lucky for us, Rod Vagg (<a href="https://github.com/rvagg">rvagg</a>) has created a node modules which give description for all kinds of errno in Node.js named <a href="https://github.com/rvagg/node-errno">errno</a>. Using example from the readme :</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -65,33 +139,34 @@
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var fs = require('fs');
-</span><span class='line'>var errno = require('errno');
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">errno</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;errno&#39;</span><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'>function errmsg(err) {
-</span><span class='line'>    var str = 'Error: '
-</span><span class='line'>    // if it's a libuv error then get the description from errno
-</span><span class='line'>    if (errno.errno[err.errno]) {
-</span><span class='line'>        str += errno.errno[err.errno].description
-</span><span class='line'>    } else {
-</span><span class='line'>        str += err.message
-</span><span class='line'>    }
+</span><span class='line'><span class="kd">function</span> <span class="nx">errmsg</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;Error: &#39;</span>
+</span><span class='line'>    <span class="c1">// if it&#39;s a libuv error then get the description from errno</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">errno</span><span class="p">.</span><span class="nx">errno</span><span class="p">[</span><span class="nx">err</span><span class="p">.</span><span class="nx">errno</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">str</span> <span class="o">+=</span> <span class="nx">errno</span><span class="p">.</span><span class="nx">errno</span><span class="p">[</span><span class="nx">err</span><span class="p">.</span><span class="nx">errno</span><span class="p">].</span><span class="nx">description</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">str</span> <span class="o">+=</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span>
+</span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>    // if it's a `fs` error then it'll have a 'path' property
-</span><span class='line'>    if (err.path) {
-</span><span class='line'>        str += ' [' + err.path + ']'
-</span><span class='line'>    }
-</span><span class='line'>    return str
-</span><span class='line'>}
+</span><span class='line'>    <span class="c1">// if it&#39;s a `fs` error then it&#39;ll have a &#39;path&#39; property</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">str</span> <span class="o">+=</span> <span class="s1">&#39; [&#39;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">.</span><span class="nx">path</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">str</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>fs.stat('filenotexists', function(err, stats) {
-</span><span class='line'>  console.error(errmsg(err));
-</span><span class='line'>})</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="nx">fs</span><span class="p">.</span><span class="nx">stat</span><span class="p">(</span><span class="s1">&#39;filenotexists&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errmsg</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>We can have human friendly readable error</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>Error: no such file or directory [c:\Users\ArifSetiawan\Repository\CymbRef\cmd\filenotexists]</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
@@ -345,7 +420,7 @@
 
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -376,37 +451,38 @@
 <span class='line-number'>29</span>
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># !/bin/sh
-</span><span class='line'># update
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># !/bin/sh</span>
+</span><span class='line'><span class="c"># update</span>
 </span><span class='line'>sudo apt-get update
 </span><span class='line'>sudo apt-get -y upgrade
 </span><span class='line'>sudo apt-get -y install build-essential libssl-dev
 </span><span class='line'>
-</span><span class='line'># nodejs
+</span><span class='line'><span class="c"># nodejs</span>
 </span><span class='line'>sudo add-apt-repository -y ppa:chris-lea/node.js
 </span><span class='line'>
-</span><span class='line'># nginx
+</span><span class='line'><span class="c"># nginx</span>
 </span><span class='line'>sudo add-apt-repository -y ppa:nginx/stable
 </span><span class='line'>
-</span><span class='line'># mongodb
+</span><span class='line'><span class="c"># mongodb</span>
 </span><span class='line'>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-</span><span class='line'>echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+</span><span class='line'><span class="nb">echo</span> <span class="s1">&#39;deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen&#39;</span> | sudo tee /etc/apt/sources.list.d/mongodb.list
 </span><span class='line'>
-</span><span class='line'># git
+</span><span class='line'><span class="c"># git</span>
 </span><span class='line'>sudo add-apt-repository -y ppa:git-core/ppa
 </span><span class='line'>
-</span><span class='line'># redis
+</span><span class='line'><span class="c"># redis</span>
 </span><span class='line'>sudo add-apt-repository -y ppa:rwky/redis
 </span><span class='line'>
-</span><span class='line'># update repo
+</span><span class='line'><span class="c"># update repo</span>
 </span><span class='line'>sudo apt-get update
 </span><span class='line'>sudo apt-get dist-upgrade
 </span><span class='line'>
-</span><span class='line'># install
+</span><span class='line'><span class="c"># install</span>
 </span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw redis-server
 </span><span class='line'>
-</span><span class='line'># start mongod
-</span><span class='line'>sudo service mongod start</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="c"># start mongod</span>
+</span><span class='line'>sudo service mongod start
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p></p>

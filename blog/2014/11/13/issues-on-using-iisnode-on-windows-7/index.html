@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ubuntu Server Setup - Infinite | Squares</title>
+  <title>Issues on Using Iisnode on Windows 7 - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="When I started new Ubuntu machine on Azure or DigitalOcean, I usually install some applications such as Node.js, MongoDB and Nginx and Git. To make &hellip;">
+  <meta name="description" content="I started to use sailsjs in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup">
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Ubuntu Server Setup</h1>
+      <h1 class="entry-title">Issues on Using Iisnode on Windows 7</h1>
     
     
       <p class="meta">
@@ -100,88 +100,78 @@
   
 
 
-<time datetime="2014-09-16T10:19:45+07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+<time datetime="2014-11-13T07:16:00+07:00" pubdate data-updated="true">Nov 13<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>When I started new Ubuntu machine on <a href="http://azure.microsoft.com/en-us/">Azure</a> or <a href="https://www.digitalocean.com/">DigitalOcean</a>, I usually install some applications such as <a href="http://nodejs.org/">Node.js</a>, <a href="http://www.mongodb.org/">MongoDB</a> and <a href="http://nginx.org/">Nginx</a> and <a href="http://git-scm.com/">Git</a>. To make things easier, I created a shell script that will do all that process.</p>
+<div class="entry-content"><p>I started to use <a href="http://sailsjs.org/">sailsjs</a> in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of the time I just can&rsquo;t. So I went to install IIS and iisnode on my Windows 7 machine to test the sailsjs on IIS deployment on local dev machine. Maybe I can figure out what went wrong. But what I found is series on errors when trying to run simple iisnode example.</p>
 
 <!-- more -->
 
 
+<p>So the example can be accessed on <a href="http://localhost/node">http://localhost/node</a></p>
+
+<h3>500.19 with Error Code 0x80070021</h3>
+
+<p>This happened whn I tried to click on of the example on <a href="http://localhost/node">http://localhost/node</a> page</p>
+
+<p>Description</p>
+
+<blockquote><p>Config Error  This configuration section cannot be used at this path. This happens when the section is locked at a parent level. Locking is either by default (overrideModeDefault=&ldquo;Deny&rdquo;), or set explicitly by a location tag with overrideMode=&ldquo;Deny&rdquo; or the legacy allowOverride=&ldquo;false&rdquo;.</p></blockquote>
+
+<p>I spent hours trying to resolve this error. This <a href="https://github.com/tjanczuk/iisnode/issues/52">issue</a> suggested to <strong>Set the Handler Mappings to Read/Write</strong>. I checked and its set correctly but still no luck.</p>
+
+<p>Then I fount this <a href="http://www.codeproject.com/Questions/390725/HTTP-Error-Internal-Server-Error">question</a> which linked to this <a href="http://www.donnfelker.com/iis-7-this-configuration-section-cannot-be-used-at-this-path/">blog</a>.</p>
+
+<p>So following the answer :</p>
+
+<ol>
+<li>Open the applicationHost.config file, located here: %windir%\system32\inetsrv\config\applicationHost.config</li>
+<li>Edit the &ldquo;handlers&rdquo; section.</li>
+<li>Change this line:</li>
+</ol>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># !/bin/sh</span>
-</span><span class='line'><span class="c"># update</span>
-</span><span class='line'>sudo apt-get update
-</span><span class='line'>sudo apt-get -y upgrade
-</span><span class='line'>sudo apt-get -y install build-essential libssl-dev
-</span><span class='line'>
-</span><span class='line'><span class="c"># nodejs</span>
-</span><span class='line'>sudo add-apt-repository -y ppa:chris-lea/node.js
-</span><span class='line'>
-</span><span class='line'><span class="c"># nginx</span>
-</span><span class='line'>sudo add-apt-repository -y ppa:nginx/stable
-</span><span class='line'>
-</span><span class='line'><span class="c"># mongodb</span>
-</span><span class='line'>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-</span><span class='line'><span class="nb">echo</span> <span class="s1">&#39;deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen&#39;</span> | sudo tee /etc/apt/sources.list.d/mongodb.list
-</span><span class='line'>
-</span><span class='line'><span class="c"># git</span>
-</span><span class='line'>sudo add-apt-repository -y ppa:git-core/ppa
-</span><span class='line'>
-</span><span class='line'><span class="c"># redis</span>
-</span><span class='line'>sudo add-apt-repository -y ppa:rwky/redis
-</span><span class='line'>
-</span><span class='line'><span class="c"># update repo</span>
-</span><span class='line'>sudo apt-get update
-</span><span class='line'>sudo apt-get dist-upgrade
-</span><span class='line'>
-</span><span class='line'><span class="c"># install</span>
-</span><span class='line'>sudo apt-get -y install nodejs nginx mongodb-org git ufw redis-server
-</span><span class='line'>
-</span><span class='line'><span class="c"># start mongod</span>
-</span><span class='line'>sudo service mongod start
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;section name=”handlers” overrideModeDefault=”Deny” /&gt;
+</span><span class='line'>  To:
+</span><span class='line'>  &lt;section name=”handlers” overrideModeDefault=”Allow” /&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
+<p>Now its working. I can click one of the example. Lets go to <a href="http://localhost/node/helloworld/readme.htm">helloworld</a></p>
 
-<p>Using <a href="https://www.docker.com/">docker</a> would be nice.</p>
+<h3>Nodejs path issue</h3>
+
+<p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a></p>
+
+<p>Description</p>
+
+<blockquote><p>The iisnode module is unable to start the node.exe process. Make sure the node.exe executable is available at the location specified in the system.webServer/iisnode/@nodeProcessCommandLine element of web.config. By default node.exe is expected in one of the directories listed in the PATH environment variable.</p></blockquote>
+
+<p>This one is easy, I use nodist which put node.exe on non default PATH. Add this line to <code>web.config</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;iisnode
+</span><span class='line'>  nodeProcessCommandLine="&quot;C:\Users\ArifSetiawan\Repository\nodist\bin\node.exe&quot;" 
+</span><span class='line'>/&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>500.1000 with Error Code 0x00000005</h3>
+
+<p>This happened when I tried to run Node.js app <a href="http://localhost/node/helloworld/hello.js">http://localhost/node/helloworld/hello.js</a>. New error.</p>
+
+<p>I spent another hours on this one. I tried to install ASP, ASP.NET and .NET Extensibility Features on IIS. Then running <code>aspnet_regiis.exe -i</code>. But still have the error!</p>
+
+<p>Any thoughts?</p>
+
+<p>As for me, I will just use Linux box. It&rsquo;s a shame because Azure Website scalability is a big plus!</p>
 </div>
 
 
@@ -204,21 +194,15 @@
   
 
 
-<time datetime="2014-09-16T10:19:45+07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+<time datetime="2014-11-13T07:16:00+07:00" pubdate data-updated="true">Nov 13<span>th</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/notes/'>Notes</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/" >Tweet</a>
   
   
   
@@ -227,10 +211,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/09/10/github-commands/" title="Previous Post: Github commands">&laquo; Github commands</a>
+        <a class="basic-alignment left" href="/blog/2014/10/01/friendly-nodejs-error-message/" title="Previous Post: Friendly Node.js error message">&laquo; Friendly Node.js error message</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/17/resizing-mongodb-data-disk/" title="Next Post: Resizing MongoDB data disk">Resizing MongoDB data disk &raquo;</a>
       
     </p>
   </footer>
@@ -318,8 +300,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/';
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/';
         var disqus_script = 'embed.js';
       
     (function () {
