@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2014-11-13T10:11:34+07:00</updated>
+  <updated>2014-11-15T07:12:18+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -18,7 +18,13 @@
     <link href="http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/"/>
     <updated>2014-11-13T07:16:00+07:00</updated>
     <id>http://blog.infinitesquares.net/blog/2014/11/13/issues-on-using-iisnode-on-windows-7</id>
-    <content type="html"><![CDATA[<p>I started to use <a href="http://sailsjs.org/">sailsjs</a> in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of the time I just can&rsquo;t. So I went to install IIS and iisnode on my Windows 7 machine to test the sailsjs on IIS deployment on local dev machine. Maybe I can figure out what went wrong. But what I found is series on errors when trying to run simple iisnode example.</p>
+    <content type="html"><![CDATA[<p><strong> Update </strong></p>
+
+<p>I found the issue with the Azure website. Sailsjs is actually working well. The issue is that I used Azure free tier and free tier is going idle (IIS app pool timeout) after some time if not used. This caused some errors when I tried to access it from browser (that&rsquo;s when the app started again). I tried to use <a href="https://uptimerobot.com/">uptimerobot</a> to check the site every 5 minutes so it will not go idle. I still found the website is stopped this morning.</p>
+
+<p><strong> end of update </strong></p>
+
+<p>I started to use <a href="http://sailsjs.org/">sailsjs</a> in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of the time I just can&rsquo;t. So I went to install IIS and iisnode on my Windows 7 machine to test the sailsjs on IIS deployment on local dev machine. Maybe I can figure out what went wrong. But what I found is series on errors when trying to run simple iisnode example.</p>
 
 <!-- more -->
 

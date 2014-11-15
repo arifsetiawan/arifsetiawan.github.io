@@ -9,7 +9,7 @@
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="I started to use sailsjs in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of &hellip;">
+  <meta name="description" content="Update I found the issue with the Azure website. Sailsjs is actually working well. The issue is that I used Azure free tier and free tier is going &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +107,13 @@
   </header>
 
 
-<div class="entry-content"><p>I started to use <a href="http://sailsjs.org/">sailsjs</a> in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of the time I just can&rsquo;t. So I went to install IIS and iisnode on my Windows 7 machine to test the sailsjs on IIS deployment on local dev machine. Maybe I can figure out what went wrong. But what I found is series on errors when trying to run simple iisnode example.</p>
+<div class="entry-content"><p><strong> Update </strong></p>
+
+<p>I found the issue with the Azure website. Sailsjs is actually working well. The issue is that I used Azure free tier and free tier is going idle (IIS app pool timeout) after some time if not used. This caused some errors when I tried to access it from browser (that&rsquo;s when the app started again). I tried to use <a href="https://uptimerobot.com/">uptimerobot</a> to check the site every 5 minutes so it will not go idle. I still found the website is stopped this morning.</p>
+
+<p><strong> end of update </strong></p>
+
+<p>I started to use <a href="http://sailsjs.org/">sailsjs</a> in my latest project. When I deployed it to Azure Web Sites, the web is not working. Sometimes I can access it, but most of the time I just can&rsquo;t. So I went to install IIS and iisnode on my Windows 7 machine to test the sailsjs on IIS deployment on local dev machine. Maybe I can figure out what went wrong. But what I found is series on errors when trying to run simple iisnode example.</p>
 
 <!-- more -->
 
