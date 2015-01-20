@@ -121,9 +121,15 @@
 <p>Then you can :</p>
 
 <ul>
-<li>Proceed to create VM in using Azure portal (recommended for beginners and when you don&rsquo;t need some sort of automation)</li>
+<li>Proceed to create VM in using Azure portal (recommended for beginners and when you don&rsquo;t need some sort of automation). You need to upload .pem file.</li>
 <li>Use azure cli to create your VM from command line (advanced user). Details on this available in my <a href="https://gist.github.com/arifsetiawan/afcf9adeb9922066f81f">gist here</a></li>
 </ul>
+
+
+<p>To use SSH key:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh -i C:\\FOLDER_NAME\\MyAzure.key USER@DOMAIN.cloudapp.net</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
