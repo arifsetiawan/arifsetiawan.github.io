@@ -9,7 +9,7 @@
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="Update I found the issue with the Azure website. Sailsjs is actually working well. The issue is that I used Azure free tier and free tier is going &hellip;">
+  <meta name="description" content="Typing password is a time wasting process. It is recommended to use SSH with public private keys to access Linux VM box. To do that in Azure, first &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/20/using-ssh-on-azure-linux-vm/">Using SSH on Azure Linux VM</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-20T09:49:13+07:00" pubdate data-updated="true">Jan 20<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Typing password is a time wasting process. It is recommended to use SSH with public private keys to access Linux VM box. To do that in Azure, first you need to create a key pair using following command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>openssl req -x509 -nodes -days 36500 -newkey rsa:2048 -keyout MyAzure.key -out MyAzure.pem</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/01/20/using-ssh-on-azure-linux-vm/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -469,53 +516,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/10/github-commands/">Github Commands</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-10T14:15:37+07:00" pubdate data-updated="true">Sep 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://git-scm.com/">Git</a> is very powerful distributed revision control. It has lots of commands but I only use several of them. I often forget some of the rarely used git commands so I make notes here.</p>
-
-<ul>
-<li><code>git clone REPOURL LOCALFOLDER</code> &ndash;> obviously to clone</li>
-<li><code>git status</code> &ndash;> get status of what files are modified, added or deleted</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/09/10/github-commands/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -557,6 +557,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/20/using-ssh-on-azure-linux-vm/">Using SSH on Azure Linux VM</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/">Issues on Using Iisnode on Windows 7</a>
       </li>
     
@@ -572,10 +576,6 @@
         <a href="/blog/2014/09/30/makefile-phony/">Makefile .PHONY</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/09/21/resumable-download-and-upload-with-qt/">Resumable Download and Upload With Qt</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -585,7 +585,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Nurul Arif Setiawan -
+  Copyright &copy; 2015 - Nurul Arif Setiawan -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

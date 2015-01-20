@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Azure | Infinite | Squares]]></title>
+  <link href="http://blog.infinitesquares.net/blog/categories/azure/atom.xml" rel="self"/>
+  <link href="http://blog.infinitesquares.net/"/>
+  <updated>2015-01-20T09:56:44+07:00</updated>
+  <id>http://blog.infinitesquares.net/</id>
+  <author>
+    <name><![CDATA[Nurul Arif Setiawan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using SSH on Azure Linux VM]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/01/20/using-ssh-on-azure-linux-vm/"/>
+    <updated>2015-01-20T09:49:13+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/01/20/using-ssh-on-azure-linux-vm</id>
+    <content type="html"><![CDATA[<p>Typing password is a time wasting process. It is recommended to use SSH with public private keys to access Linux VM box. To do that in Azure, first you need to create a key pair using following command</p>
+
+<p><code>
+openssl req -x509 -nodes -days 36500 -newkey rsa:2048 -keyout MyAzure.key -out MyAzure.pem
+</code></p>
+
+<!-- more -->
+
+
+<p>Then you can :</p>
+
+<ul>
+<li>Proceed to create VM in using Azure portal (recommended for beginners and when you don&rsquo;t need some sort of automation)</li>
+<li>Use azure cli to create your VM from command line (advanced user). Details on this available in my <a href="https://gist.github.com/arifsetiawan/afcf9adeb9922066f81f">gist here</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

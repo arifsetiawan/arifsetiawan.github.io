@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Flatten Node_modules - Infinite | Squares</title>
+  <title>Category: Azure - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="If you worked with Node.js, you might start notice youd node_modules started to simply nested into the abyss and the path is getting longer and &hellip;">
+  <meta name="description" content="Category: Azure">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/21/flatten-node-modules">
+  <link rel="canonical" href="http://blog.infinitesquares.netblog/categories/azure">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -80,127 +80,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Flatten Node_modules</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-21T05:45:42+07:00" pubdate data-updated="true">Sep 21<span>st</span>, 2014</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Azure</h1>
     
   </header>
-
-
-<div class="entry-content"><p>If you worked with Node.js, you might start notice youd node_modules started to simply nested into the abyss and the path is getting longer and longer. Consider this :</p>
-
-<p><code>/C/Users/ArifSetiawan/Repository/Katch/katch/node_modules/sails/node_modules/grunt-contrib-less/node_modules/less/node_modules/request/node_modules/form-data/node_modules/combined-stream/node_modules/delayed-stream/test/integration/test-handle-source-errors.js</code></p>
-
-<p>Yes, it is a headache to see deeply nested node_modules. You got more headache when you see that there are some duplicated node_modules pop out elsewhere. Well, the headache part is subjective my opinion.</p>
-
-<!-- more -->
-
-
-<p>I think <a href="https://www.npmjs.org/">npm</a> is designed to work in fire and forget style, when you install a module, you don&rsquo;t have to think dependencies hell where some modules require one module with different version number. If you install the latest, then other module simply break. You can&rsquo;t control that other modules author might choose to ignore if their modules dependency is updated with breaking changes. The solution is thet each module has its own <code>node_modules</code> and each module in <code>node_modules</code> has its own <code>node_modules</code> and so on.</p>
-
-<p>A while ago, I wrote a Node.js module named <strong>flatten-packages</strong> that will flatten your node_modules into one level and removing all duplicates by aggressiely delete old version when new one is found. You can find the project on <a href="https://github.com/arifsetiawan/flatten">github</a>. There are things to consider when using <strong>flatten-packages</strong>:</p>
-
-<ul>
-<li>Your node_modules folder might explode with numbers of previously nested node_modules.</li>
-<li>Version changes might break some of your dependency</li>
-<li>You might be confused when trying to relate your package.json with exploded node_modules</li>
-</ul>
-
-
-<p>With <code>flatten-packages -i</code> command, you can get summary of your node_modules hierarcy.</p>
-
-<p>Sample <code>flatten-packages -i</code> output</p>
-
-<p><img src="/images/posts/flatten_node_modules_small.png" title="Flatten small" alt="Flatten small" /></p>
-
-<p>From 17 modules into 73 modules. I can live with that</p>
-
-<p>Now consider this</p>
-
-<p><img src="/images/posts/flatten_node_modules_big.png" title="Flatten big" alt="Flatten big" /></p>
-
-<p>8 layers deep of node_modules with 514 duplicates! If I flatten it, my node_modules folder with explode from 33 modules into 271 modules!</p>
-
-<p>As I have said before, with npm you shouldn&rsquo;t worry about those deeply nested node_modules which cause <a href="https://github.com/joyent/node/issues/6960">Windows issue when filename has more than 260 characters</a> and modules duplicates (514 in above case) that eat up your disk space (disk is cheap now). It&rsquo;s just unlucky for me to work on Windows with ony 10 GB to spare. That what causes my headache.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Nurul Arif Setiawan</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2015</h2>
+
+<article>
+  
+<h1><a href="/blog/2015/01/20/using-ssh-on-azure-linux-vm/">Using SSH on Azure Linux VM</a></h1>
+<time datetime="2015-01-20T09:49:13+07:00" pubdate><span class='month'>Jan</span> <span class='day'>20</span> <span class='year'>2015</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/azure/'>Azure</a></span>
+</footer>
 
 
-<time datetime="2014-09-21T05:45:42+07:00" pubdate data-updated="true">Sep 21<span>st</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/nodejs/'>Nodejs</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/21/flatten-node-modules/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/21/flatten-node-modules/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/09/20/know-your-npm/" title="Previous Post: Know your npm">&laquo; Know your npm</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/09/21/resumable-download-and-upload-with-qt/" title="Next Post: Resumable download and upload with Qt">Resumable download and upload with Qt &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -277,10 +186,7 @@
       var disqus_shortname = 'infinitesquares';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/21/flatten-node-modules/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/21/flatten-node-modules/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
