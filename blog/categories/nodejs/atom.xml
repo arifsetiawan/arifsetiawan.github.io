@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-01-20T10:04:15+07:00</updated>
+  <updated>2015-01-22T12:06:06+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nginx for Node.js]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/01/22/nginx-for-node-dot-js/"/>
+    <updated>2015-01-22T11:49:45+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/01/22/nginx-for-node-dot-js</id>
+    <content type="html"><![CDATA[<p><a href="http://nginx.org/">Nginx</a> is a high performance web server. Some said it is better than Apache. Nginx can be used as reverse proxy for Node.js server application. And also as static file server since it&rsquo;s very efficient. If you are have a VPS or VM running, you can use Nginx as front for more than one Node.js app.</p>
+
+<p>First, you have to install Nginx first. My standard script for installing development server is available <a href="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/">here</a>. Once you have nginx setup, when you access your server on port 80, you will see nginx welcoming screen.</p>
+
+<!-- more -->
+
+
+<p>Here, I assume you already have a Nodejs app running. Use forever or pm2 for production server.</p>
+
+<p>Remove the default site file. You can choose to keep this, just make sure the server_name is different.
+<code>
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
+</code></p>
+
+<p>Create new file for your site
+<code>
+sudo nano /etc/nginx/sites-available/mysite
+</code></p>
+
+<p>The content
+```
+upstream myNodeApp{</p>
+
+<pre><code>server localhost:4000;
+</code></pre>
+
+<p>}</p>
+
+<p>server{</p>
+
+<pre><code>server_name localhost;
+
+access_log /home/server/logs/access.log;
+error_log /home/server/logs/access.log;
+
+location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+
+    proxy_pass http://myNodeApp;
+    proxy_redirect off;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Save and close the nano text editor. Make sure you have created logs folder as shown above.</p>
+
+<p>Check your site file
+<code>
+sudo nginx -t
+</code></p>
+
+<p>If there are error, nginx will tell you.</p>
+
+<p>Restart nginx
+<code>
+sudo service nginx restart
+</code></p>
+
+<p>Access your server on port 80 using your favorite browser. There is your nodejs app.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Issues on Using Iisnode on Windows 7]]></title>
@@ -212,39 +285,6 @@ Error: no such file or directory [c:\Users\ArifSetiawan\Repository\CymbRef\cmd\f
 <li><code>npm shrinkwrap</code> &ndash;> lock modules version dependency for the app</li>
 <li><code>npm view -g --depth=0</code> &ndash;> list global installed modules</li>
 <li><code>npm view MODULENAME</code> &ndash;> view module metadata on npmjs registry, you can check available versions</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Node.js Project Base Template]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2014/09/09/nodejs-project-base-template/"/>
-    <updated>2014-09-09T15:11:00+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2014/09/09/nodejs-project-base-template</id>
-    <content type="html"><![CDATA[<p>There are many Node.js starting template, and after working couple times with <a href="http://expressjs.com/">Expressjs</a>, I also ended up creating my own base template. You can check it out <a href="https://github.com/arifsetiawan/node-base">here</a>.</p>
-
-<!-- more -->
-
-
-<p>Base template ideally support your workflow and it has some structure to organize your code. My base template is not meant to be a full fledged framework like <a href="http://sailsjs.org/">sailsjs</a>, it just a bunch of codes that I would like to be readily available when I started a Node.js project. As I work more with Node.js, my base template will be evolving.</p>
-
-<h2>Components</h2>
-
-<ul>
-<li>MongoDB as database</li>
-<li>Passport to manage authentication with session stored in MongoDB</li>
-<li>Formidable for multipart post</li>
-<li>Swig as templating engine</li>
-<li>Generic MongoDB query</li>
-<li>Front end components
-
-<ul>
-<li>Bootstrap</li>
-<li>Font awesome</li>
-<li>jQuery</li>
-</ul>
-</li>
 </ul>
 
 ]]></content>

@@ -57,8 +57,12 @@
         <lastmod>2015-01-20T10:04:05+07:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.infinitesquares.net/blog/2015/01/22/nginx-for-node-dot-js/</loc>
+        <lastmod>2015-01-22T12:06:06+07:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.infinitesquares.net/blog/archives/</loc>
-        <lastmod>2015-01-20T10:04:05+07:00</lastmod>
+        <lastmod>2015-01-22T12:06:06+07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.infinitesquares.net/blog/categories/</loc>
@@ -66,7 +70,7 @@
     </url>
     <url>
         <loc>http://blog.infinitesquares.net/</loc>
-        <lastmod>2015-01-20T10:04:05+07:00</lastmod>
+        <lastmod>2015-01-22T12:06:06+07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.infinitesquares.net/robots.txt</loc>

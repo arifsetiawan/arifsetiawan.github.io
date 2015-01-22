@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-01-20T10:04:15+07:00</updated>
+  <updated>2015-01-22T12:04:14+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nginx for Node.js]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/01/22/nginx-for-node-dot-js/"/>
+    <updated>2015-01-22T11:49:45+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/01/22/nginx-for-node-dot-js</id>
+    <content type="html"><![CDATA[<p><a href="http://nginx.org/">Nginx</a> is a high performance web server. Some said it is better than Apache. Nginx can be used as reverse proxy for Node.js server application. And also as static file server since it&rsquo;s very efficient. If you are have a VPS or VM running, you can use Nginx as front for more than one Node.js app.</p>
+
+<p>First, you have to install Nginx first. My standard script for installing development server is available <a href="http://blog.infinitesquares.net/blog/2014/09/16/ubuntu-server-setup/">here</a>. Once you have nginx setup, when you access your server on port 80, you will see nginx welcoming screen.</p>
+
+<!-- more -->
+
+
+<p>Here, I assume you already have a Nodejs app running. Use forever or pm2 for production server.</p>
+
+<p>Remove the default site file. You can choose to keep this, just make sure the server_name is different.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo rm /etc/nginx/sites-available/default
+</span><span class='line'>sudo rm /etc/nginx/sites-enabled/default</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create new file for your site</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo nano /etc/nginx/sites-available/mysite</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The content</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>upstream myNodeApp{
+</span><span class='line'>    server localhost:4000;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>server{
+</span><span class='line'>    server_name localhost;
+</span><span class='line'>
+</span><span class='line'>    access_log /home/server/logs/access.log;
+</span><span class='line'>    error_log /home/server/logs/access.log;
+</span><span class='line'>
+</span><span class='line'>    location / {
+</span><span class='line'>        proxy_set_header X-Real-IP $remote_addr;
+</span><span class='line'>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+</span><span class='line'>        proxy_set_header Host $http_host;
+</span><span class='line'>        proxy_set_header X-NginX-Proxy true;
+</span><span class='line'>
+</span><span class='line'>        proxy_pass http://myNodeApp;
+</span><span class='line'>        proxy_redirect off;
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save and close the nano text editor. Make sure you have created logs folder as shown above.</p>
+
+<p>Check your site file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo nginx -t</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If there are error, nginx will tell you.</p>
+
+<p>Restart nginx</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nginx restart</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using SSH on Azure Linux VM]]></title>
