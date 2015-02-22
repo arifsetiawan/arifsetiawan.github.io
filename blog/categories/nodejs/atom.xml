@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-01-22T12:06:06+07:00</updated>
+  <updated>2015-02-22T10:50:49+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Gulp]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/02/22/getting-started-with-gulp/"/>
+    <updated>2015-02-22T10:08:17+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/02/22/getting-started-with-gulp</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/gulpjs/gulp">Gulp</a> is a build system implemented using stream. You can use gulp to hinting and linting scripts, concatenate and minify them, automate testing and many others. I have been wanted to use Gulp in my Nodejs project for a while (I have tried Grunt once, but that not work well for me). This is my working with Gulp notes.</p>
+
+<!-- more -->
+
+
+<h2>Installation</h2>
+
+<p>To start, install Gulp globally</p>
+
+<p><code>
+npm install -g gulp
+</code></p>
+
+<p>Next, install gulp as development module in your Nodejs project</p>
+
+<p><code>
+npm install gulp --save-dev
+</code></p>
+
+<p>Make <code>gulpfile.js</code> in your root project folder</p>
+
+<p>```
+var gulp = require(&lsquo;gulp&rsquo;);</p>
+
+<p>gulp.task(&lsquo;default&rsquo;, function() {
+  // gulp tasks here
+});
+```</p>
+
+<p>Then run <code>gulp</code> from command line</p>
+
+<p><code>
+$ gulp
+[10:18:23] Using gulpfile ~\app\gulpfile.js
+[10:18:23] Starting 'default'...
+[10:18:23] Finished 'default' after 72 µs
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nginx for Node.js]]></title>
@@ -267,26 +312,6 @@ Error: no such file or directory [c:\Users\ArifSetiawan\Repository\CymbRef\cmd\f
 <p>8 layers deep of node_modules with 514 duplicates! If I flatten it, my node_modules folder with explode from 33 modules into 271 modules!</p>
 
 <p>As I have said before, with npm you shouldn&rsquo;t worry about those deeply nested node_modules which cause <a href="https://github.com/joyent/node/issues/6960">Windows issue when filename has more than 260 characters</a> and modules duplicates (514 in above case) that eat up your disk space (disk is cheap now). It&rsquo;s just unlucky for me to work on Windows with ony 10 GB to spare. That what causes my headache.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Know Your Npm]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm/"/>
-    <updated>2014-09-20T17:19:15+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2014/09/20/know-your-npm</id>
-    <content type="html"><![CDATA[<p><a href="https://www.npmjs.org/">NPM (Node Packaged Modules)</a> is indespensable part of <a href="http://nodejs.org/">Node.js</a> ecosystem. Knowing how to use npm is really important when working on Node.js project. Some of the npm commands :</p>
-
-<ul>
-<li><code>npm init</code> &ndash;> create package.json file to start a Node.js project</li>
-<li><code>npm install MODULENAME --save</code> &ndash;> install module and save to dependencies in package.json</li>
-<li><code>npm install MODULENAME --save-dev</code> &ndash;> install module and save to devDependencies in package.json</li>
-<li><code>npm install --production</code> &ndash;> skip devDependencies install</li>
-<li><code>npm shrinkwrap</code> &ndash;> lock modules version dependency for the app</li>
-<li><code>npm view -g --depth=0</code> &ndash;> list global installed modules</li>
-<li><code>npm view MODULENAME</code> &ndash;> view module metadata on npmjs registry, you can check available versions</li>
-</ul>
-
 ]]></content>
   </entry>
   

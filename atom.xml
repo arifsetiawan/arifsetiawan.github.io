@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-01-22T12:04:14+07:00</updated>
+  <updated>2015-02-22T10:50:49+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Gulp]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/02/22/getting-started-with-gulp/"/>
+    <updated>2015-02-22T10:08:17+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/02/22/getting-started-with-gulp</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/gulpjs/gulp">Gulp</a> is a build system implemented using stream. You can use gulp to hinting and linting scripts, concatenate and minify them, automate testing and many others. I have been wanted to use Gulp in my Nodejs project for a while (I have tried Grunt once, but that not work well for me). This is my working with Gulp notes.</p>
+
+<!-- more -->
+
+
+<h2>Installation</h2>
+
+<p>To start, install Gulp globally</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g gulp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, install gulp as development module in your Nodejs project</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install gulp --save-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Make <code>gulpfile.js</code> in your root project folder</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var gulp = require('gulp');
+</span><span class='line'>
+</span><span class='line'>gulp.task('default', function() {
+</span><span class='line'>  // gulp tasks here
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then run <code>gulp</code> from command line</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gulp
+</span><span class='line'>[10:18:23] Using gulpfile ~\app\gulpfile.js
+</span><span class='line'>[10:18:23] Starting 'default'...
+</span><span class='line'>[10:18:23] Finished 'default' after 72 µs</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nginx for Node.js]]></title>
@@ -100,6 +154,8 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nginx restart</span></code></pre></td></tr></table></div></figure>
 
+
+<p>Access your server on port 80 using your favorite browser. There is your nodejs app.</p>
 ]]></content>
   </entry>
   
@@ -768,7 +824,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Github Commands]]></title>
+    <title type="html"><![CDATA[Git Commands Collection]]></title>
     <link href="http://blog.infinitesquares.net/blog/2014/09/10/github-commands/"/>
     <updated>2014-09-10T14:15:37+07:00</updated>
     <id>http://blog.infinitesquares.net/blog/2014/09/10/github-commands</id>
@@ -819,6 +875,27 @@
 <li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
 <li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
 </ul>
+
+
+<p>Reset</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard HEAD~1
+</span><span class='line'>The HEAD~1 means the commit before head.
+</span><span class='line'>
+</span><span class='line'>git reset --hard HEAD~4
+</span><span class='line'>git reset --hard &lt;sha1-commit-id&gt;
+</span><span class='line'>
+</span><span class='line'>git reset --hard &lt;REMOTE&gt;/&lt;BRANCH_NAME&gt;
+</span><span class='line'>git reset --hard origin/master
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Replace master branch</p>

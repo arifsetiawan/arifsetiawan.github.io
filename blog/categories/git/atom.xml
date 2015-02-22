@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-01-22T12:06:06+07:00</updated>
+  <updated>2015-02-22T10:50:49+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Github Commands]]></title>
+    <title type="html"><![CDATA[Git Commands Collection]]></title>
     <link href="http://blog.infinitesquares.net/blog/2014/09/10/github-commands/"/>
     <updated>2014-09-10T14:15:37+07:00</updated>
     <id>http://blog.infinitesquares.net/blog/2014/09/10/github-commands</id>
@@ -66,6 +66,20 @@
 <li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
 </ul>
 
+
+<p>Reset</p>
+
+<p>```
+git reset &mdash;hard HEAD~1
+The HEAD~1 means the commit before head.</p>
+
+<p>git reset &mdash;hard HEAD~4
+git reset &mdash;hard &lt;sha1-commit-id></p>
+
+<p>git reset &mdash;hard <REMOTE>/&lt;BRANCH_NAME>
+git reset &mdash;hard origin/master</p>
+
+<p>```</p>
 
 <p>Replace master branch
 ```

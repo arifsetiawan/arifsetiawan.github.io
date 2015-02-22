@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Github Commands - Infinite | Squares</title>
+  <title>Git Commands Collection - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Github Commands</h1>
+      <h1 class="entry-title">Git Commands Collection</h1>
     
     
       <p class="meta">
@@ -154,6 +154,27 @@
 <li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
 <li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
 </ul>
+
+
+<p>Reset</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard HEAD~1
+</span><span class='line'>The HEAD~1 means the commit before head.
+</span><span class='line'>
+</span><span class='line'>git reset --hard HEAD~4
+</span><span class='line'>git reset --hard &lt;sha1-commit-id&gt;
+</span><span class='line'>
+</span><span class='line'>git reset --hard &lt;REMOTE&gt;/&lt;BRANCH_NAME&gt;
+</span><span class='line'>git reset --hard origin/master
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Replace master branch</p>
@@ -284,6 +305,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/02/22/getting-started-with-gulp/">Getting Started With Gulp</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/01/22/nginx-for-node-dot-js/">Nginx for Node.js</a>
       </li>
     
@@ -297,10 +322,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/11/add-user-to-mongodb/">Add User to MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/01/friendly-nodejs-error-message/">Friendly Node.js Error Message</a>
       </li>
     
   </ul>
