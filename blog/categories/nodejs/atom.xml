@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-04-10T22:22:59+07:00</updated>
+  <updated>2015-04-10T22:26:48+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Getting Started With Gulp]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2015/02/24/getting-started-with-gulp/"/>
-    <updated>2015-02-24T10:08:17+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2015/02/24/getting-started-with-gulp</id>
+    <link href="http://blog.infinitesquares.net/blog/2015/04/01/getting-started-with-gulp/"/>
+    <updated>2015-04-01T10:08:17+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/04/01/getting-started-with-gulp</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/gulpjs/gulp">Gulp</a> is a build system implemented using stream. You can use gulp to hinting and linting scripts, concatenate and minify them, automate testing and many others. I have been wanted to use Gulp in my Nodejs project for a while (I have tried Grunt once, but that not work well for me). This is my working with Gulp notes.</p>
 
 <!-- more -->
@@ -39,7 +39,7 @@ npm install gulp --save-dev
 
 <p>Make <code>gulpfile.js</code> in your root project folder</p>
 
-<p>```
+<p>``` javascript
 var gulp = require(&lsquo;gulp&rsquo;);</p>
 
 <p>gulp.task(&lsquo;default&rsquo;, function() {
@@ -540,7 +540,7 @@ npm install gulp-useref gulp-if gulp-rev gulp-uglify gulp-minify-css gulp-rev gu
 
 <p>You also need to update express to use your update swig files. My preference is to use config file.</p>
 
-<p><code>
+<p><code>javascript
 app.engine('swig', swig.renderFile);
 app.set('views', path.join(__dirname, config.useDist ? 'dist/views': 'app/views'));
 app.set('view engine', 'swig');
@@ -548,7 +548,7 @@ app.set('view engine', 'swig');
 
 <p>Also because the asset is now has revisions, you don&rsquo;t have to worry if you set long time for it to expire on browser assets (this will reduce request to server). Here I set to 1 year.</p>
 
-<p>```
+<p>``` javascript
 app.use(serveStatic(path.join(__dirname, &lsquo;dist&rsquo;), {
   setHeaders: function setDistCacheControl(res, path) {</p>
 

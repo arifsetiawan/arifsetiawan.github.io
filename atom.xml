@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-04-10T22:22:59+07:00</updated>
+  <updated>2015-04-10T22:26:48+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Getting Started With Gulp]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2015/02/24/getting-started-with-gulp/"/>
-    <updated>2015-02-24T10:08:17+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2015/02/24/getting-started-with-gulp</id>
+    <link href="http://blog.infinitesquares.net/blog/2015/04/01/getting-started-with-gulp/"/>
+    <updated>2015-04-01T10:08:17+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/04/01/getting-started-with-gulp</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/gulpjs/gulp">Gulp</a> is a build system implemented using stream. You can use gulp to hinting and linting scripts, concatenate and minify them, automate testing and many others. I have been wanted to use Gulp in my Nodejs project for a while (I have tried Grunt once, but that not work well for me). This is my working with Gulp notes.</p>
 
 <!-- more -->
@@ -39,28 +39,30 @@
 
 <p>Make <code>gulpfile.js</code> in your root project folder</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var gulp = require('gulp');
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp&#39;</span><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'>gulp.task('default', function() {
-</span><span class='line'>  // gulp tasks here
-</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// gulp tasks here</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Then run <code>gulp</code> from command line</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ gulp
-</span><span class='line'>[10:18:23] Using gulpfile ~\app\gulpfile.js
-</span><span class='line'>[10:18:23] Starting 'default'...
-</span><span class='line'>[10:18:23] Finished 'default' after 72 µs</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span> <span class="nx">gulp</span>
+</span><span class='line'><span class="p">[</span><span class="mi">10</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mi">23</span><span class="p">]</span> <span class="nx">Using</span> <span class="nx">gulpfile</span> <span class="o">~</span><span class="err">\</span><span class="nx">app</span><span class="err">\</span><span class="nx">gulpfile</span><span class="p">.</span><span class="nx">js</span>
+</span><span class='line'><span class="p">[</span><span class="mi">10</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mi">23</span><span class="p">]</span> <span class="nx">Starting</span> <span class="s1">&#39;default&#39;</span><span class="p">...</span>
+</span><span class='line'><span class="p">[</span><span class="mi">10</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mi">23</span><span class="p">]</span> <span class="nx">Finished</span> <span class="s1">&#39;default&#39;</span> <span class="nx">after</span> <span class="mi">72</span> <span class="err">µ</span><span class="nx">s</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Development style</h2>
@@ -221,8 +223,9 @@
 
 <p>So head to your console and install the followings:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm install gulp-useref gulp-if gulp-rev gulp-uglify gulp-minify-css gulp-rev gulp-rev-replace gulp-sequence del --save-dev</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">npm</span> <span class="nx">install</span> <span class="nx">gulp</span><span class="o">-</span><span class="nx">useref</span> <span class="nx">gulp</span><span class="o">-</span><span class="k">if</span> <span class="nx">gulp</span><span class="o">-</span><span class="nx">rev</span> <span class="nx">gulp</span><span class="o">-</span><span class="nx">uglify</span> <span class="nx">gulp</span><span class="o">-</span><span class="nx">minify</span><span class="o">-</span><span class="nx">css</span> <span class="nx">gulp</span><span class="o">-</span><span class="nx">rev</span> <span class="nx">gulp</span><span class="o">-</span><span class="nx">rev</span><span class="o">-</span><span class="nx">replace</span> <span class="nx">gulp</span><span class="o">-</span><span class="nx">sequence</span> <span class="nx">del</span> <span class="o">--</span><span class="nx">save</span><span class="o">-</span><span class="nx">dev</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Then update your swig files</p>
@@ -469,28 +472,30 @@
 
 <p>You also need to update express to use your update swig files. My preference is to use config file.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app.engine('swig', swig.renderFile);
-</span><span class='line'>app.set('views', path.join(__dirname, config.useDist ? 'dist/views': 'app/views'));
-</span><span class='line'>app.set('view engine', 'swig');</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">engine</span><span class="p">(</span><span class="s1">&#39;swig&#39;</span><span class="p">,</span> <span class="nx">swig</span><span class="p">.</span><span class="nx">renderFile</span><span class="p">);</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="nx">config</span><span class="p">.</span><span class="nx">useDist</span> <span class="o">?</span> <span class="s1">&#39;dist/views&#39;</span><span class="o">:</span> <span class="s1">&#39;app/views&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;swig&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Also because the asset is now has revisions, you don&rsquo;t have to worry if you set long time for it to expire on browser assets (this will reduce request to server). Here I set to 1 year.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app.use(serveStatic(path.join(__dirname, 'dist'), {
-</span><span class='line'>  setHeaders: function setDistCacheControl(res, path) {
-</span><span class='line'>    res.setHeader('Cache-Control', 'public, max-age=' + (365*86400))
-</span><span class='line'>    res.setHeader("Expires", moment().add(1,'y').toDate().toUTCString());
-</span><span class='line'>  }
-</span><span class='line'>}))</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">serveStatic</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">),</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">setHeaders</span><span class="o">:</span> <span class="kd">function</span> <span class="nx">setDistCacheControl</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Cache-Control&#39;</span><span class="p">,</span> <span class="s1">&#39;public, max-age=&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="mi">365</span><span class="o">*</span><span class="mi">86400</span><span class="p">))</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s2">&quot;Expires&quot;</span><span class="p">,</span> <span class="nx">moment</span><span class="p">().</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">).</span><span class="nx">toDate</span><span class="p">().</span><span class="nx">toUTCString</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}))</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>That&rsquo;s it. I hope this notes is useful for you. Let me know if you have any comment or feedback.</p>
