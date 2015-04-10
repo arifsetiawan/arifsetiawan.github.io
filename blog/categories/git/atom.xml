@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-02-22T10:50:49+07:00</updated>
+  <updated>2015-04-10T22:22:59+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -63,23 +63,29 @@
 <li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
 <li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
 <li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
-<li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
+<li><code>git log -- FILENAME</code> &ndash;> view a file changing history</li>
+<li><code>git commit --amend -m "New commit message"</code> &ndash;> change latest commit message</li>
 </ul>
 
 
-<p>Reset</p>
-
-<p>```
+<p>Reset
+```
 git reset &mdash;hard HEAD~1
-The HEAD~1 means the commit before head.</p>
+&ndash;>The HEAD~1 means the commit before head.</p>
 
 <p>git reset &mdash;hard HEAD~4
 git reset &mdash;hard &lt;sha1-commit-id></p>
 
 <p>git reset &mdash;hard <REMOTE>/&lt;BRANCH_NAME>
-git reset &mdash;hard origin/master</p>
+git reset &mdash;hard origin/master
+```</p>
 
-<p>```</p>
+<p>Delete a file from commit
+```
+find . -name .DS_Store -print0 | xargs -0 git rm -f &mdash;ignore-unmatch</p>
+
+<p>Update .gitignore and commit
+```</p>
 
 <p>Replace master branch
 ```

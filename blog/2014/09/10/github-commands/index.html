@@ -71,7 +71,7 @@
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
   <li><a href="/blog/categories">Categories</a></li>
-  <li><a href="http://orchidreader.com/" target="_blank">Orchid Reader</a></li>
+  <li><a href="https://www.catchk.com/" target="_blank">Catchk</a></li>
   <li><a href="http://cymbidium.co.id/" target="_blank">Cymbidium</a></li>
   <li><a href="http://www.jepret.in/" target="_blank">Jepret Cloud</a></li>
 </ul>
@@ -152,7 +152,8 @@
 <li><code>git clean -fx</code> &ndash;> delete untracked files and directories, -f force, -n directory</li>
 <li><code>git clean -n</code> &ndash;> clean dry run, list what to be deleted</li>
 <li><code>git checkout -- FILENAME</code> &ndash;> cancel changes on a filename</li>
-<li><code>git log -- FILENAME</code> &ndash;> change a file changing history</li>
+<li><code>git log -- FILENAME</code> &ndash;> view a file changing history</li>
+<li><code>git commit --amend -m "New commit message"</code> &ndash;> change latest commit message</li>
 </ul>
 
 
@@ -167,14 +168,23 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard HEAD~1
-</span><span class='line'>The HEAD~1 means the commit before head.
+</span><span class='line'>-&gt;The HEAD~1 means the commit before head.
 </span><span class='line'>
 </span><span class='line'>git reset --hard HEAD~4
 </span><span class='line'>git reset --hard &lt;sha1-commit-id&gt;
 </span><span class='line'>
 </span><span class='line'>git reset --hard &lt;REMOTE&gt;/&lt;BRANCH_NAME&gt;
-</span><span class='line'>git reset --hard origin/master
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>git reset --hard origin/master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Delete a file from commit</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+</span><span class='line'>
+</span><span class='line'>Update .gitignore and commit</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Replace master branch</p>
@@ -276,9 +286,8 @@
   
     <section>
   <h1>About Me</h1>
-  <p>I'm Arif Setiawan, primarily C++ and Javascript (Node.js) Developer. Currently work as CTO at <a href="http://dycode.co.id/">Dycode</a></p>
-  <p>My upcoming product : <a href="http://orchidreader.com">OrchidReader</a></p>
-  <p>I developed backend service for <a href="http://www.cymbidium.co.id/">Cymbidium</a>, a document archiving and processing solution.<br>And <a href="http://www.jepret.in/">Jepret Cloud</a>, a platfom for photo collecting and management<p>
+  <p>I'm Arif Setiawan, primarily C++ and Javascript (Node.js) Developer. Currently work as CTO at <a href="http://www.catchk.com/">Catchk</a></p>
+  <p>I also developed backend service for <a href="http://www.jepret.in/">Jepret Cloud</a>, a platfom for photo collecting and management.<br>And <a href="http://www.cymbidium.co.id/">Cymbidium</a>, a document archiving and processing solution.</p>
   <p>I worked with many languages: C, C++, C#, Javascript, PHP, HTML, CSS, Objective-C, Java and work on various platforms: Qt, OpenCV, .NET, iOS, Android and Node.js.<p>
   <p>I also have interest in Machine Learning, Image Processing, and Big Data Processing and Analytics<p>
 </section>
@@ -305,7 +314,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/02/22/getting-started-with-gulp/">Getting Started With Gulp</a>
+        <a href="/blog/2015/02/24/getting-started-with-gulp/">Getting Started With Gulp</a>
       </li>
     
       <li class="post">
