@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-04-10T22:34:40+07:00</updated>
+  <updated>2015-06-01T22:00:34+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OAuth2 Flows]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows/"/>
+    <updated>2015-06-01T21:59:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows</id>
+    <content type="html"><![CDATA[<p>During my work to refactor one of my Node.js based app, I tried to dug deeper into OAuth2 authorization flows. There are 4 authorization flows. See here <a href="http://labs.hybris.com/2012/06/01/oauth2-authorization-code-flow/">http://labs.hybris.com/2012/06/01/oauth2-authorization-code-flow/</a>:</p>
+
+<!-- more -->
+
+
+<ul>
+<li>Authorization Code Flow, aka Server-Side Flow or the ‘typical’ Oauth2 flow: this flow includes sending the client user via redirect to the provider’s login and authorization page, then will redirect back to your web application and pass a authorization code in the URL parameters.</li>
+<li>Implicit Flow, aka as Client-Side Flow: this flow is pretty simple and is suited for browser-based client-side web applications. This means: JavaScript. You send the user via redirect to the provider’s web site, she logs in and authorizes your app, then the provider redirects back to your web application.</li>
+<li>Resource Owner Password Flow: this flow is great for native mobile applications that you can trust. This flow includes sending the user’s username and password to the token endpoint in exchange for an access token.</li>
+<li>Client Credentials Flow: this flow identifies the client and give the client itself access to resources it owns and does not give the client access to users’ data.</li>
+</ul>
+
+
+<p>Since my app is written with Node.js, first move is to see if there is Node.js modules that support all flows. Fortunately, <a href="http://passportjs.org/">passport</a> support all of it. Here are some links for each flow (with the exception of the last, since it just about client data):</p>
+
+<ul>
+<li>Authorization Code Flow. <a href="https://rwlive.wordpress.com/2014/05/26/oauth2-authorization-grant-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/05/26/oauth2-authorization-grant-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+<li>Implicit Flow. <a href="https://rwlive.wordpress.com/2014/06/11/oauth2-implicit-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/06/11/oauth2-implicit-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+<li>Resource Owner Password Flow. <a href="https://rwlive.wordpress.com/2014/06/24/oauth2-resource-owner-password-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/06/24/oauth2-resource-owner-password-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+</ul>
+
+
+<p>For your application, if you start with mobile app developed internally, start with Resource Owner Password Flow. If you start allowing third party applications to integrate with your API, implement Authorization Code Flow. Finally, when you develop a javascript client library for your API, deploy Implicit Flow.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Getting Started With Gulp]]></title>

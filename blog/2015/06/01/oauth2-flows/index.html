@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Resizing MongoDB Data Disk - Infinite | Squares</title>
+  <title>OAuth2 Flows - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="I received a message saying the are issue in our Node.js app running on Azure: Can&rsquo;t take a write lock while out of disk space. The issue is &hellip;">
+  <meta name="description" content="During my work to refactor one of my Node.js based app, I tried to dug deeper into OAuth2 authorization flows. There are 4 authorization flows. See &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk">
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Resizing MongoDB Data Disk</h1>
+      <h1 class="entry-title">OAuth2 Flows</h1>
     
     
       <p class="meta">
@@ -100,57 +100,36 @@
   
 
 
-<time datetime="2014-09-17T06:19:00+07:00" pubdate data-updated="true">Sep 17<span>th</span>, 2014</time>
+<time datetime="2015-06-01T21:59:00+07:00" pubdate data-updated="true">Jun 1<span>st</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I received a message saying the are issue in our Node.js app running on Azure: Can&rsquo;t take a write lock while out of disk space. The issue is clear enough: our MongoDB data disk is run out. I will outlined steps how we can resize MongoDB data disk. Well, it&rsquo;s not actually that hard. Simplified steps are :</p>
+<div class="entry-content"><p>During my work to refactor one of my Node.js based app, I tried to dug deeper into OAuth2 authorization flows. There are 4 authorization flows. See here <a href="http://labs.hybris.com/2012/06/01/oauth2-authorization-code-flow/">http://labs.hybris.com/2012/06/01/oauth2-authorization-code-flow/</a>:</p>
 
 <!-- more -->
 
 
 <ul>
-<li>Prepare bigger data disk</li>
-<li>Copy all old MongoDB data from old disk to new one</li>
-<li>Update MongoDB config</li>
-<li>Restart MongoDB service</li>
+<li>Authorization Code Flow, aka Server-Side Flow or the ‘typical’ Oauth2 flow: this flow includes sending the client user via redirect to the provider’s login and authorization page, then will redirect back to your web application and pass a authorization code in the URL parameters.</li>
+<li>Implicit Flow, aka as Client-Side Flow: this flow is pretty simple and is suited for browser-based client-side web applications. This means: JavaScript. You send the user via redirect to the provider’s web site, she logs in and authorizes your app, then the provider redirects back to your web application.</li>
+<li>Resource Owner Password Flow: this flow is great for native mobile applications that you can trust. This flow includes sending the user’s username and password to the token endpoint in exchange for an access token.</li>
+<li>Client Credentials Flow: this flow identifies the client and give the client itself access to resources it owns and does not give the client access to users’ data.</li>
 </ul>
 
 
-<p>Start with preparing bigger disk space. On Azure, follow this tutorial on <a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-how-to-attach-disk/">How to Attach a Data Disk to a Linux Virtual Machine</a></p>
+<p>Since my app is written with Node.js, first move is to see if there is Node.js modules that support all flows. Fortunately, <a href="http://passportjs.org/">passport</a> support all of it. Here are some links for each flow (with the exception of the last, since it just about client data):</p>
 
-<p>Then create MongoDB data folder and make sure to change ownership of the folder to mongod or you will have write access issue.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir /mongodata
-</span><span class='line'>$ sudo chown -R mongod:mongod /mongodata</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Copy all old data to new folder</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp -r /oldmongodata /mongodata</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>Authorization Code Flow. <a href="https://rwlive.wordpress.com/2014/05/26/oauth2-authorization-grant-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/05/26/oauth2-authorization-grant-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+<li>Implicit Flow. <a href="https://rwlive.wordpress.com/2014/06/11/oauth2-implicit-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/06/11/oauth2-implicit-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+<li>Resource Owner Password Flow. <a href="https://rwlive.wordpress.com/2014/06/24/oauth2-resource-owner-password-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/06/24/oauth2-resource-owner-password-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+</ul>
 
 
-<p>Use option <code>-v</code> if you want to see the copying progree, or if you forget to do that use this command</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ watch ls -lah /mongodata</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When copy completed, open MongoDb config file (usually in <code>/etc/mongod.conf</code>) and update the dbpath to the new data folder.</p>
-
-<p>Restart the service</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongod start</span></code></pre></td></tr></table></div></figure>
-
-
-<p>While the resizing MongoDB data disk is quite simple, disk run out issue should not be happening during production server deployment. One possible approach to minimize the risk is to create reporting daemon (or use third party service) to monitor server stats.</p>
+<p>For your application, if you start with mobile app developed internally, start with Resource Owner Password Flow. If you start allowing third party applications to integrate with your API, implement Authorization Code Flow. Finally, when you develop a javascript client library for your API, deploy Implicit Flow.</p>
 </div>
 
 
@@ -173,21 +152,15 @@
   
 
 
-<time datetime="2014-09-17T06:19:00+07:00" pubdate data-updated="true">Sep 17<span>th</span>, 2014</time>
+<time datetime="2015-06-01T21:59:00+07:00" pubdate data-updated="true">Jun 1<span>st</span>, 2015</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/mongodb/'>MongoDB</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows/" >Tweet</a>
   
   
   
@@ -196,10 +169,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/09/16/ubuntu-server-setup/" title="Previous Post: Ubuntu server setup">&laquo; Ubuntu server setup</a>
+        <a class="basic-alignment left" href="/blog/2015/04/01/getting-started-with-gulp/" title="Previous Post: Getting Started with Gulp">&laquo; Getting Started with Gulp</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/20/know-your-npm/" title="Next Post: Know your npm">Know your npm &raquo;</a>
       
     </p>
   </footer>
@@ -287,8 +258,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2014/09/17/resizing-mongodb-data-disk/';
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows/';
         var disqus_script = 'embed.js';
       
     (function () {
