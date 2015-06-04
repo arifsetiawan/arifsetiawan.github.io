@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-06-01T22:00:34+07:00</updated>
+  <updated>2015-06-04T13:22:30+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -1291,9 +1291,9 @@
   
   <entry>
     <title type="html"><![CDATA[Git Commands Collection]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2014/09/10/github-commands/"/>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/10/git-commands/"/>
     <updated>2014-09-10T14:15:37+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2014/09/10/github-commands</id>
+    <id>http://blog.infinitesquares.net/blog/2014/09/10/git-commands</id>
     <content type="html"><![CDATA[<p><a href="http://git-scm.com/">Git</a> is very powerful distributed revision control. It has lots of commands but I only use several of them. I often forget some of the rarely used git commands so I make notes here.</p>
 
 <ul>
@@ -1404,6 +1404,16 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch FILENAME' --prune-empty --tag-name-filter cat -- --all
 </span><span class='line'>git push --force --verbose --dry-run
 </span><span class='line'>git push --force</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ignore files that have already been committed to a Git repository</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git rm -r --cached .
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m ".gitignore is now working"</span></code></pre></td></tr></table></div></figure>
 
 
 <p>I will add more when I found out other git commands</p>

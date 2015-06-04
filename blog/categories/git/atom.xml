@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-06-01T22:00:34+07:00</updated>
+  <updated>2015-06-04T13:22:30+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Git Commands Collection]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2014/09/10/github-commands/"/>
+    <link href="http://blog.infinitesquares.net/blog/2014/09/10/git-commands/"/>
     <updated>2014-09-10T14:15:37+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2014/09/10/github-commands</id>
+    <id>http://blog.infinitesquares.net/blog/2014/09/10/git-commands</id>
     <content type="html"><![CDATA[<p><a href="http://git-scm.com/">Git</a> is very powerful distributed revision control. It has lots of commands but I only use several of them. I often forget some of the rarely used git commands so I make notes here.</p>
 
 <ul>
@@ -106,6 +106,14 @@ git checkout master
 git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch FILENAME' --prune-empty --tag-name-filter cat -- --all
 git push --force --verbose --dry-run
 git push --force
+</code></p>
+
+<p>Ignore files that have already been committed to a Git repository</p>
+
+<p><code>
+git rm -r --cached .
+git add .
+git commit -m ".gitignore is now working"
 </code></p>
 
 <p>I will add more when I found out other git commands</p>
