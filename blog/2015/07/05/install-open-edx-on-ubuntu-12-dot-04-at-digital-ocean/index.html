@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Install Open edX on Ubuntu 12.04 at Digital Ocean - Infinite | Squares</title>
+  <meta name="author" content="Nurul Arif Setiawan">
+
+  
+  <meta name="description" content="Open edX is the open source platform that powers edX courses. It is freely available to the community. Institutions can host their own instances of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45905282-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Infinite | Squares</a></h1>
+  
+    <h2>Art of code and more</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.infinitesquares.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="https://www.catchk.com/" target="_blank">Catchk</a></li>
+  <li><a href="http://cymbidium.co.id/" target="_blank">Cymbidium</a></li>
+  <li><a href="http://www.jepret.in/" target="_blank">Jepret Cloud</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Install Open edX on Ubuntu 12.04 at Digital Ocean</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-05T17:04:32+07:00" pubdate data-updated="true">Jul 5<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://open.edx.org">Open edX</a> is the open source platform that powers <a href="https://www.edx.org/">edX</a> courses. It is freely available to the community. Institutions can host their own instances of Open edX and offer their own classes. Educators can extend the platform to build learning tools that precisely meet their needs. And developers can contribute new features to the Open edX platform. There are already many online course sites <a href="https://github.com/edx/edx-platform/wiki/Sites-powered-by-Open-edX">developed using Open edX</a>.</p>
+
+<!-- more -->
+
+
+<h3>Architecture</h3>
+
+<p>Open edX consisting of several web applications, mostly written with Django Python. There are also mobile app for Android and iOS and analytics platform powered by Hadoop. It is quite complete and we can deploy it to have a complete online course experience. The architecture is explained <a href="https://open.edx.org/contributing-to-edx/architecture">here</a>.</p>
+
+<p>Open edX has several components :</p>
+
+<ul>
+<li>LMS (App visible to students)</li>
+<li>CMS (Studio. App visible to course creator)</li>
+<li>cs_comment_service (Discussions)</li>
+<li>MySQL (Database for user data and others)</li>
+<li>Mongo (Database for course)</li>
+<li>Mobile Apps (Android and iOS)</li>
+<li>Analytics (Insight in edx.org)</li>
+<li>Search with Elasticsearch</li>
+<li>Background workers for various purposes (queued and distributed using Celery and RabbitMQ)</li>
+</ul>
+
+
+<h3>Installation</h3>
+
+<p>To start with Open edX, we need to install it first. There are several options for Open edX platform installation:</p>
+
+<ul>
+<li>The Open edX Developer Stack, known as Devstack, is a Vagrant instance designed for local development.</li>
+<li>Open edX Fullstack, known as Fullstack, has several deployment options:
+
+<ul>
+<li>Vagrant instance designed for deploying all edX services on a single server.</li>
+<li>Open edX Fullstack on <a href="https://github.com/edx/configuration/wiki/edX-Ubuntu-12.04-64-bit-Installation">Ubuntu 12.04 64 bit</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>All installation methods mentioned above are meant for development purposes and not live production websites, since all of the components (apps and databases) are installed on single servers.</p>
+
+<p>Since my laptop is not suitable for work with VirtualBox, I opted to install Open edX on Ubuntu server on cloud. For the cloud provider, I choose <a href="https://www.digitalocean.com/">Digital Ocean</a>. Digital Ocean provide SSD backed cloud server and its quite cheap. And this is my Open edX installation notes on Ubuntu 12.04 at Digital Ocean. Note that this is based on my experience as of today (2015-07-05).</p>
+
+<h3>Installation notes on Digital Ocean</h3>
+
+<h4>Create a server</h4>
+
+<p>First, create Digital Ocean account if you don&rsquo;t have one. You need to add your credit card so you can create your first droplet (server).</p>
+
+<p>I choose droplet with 4 CPUs and 8 GB RAM ($80/mo). I think 2 CPUs and 4 GB RAM ($40/mo) could work but maybe installation will take a bit longer. Open edX has lots of components. Choose Image Ubuntu 12.04.5 x64.</p>
+
+<p>I recommend to Add SSH keys for your Ubuntu server. It is considered more secure than password based access, and you don&rsquo;t have to type password each time you access it. You can follow <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">this tutorial</a> to create SSH key for your server.</p>
+
+<p>This is my droplet summary</p>
+
+<ul>
+<li>Hostname : OpenEDX</li>
+<li>Size : $80/mo</li>
+<li>Region : Singapore 1</li>
+<li>Image : 12.04.5 x64</li>
+<li>Settings : none</li>
+<li>SSH Keys : DigitalOcean</li>
+</ul>
+
+
+<p>When you&rsquo;re ready create your droplet. It will take about one minute.</p>
+
+<h4>Add swap space</h4>
+
+<p>Before we continue with Open edX installation. Lets create a swap space to add total amount of virtual memory allocated for our single server.</p>
+
+<p>Again, folks and Digital Ocean has created <a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-12-04">a tutorial for creating swap space on Ubuntu server</a>. Follow those steps with one exception, I want to create a 8 GB swap space and I use this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sudo dd if=/dev/zero of=/swapfile bs=1G count=8</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The tutorial page use 1024 bytes blocksize and it takes too long to create 8 GB swap. Plus, I am having hard time calculate the correct count (I experienced error that all the disk content is used as swap. Which is not what you want)</p>
+
+<h4>Install Open edX</h4>
+
+<p>After the server ready, now we can install Open edX. The install script is already available on Open edX repository on Github. We need to update the server first.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sudo apt-get update -y
+</span><span class='line'># sudo apt-get upgrade -y
+</span><span class='line'># sudo apt-get install htop
+</span><span class='line'># sudo reboot</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I install htop so I can monitor what happens during installation. It takes a while and sometimes I wonder what is going on. Is it hang or doing something (compiling, downloading, etc)</p>
+
+<p>Then run this command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will run ansible commands to install all required dependencies and services for running Open edX on single server.</p>
+
+<p>While we wait, lets read some Open edX documentation</p>
+
+<ul>
+<li><a href="https://github.com/edx/edx-platform/wiki">https://github.com/edx/edx-platform/wiki</a></li>
+<li><a href="https://github.com/edx/configuration/wiki">https://github.com/edx/configuration/wiki</a></li>
+<li><a href="http://edx-developer-guide.readthedocs.org/">http://edx-developer-guide.readthedocs.org/</a></li>
+<li><a href="http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/">http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/</a></li>
+<li><a href="http://edx.readthedocs.org/projects/xblock/en/latest/">http://edx.readthedocs.org/projects/xblock/en/latest/</a></li>
+<li><a href="http://edx.readthedocs.org/projects/open-edx-building-and-running-a-course/en/named-release-birch/">http://edx.readthedocs.org/projects/open-edx-building-and-running-a-course/en/named-release-birch/</a></li>
+</ul>
+
+
+<p>Then I experiences series of errors:</p>
+
+<h5>Error 1</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error
+</span><span class='line'>  Downloading dm.xmlsec.binding-1.3.2.tar.gz (119kB)
+</span><span class='line'>    Error: cannot get XMLSec1 pre-processor and compiler flags; do you have the `libxmlsec1` development package installed?
+</span><span class='line'>    Complete output from command python setup.py egg_info:
+</span><span class='line'>    Error: cannot get XMLSec1 pre-processor and compiler flags; do you have the `libxmlsec1` development package installed?
+</span><span class='line'>
+</span><span class='line'>    ----------------------------------------
+</span><span class='line'>    Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-RMvh3g/dm.xmlsec.binding
+</span><span class='line'>
+</span><span class='line'>FATAL: all hosts have already failed -- aborting</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The install script is missing one package: <code>libxmlsec1-dev</code>. Let&rsquo;s install it</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sudo apt-get install libxmlsec1-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Redo the process by calling</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Continue reading.</p>
+
+<h5>Error 2</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error
+</span><span class='line'>    swig -python -I/usr/include/python2.7 -I/usr/include/x86_64-linux-gnu -I/usr/include -I/usr/include/openssl -includeall -modern -o SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
+</span><span class='line'>
+</span><span class='line'>    unable to execute swig: No such file or directory
+</span><span class='line'>
+</span><span class='line'>    error: command 'swig' failed with exit status 1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The install script is again missing one package: <code>swig</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sudo apt-get install swig</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Redo the process</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And continue reading.</p>
+
+<h5>Error 3</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...
+</span><span class='line'>- Migration 'student:0031_drop_student_anonymoususerid_temp_archive' is marked for no-dry-run.
+</span><span class='line'> &gt; student:0032_add_field_UserProfile_country_add_field_UserProfile_city
+</span><span class='line'> &gt; student:0032_auto__add_loginfailures
+</span><span class='line'> &gt; student:0033_auto__add_passwordhistory
+</span><span class='line'> &gt; student:0034_auto__add_courseaccessrole
+</span><span class='line'> &gt; student:0035_access_roles
+</span><span class='line'> - Migration 'student:0035_access_roles' is marked for no-dry-run.
+</span><span class='line'> ! Error found during real run of migration! Aborting.
+</span><span class='line'>
+</span><span class='line'> ! Since you have a database that does not support running
+</span><span class='line'> ! schema-altering statements in transactions, we have had
+</span><span class='line'> ! to leave it in an interim state between migrations.
+</span><span class='line'>
+</span><span class='line'>! You *might* be able to recover with:   (migration cannot be dry-run; cannot discover commands)
+</span><span class='line'> ! The South developers regret this has happened, and would
+</span><span class='line'> ! like to gently persuade you to consider a slightly
+</span><span class='line'> ! easier-to-deal-with DBMS (one that supports DDL transactions)
+</span><span class='line'> ! NOTE: The error which caused the migration to fail is further up.
+</span><span class='line'>Error in migration: student:0035_access_roles
+</span><span class='line'>changed: [localhost] =&gt; (item=cms)
+</span><span class='line'>
+</span><span class='line'>FATAL: all hosts have already failed -- aborting</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is error during database migration. I just redo the whole process.</p>
+
+<p>You might wonder is it safe to redo the install process over and over again. It is safe because Ansible is designed to be idempotent which means that you can apply and re-apply it an infinite number of times without changing the result. I just assume the Open edX authors utilize idempotency in their Ansible playbooks.</p>
+
+<h5>Error 4</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error
+</span><span class='line'>failed: [localhost] =&gt; {"failed": true, "item": ""}
+</span><span class='line'>msg: Failed to validate the SSL certificate for download.elasticsearch.org:443. Use validate_certs=no or make sure your managed systems have a valid CA certificate installed. Paths checked for this platform: /etc/ssl/certs, /etc/pki/ca-trust/extracted/pem, /etc/pki/tls/certs, /usr/share/ca-certificates/cacert.org, /etc/ansible
+</span><span class='line'>
+</span><span class='line'>FATAL: all hosts have already failed -- aborting</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It means we cannot proceed to download ElasticSearch installer because our system installed certificates do not recognize SSL used in download.elasticsearch.org. One way to fix this, as suggested by the error message, add <code>validate_certs=no</code> somewhere when we install ElasticSearch. Open playbook for ElasticSearch:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># nano /var/tmp/configuration/playbooks/roles/elasticsearch/tasks/main.yml</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At line 37, right after <code>force=no</code>, and press space to insert new line.
+Type <code>validate_certs=no</code> in a new line.</p>
+
+<p>Then redo install using following script:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cd /var/tmp/configuration/playbooks && sudo ansible-playbook -c local ./edx_sandbox.yml -i "localhost,"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that I redo Ansible process by executing local script instead of fetching again from github because we don&rsquo;t want to lose our changes.</p>
+
+<h4>Successful install</h4>
+
+<p>After a while, finally there are no more errors on the installation process, and I have my Open edX running. Next, we will continue on customizing our Open edX instance.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nurul Arif Setiawan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-05T17:04:32+07:00" pubdate data-updated="true">Jul 5<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/notes/'>Notes</a>, <a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a>, <a class='category' href='/blog/categories/edx/'>edX</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/01/oauth2-flows/" title="Previous Post: OAuth2 Flows ">&laquo; OAuth2 Flows </a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>I'm Arif Setiawan, primarily working as fullstack web and C++ developer.</p> 
+  <p>I helped development of <a href="http://www.catchk.com/">Catchk</a>, a photo resume platform.</p>
+  <p>I also developed backend service for <a href="http://www.jepret.in/">Jepret Cloud</a>, a platfom for photo collecting and management.<br>And <a href="http://www.cymbidium.co.id/">Cymbidium</a>, a document archiving and processing solution.</p>
+  <p>I worked with many languages: C, C++, C#, Javascript, PHP, HTML, CSS, Objective-C, Java and work on various platforms: Qt, OpenCV, .NET, iOS, Android and Node.js.<p>
+  <p>I also have interest in Machine Learning, Image Processing, and Big Data Processing and Analytics<p>
+</section>
+<section class="twitter2">
+  <h1>
+    <a href="https://twitter.com/ken121f" target="_blank">
+      <img src="/images/logo.png" width="32" height="32">
+      ken121f
+    </a>
+  </h1>
+</section><section class="github2">
+  <h1>
+    <a href="https://github.com/arifsetiawan" target="_blank">
+      <img src="/images/github_64.png" width="32" height="32">
+      arifsetiawan
+    </a>
+  </h1>
+</section><section class="linkedin">
+  <h1>
+    <a href="https://www.linkedin.com/pub/nurul-arif-setiawan/43/b71/311" target="_blank"><img src="/images/linkedin_64.png" width="32" height="32">Arif Setiawan</a>
+  </h1>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/">Install Open edX on Ubuntu 12.04 at Digital Ocean</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/oauth2-flows/">OAuth2 Flows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/01/getting-started-with-gulp/">Getting Started With Gulp</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/22/nginx-for-node-dot-js/">Nginx for Node.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/20/using-ssh-on-azure-linux-vm/">Using SSH on Azure Linux VM</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nurul Arif Setiawan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'infinitesquares';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

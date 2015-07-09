@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-06-04T13:22:30+07:00</updated>
+  <updated>2015-07-09T11:10:53+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -114,6 +114,12 @@ git push --force
 git rm -r --cached .
 git add .
 git commit -m ".gitignore is now working"
+</code></p>
+
+<p>Undo last merge. Assume local master was not ahead of origin/master. It preserve changes. Here ORIG_HEAD should point to a commit directly before merge has occurred.</p>
+
+<p><code>
+git reset --merge ORIG_HEAD
 </code></p>
 
 <p>I will add more when I found out other git commands</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-06-04T13:22:30+07:00</updated>
+  <updated>2015-07-09T11:10:53+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OAuth2 Flows]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows/"/>
+    <updated>2015-06-01T21:59:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/06/01/oauth2-flows</id>
+    <content type="html"><![CDATA[<p>During my work to refactor one of my Node.js based app, I tried to dug deeper into OAuth2 authorization flows. There are 4 authorization flows. See here <a href="http://labs.hybris.com/2012/06/01/oauth2-authorization-code-flow/">http://labs.hybris.com/2012/06/01/oauth2-authorization-code-flow/</a>:</p>
+
+<!-- more -->
+
+
+<ul>
+<li>Authorization Code Flow, aka Server-Side Flow or the ‘typical’ Oauth2 flow: this flow includes sending the client user via redirect to the provider’s login and authorization page, then will redirect back to your web application and pass a authorization code in the URL parameters.</li>
+<li>Implicit Flow, aka as Client-Side Flow: this flow is pretty simple and is suited for browser-based client-side web applications. This means: JavaScript. You send the user via redirect to the provider’s web site, she logs in and authorizes your app, then the provider redirects back to your web application.</li>
+<li>Resource Owner Password Flow: this flow is great for native mobile applications that you can trust. This flow includes sending the user’s username and password to the token endpoint in exchange for an access token.</li>
+<li>Client Credentials Flow: this flow identifies the client and give the client itself access to resources it owns and does not give the client access to users’ data.</li>
+</ul>
+
+
+<p>Since my app is written with Node.js, first move is to see if there is Node.js modules that support all flows. Fortunately, <a href="http://passportjs.org/">passport</a> support all of it. Here are some links for each flow (with the exception of the last, since it just about client data):</p>
+
+<ul>
+<li>Authorization Code Flow. <a href="https://rwlive.wordpress.com/2014/05/26/oauth2-authorization-grant-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/05/26/oauth2-authorization-grant-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+<li>Implicit Flow. <a href="https://rwlive.wordpress.com/2014/06/11/oauth2-implicit-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/06/11/oauth2-implicit-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+<li>Resource Owner Password Flow. <a href="https://rwlive.wordpress.com/2014/06/24/oauth2-resource-owner-password-flow-using-oauth2orize-express-4-and-mongojs/">https://rwlive.wordpress.com/2014/06/24/oauth2-resource-owner-password-flow-using-oauth2orize-express-4-and-mongojs/</a></li>
+</ul>
+
+
+<p>For your application, if you start with mobile app developed internally, start with Resource Owner Password Flow. If you start allowing third party applications to integrate with your API, implement Authorization Code Flow. Finally, when you develop a javascript client library for your API, deploy Implicit Flow.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Getting Started With Gulp]]></title>
@@ -775,49 +806,6 @@ return str
 <p><code>plain
 Error: no such file or directory [c:\Users\ArifSetiawan\Repository\CymbRef\cmd\filenotexists]
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Flatten Node_modules]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2014/09/21/flatten-node-modules/"/>
-    <updated>2014-09-21T05:45:42+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2014/09/21/flatten-node-modules</id>
-    <content type="html"><![CDATA[<p>If you worked with Node.js, you might start notice youd node_modules started to simply nested into the abyss and the path is getting longer and longer. Consider this :</p>
-
-<p><code>/C/Users/ArifSetiawan/Repository/Katch/katch/node_modules/sails/node_modules/grunt-contrib-less/node_modules/less/node_modules/request/node_modules/form-data/node_modules/combined-stream/node_modules/delayed-stream/test/integration/test-handle-source-errors.js</code></p>
-
-<p>Yes, it is a headache to see deeply nested node_modules. You got more headache when you see that there are some duplicated node_modules pop out elsewhere. Well, the headache part is subjective my opinion.</p>
-
-<!-- more -->
-
-
-<p>I think <a href="https://www.npmjs.org/">npm</a> is designed to work in fire and forget style, when you install a module, you don&rsquo;t have to think dependencies hell where some modules require one module with different version number. If you install the latest, then other module simply break. You can&rsquo;t control that other modules author might choose to ignore if their modules dependency is updated with breaking changes. The solution is thet each module has its own <code>node_modules</code> and each module in <code>node_modules</code> has its own <code>node_modules</code> and so on.</p>
-
-<p>A while ago, I wrote a Node.js module named <strong>flatten-packages</strong> that will flatten your node_modules into one level and removing all duplicates by aggressiely delete old version when new one is found. You can find the project on <a href="https://github.com/arifsetiawan/flatten">github</a>. There are things to consider when using <strong>flatten-packages</strong>:</p>
-
-<ul>
-<li>Your node_modules folder might explode with numbers of previously nested node_modules.</li>
-<li>Version changes might break some of your dependency</li>
-<li>You might be confused when trying to relate your package.json with exploded node_modules</li>
-</ul>
-
-
-<p>With <code>flatten-packages -i</code> command, you can get summary of your node_modules hierarcy.</p>
-
-<p>Sample <code>flatten-packages -i</code> output</p>
-
-<p><img src="/images/posts/flatten_node_modules_small.png" title="Flatten small" alt="Flatten small" /></p>
-
-<p>From 17 modules into 73 modules. I can live with that</p>
-
-<p>Now consider this</p>
-
-<p><img src="/images/posts/flatten_node_modules_big.png" title="Flatten big" alt="Flatten big" /></p>
-
-<p>8 layers deep of node_modules with 514 duplicates! If I flatten it, my node_modules folder with explode from 33 modules into 271 modules!</p>
-
-<p>As I have said before, with npm you shouldn&rsquo;t worry about those deeply nested node_modules which cause <a href="https://github.com/joyent/node/issues/6960">Windows issue when filename has more than 260 characters</a> and modules duplicates (514 in above case) that eat up your disk space (disk is cheap now). It&rsquo;s just unlucky for me to work on Windows with ony 10 GB to spare. That what causes my headache.</p>
 ]]></content>
   </entry>
   
