@@ -4,7 +4,7 @@
   <title><![CDATA[Category: edX | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/edx/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-07-09T11:10:53+07:00</updated>
+  <updated>2015-07-10T16:58:19+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -276,6 +276,14 @@ Type <code>validate_certs=no</code> in a new line.</p>
 <h4>Successful install</h4>
 
 <p>After a while, finally there are no more errors on the installation process, and I have my Open edX running. Next, we will continue on customizing our Open edX instance.</p>
+
+<p>To make our life easier, I have <a href="https://github.com/arifsetiawan/configuration">forked edx configuration repo</a> and you can execute it on Ubuntu 12.04 machine with</p>
+
+<p>```</p>
+
+<h1>wget <a href="https://cdn.rawgit.com/arifsetiawan/configuration/master/util/install/sandbox.sh">https://cdn.rawgit.com/arifsetiawan/configuration/master/util/install/sandbox.sh</a> -O &ndash; | bash</h1>
+
+<p>```</p>
 ]]></content>
   </entry>
   
