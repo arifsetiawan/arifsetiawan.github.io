@@ -72,11 +72,17 @@
         <loc>
             http://blog.infinitesquares.net/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/
         </loc>
-        <lastmod>2015-07-10T16:57:52+07:00</lastmod>
+        <lastmod>2015-07-10T17:00:39+07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://blog.infinitesquares.net/blog/2015/07/24/remove-malware-in-wordpress-site/
+        </loc>
+        <lastmod>2015-07-24T15:48:15+07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.infinitesquares.net/blog/archives/</loc>
-        <lastmod>2015-07-10T16:57:52+07:00</lastmod>
+        <lastmod>2015-07-24T15:48:15+07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.infinitesquares.net/blog/categories/</loc>
@@ -84,7 +90,7 @@
     </url>
     <url>
         <loc>http://blog.infinitesquares.net/</loc>
-        <lastmod>2015-07-10T16:57:52+07:00</lastmod>
+        <lastmod>2015-07-24T15:48:15+07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.infinitesquares.net/robots.txt</loc>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-07-10T16:58:19+07:00</updated>
+  <updated>2015-07-24T15:49:17+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Remove Malware in Wordpress Site]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/07/24/remove-malware-in-wordpress-site/"/>
+    <updated>2015-07-24T15:48:00+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/07/24/remove-malware-in-wordpress-site</id>
+    <content type="html"><![CDATA[<p>Beside develop web application with Javascript, I also work as an IT support. I had to manage (setup and server side maintenance) several <a href="https://wordpress.org/">Wordpress</a> based company sites running on IIS 6.1 on Windows Server 2008. Lately, our latest sites has been infected with malware. This is the notes on how I clean those sites.</p>
+
+<!-- more -->
+
+
+<p>To start, let me say that I am not a security expert. If you find any errors within this post, let me know. I would be very grateful for that.</p>
+
+<p>I am following notes on How To Remove Malware From WordPress <a href="http://securepress.org/tutorial-how-to-remove-malware.php">here</a>. Note that, for now, I skipped on cleaning the database. We will revisit this if needed later.</p>
+
+<h2>Wordpress malware scanner</h2>
+
+<p>Using Wordfence Scan plugin, my colleague who manage our site content, give me the list of malicious files:</p>
+
+<p><code>
+wp-content/themes/index.php
+wp-content/plugins/index.php
+wp-content/index.php
+wp-includes/theme.php
+</code></p>
+
+<p>The infected file will looks like this
+<img src="https://cldup.com/Q49Ty7wz0q.jpg" title="Infected index.php" alt="Infected index.php" /></p>
+
+<p>The attack seems like related to the theme. Perhaps there is vurnerability in the third party theme that we used.</p>
+
+<h2>Cleanup steps</h2>
+
+<h3>1. Download latest wordpress</h3>
+
+<p>Go to <a href="https://wordpress.org/download/">Wordpress official site</a> and download the latest version. Extract the zip into a location. We will use it as reference when we clean our files and folder</p>
+
+<h3>2. Remove most of the files</h3>
+
+<p>Before deleting all of the Wordpress files, you might want to make a copy of it first.</p>
+
+<p>Delete everything in the site folder except for the <code>wp-content</code> folder, and the <code>wp-config.php</code> file. Your wordpress folder sites will looks like below:</p>
+
+<p><code>
+wp-content
+wp-config.php
+</code></p>
+
+<h3>3. Inspect wp-config.php</h3>
+
+<p>Check <code>wp-config.php</code> for any malicious content (random string and such). Use latest wordpress downloaded before as reference. You can also change Unique keys and salt using this <a href="https://api.wordpress.org/secret-key/1.1/salt/">wordpress service</a>.</p>
+
+<h3>4. Inspect wp-content folder</h3>
+
+<p>By default, <code>wp-content</code> folder should have following structure</p>
+
+<p><code>
+plugins
+themes
+uploads
+index.php
+</code></p>
+
+<p>Since the content is managed by someone else, I proceed to delete all files except <code>uploads</code> folder. I will have to manually check that folder for malicious files (php files or anything that you may not have uploaded)</p>
+
+<h3>5. Re upload wordpress and themes</h3>
+
+<p>We can just copy and paste from latest wordpress files we downloaded earlier</p>
+
+<p>And we are done.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Install Open edX on Ubuntu 12.04 at Digital Ocean]]></title>
@@ -518,68 +590,6 @@ git reset --merge ORIG_HEAD
 </code></p>
 
 <p>I will add more when I found out other git commands</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello Octopress]]></title>
-    <link href="http://blog.infinitesquares.net/blog/2013/11/21/hello-world/"/>
-    <updated>2013-11-21T13:43:28+07:00</updated>
-    <id>http://blog.infinitesquares.net/blog/2013/11/21/hello-world</id>
-    <content type="html"><![CDATA[<p>Starting to blog with octopress! blogging with markdown is fun!</p>
-
-<h2>Steps on blogging with Octopress</h2>
-
-<p>(So I don&rsquo;t always google)</p>
-
-<!-- more -->
-
-
-<p>Notes copied from <a href="http://octopress.org/docs/blogging/">octopress docs</a></p>
-
-<h3>New article</h3>
-
-<p><code>
-rake new_post["This is awesome article title!"]
-</code>
-edit headers, add categories. Example:
-```</p>
-
-<h1>One category</h1>
-
-<p>categories: Code</p>
-
-<h1>Multiple categories example 1</h1>
-
-<p>categories: [Code, C++]</p>
-
-<h1>Multiple categories example 2</h1>
-
-<p>categories:
-&ndash; Code
-&ndash; C++
-```</p>
-
-<h3>New Pages</h3>
-
-<p>```
-rake new_page[super-awesome]</p>
-
-<h1>creates /source/super-awesome/index.markdown</h1>
-
-<p>```</p>
-
-<h3>Content</h3>
-
-<p>Inserting <code>&lt;!-- more --&gt;</code> will prevent the post content below this mark from being displayed on the index page for the blog posts</p>
-
-<h3>Generate, Preview, Publish</h3>
-
-<p><code>
-bundle exec rake generate   # Generates posts and pages into the public directory
-bundle exec rake preview    # Watches, and mounts a webserver at http://localhost:4000
-bundle exec rake deploy     # Deploy to git
-</code></p>
 ]]></content>
   </entry>
   

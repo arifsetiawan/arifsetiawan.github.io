@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: edX | Infinite | Squares]]></title>
-  <link href="http://blog.infinitesquares.net/blog/categories/edx/atom.xml" rel="self"/>
+  <title><![CDATA[Category: OpenEdX | Infinite | Squares]]></title>
+  <link href="http://blog.infinitesquares.net/blog/categories/openedx/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-07-10T16:58:19+07:00</updated>
+  <updated>2015-07-24T15:49:17+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
