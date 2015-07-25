@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Customizing Open edX - Settings - Infinite | Squares</title>
+  <meta name="author" content="Nurul Arif Setiawan">
+
+  
+  <meta name="description" content="After finished OpenEdX installation we need to modify some settings to change text, logo and activate some functionality: changing site name, using &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2015/07/25/customizing-open-edx-settings">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45905282-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Infinite | Squares</a></h1>
+  
+    <h2>Art of code and more</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.infinitesquares.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="https://www.catchk.com/" target="_blank">Catchk</a></li>
+  <li><a href="http://cymbidium.co.id/" target="_blank">Cymbidium</a></li>
+  <li><a href="http://www.jepret.in/" target="_blank">Jepret Cloud</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Customizing Open edX - Settings</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-25T20:24:00+07:00" pubdate data-updated="true">Jul 25<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>After finished <a href="http://blog.infinitesquares.net/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/">OpenEdX installation</a> we need to modify some settings to change text, logo and activate some functionality: changing site name, using third party auth and many others. This is where things are a bit confusing because some documentations use different approach.</p>
+
+<!-- more -->
+
+
+<h2>Ways to update Open edX settings</h2>
+
+<p>When reading several Open edX documentation, I found there are several methods to update Open edX settings:</p>
+
+<ol>
+<li>Update <code>server-vars.yml</code> at <code>/edx/app/edx_ansible/server-vars.yml</code></li>
+<li>Update JSON config like <code>lms.env.json</code> or <code>cms.env.json</code> in <code>/edx/app/edxapp</code></li>
+<li>Change <code>*.py</code> files in <code>/edx/app/edxapp/edx-platform/cms/envs</code> or <code>/edx/app/edxapp/edx-platform/lms/envs</code></li>
+</ol>
+
+
+<p>In tutorial about <a href="https://github.com/edx/edx-platform/wiki/Custom-Theming">custom theming</a>, it said we have to update <code>/edx/app/edx_ansible/server-vars.yml</code> then re run provisining script</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /edx/bin/update edx-platform master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In tutorial about <a href="http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/mobile.html">setting up mobile application</a>, it said we need to update <code>edx/app/edxapp/lms.env.json</code> then restart the server with</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /edx/bin/supervisorctl restart edxapp:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In tutorial about <a href="http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/configuration/enable_prerequisites.html">enabling course prerequisites</a>, we need to</p>
+
+<blockquote><p>Set the value of MILESTONES_APP in the /cms/envs/common.py and /lms/envs/common.py files to True</p></blockquote>
+
+<p>Then run database migration with (see <a href="https://github.com/edx/configuration/wiki/edX-Managing-the-Full-Stack">here</a> for how to manage Open edX full stack):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo su edxapp -s /bin/bash
+</span><span class='line'>cd ~
+</span><span class='line'>source edxapp_env
+</span><span class='line'>python /edx/app/edxapp/edx-platform/manage.py {lms/cms} syncdb --migrate --settings aws</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, do all the methods is related? And what is recommended approach?</p>
+
+<h2>How Open edX read settings</h2>
+
+<p>Open edX app (CMS and LMS) both has <code>envs</code> folders consisted to several <code>*.py</code> files. Those files are there to provide default sane settings in case you as the developer or admin did not provide customized settings. That is usually the case when we start exploring Open edX (either dev-stack or full-stack installation).</p>
+
+<p>We only need to pay attention to two files if you deploy full-stack like me. If you working on dev-stack there is one setting file for that environment too.</p>
+
+<ol>
+<li>common.py &ndash; contains <em>default</em> settings, so that reasonable things happen; this way a default setting just for django does not need to appear in a playbook. Rule of thumb:  Never change these, unless you are doing new application/component development, and you are setting a new <em>reasonable default</em> for your component.</li>
+<li>aws.py &ndash; this file basically executes after common.py, and inspects the environment, including the json files in (<code>lms.env.json</code> and others) to see if some default should be modified.</li>
+<li>devstack.py &ndash; builds on top of aws.py, changing any settings as appropriate so that it may run on development servers, and locally.</li>
+</ol>
+
+
+<p>So now we have link between updating <code>envs/aws.py</code> (3rd method) and <code>*.json</code> (2nd method). In general changes to <code>*.json</code> will be read and used to override default setting from <code>common.py</code></p>
+
+<p>In case you notice, in database migration command above we passed parameter <code>--settings aws</code> which indicate that we want to use <code>envs/aws.py</code> as our settings.</p>
+
+<p>Now, how it all connected to the <code>server-vars.yml</code> (1st method)? it turns out that <code>*.json</code> files is generated from <code>server-vars.yml</code> during ansible playbook process.</p>
+
+<p>When we run our ansible install commands</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cd /var/tmp/configuration/playbooks && sudo ansible-playbook -c local ./edx_sandbox.yml -i "localhost,"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will create a four JSON config files:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># lms.env.json
+</span><span class='line'># lms.auth.json
+</span><span class='line'># cms.env.json
+</span><span class='line'># cms.auth.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Those json files is then read when <code>aws.py</code> is loaded.</p>
+
+<h2>Working with settings</h2>
+
+<p>For the full list of settings that you can override in <code>server-vars.yml</code> check <a href="https://github.com/edx/configuration/blob/master/playbooks/roles/edxapp/defaults/main.yml">here</a>. If you see <code>main.yml</code> file in previous link, there are more than 100 settings that you can tweak and set. We can pick one of the three methods above for development while we learn about Open edX and make sure those settings working as we expected.</p>
+
+<p>For initial development purposes, we can start with creating our own settings file or modifying the one that used by default (<code>aws.py</code> in case of full stack install as we have) to experiment and determine what works. This is fast because we only need to restart the app after settings update.</p>
+
+<p>Or we can start with modifying JSON file in <code>/edx/app/edxapp/*.json</code> and check in <code>aws.py</code> that the variable is read (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). This is also fast because we only need to restart the app after settings update.</p>
+
+<p>For long-term development purposes, it is better if we use <code>server-vars.yml</code> and to ensure that each variable is actually read in by <code>aws.py</code> (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). <code>server-vars.yml</code> will then be read and used by the update command. Note that update command will run ansible playbook and it can take a while.</p>
+
+<p>I am still learning Open edX and if you find any errors or have question or suggestion, please let me know.</p>
+
+<p>Next, we will continue on customizing settings on our Open edX instance to enable third party auth and many others.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nurul Arif Setiawan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-25T20:24:00+07:00" pubdate data-updated="true">Jul 25<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/notes/'>Notes</a>, <a class='category' href='/blog/categories/openedx/'>OpenEdX</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2015/07/25/customizing-open-edx-settings/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2015/07/25/customizing-open-edx-settings/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/07/24/remove-malware-in-wordpress-site/" title="Previous Post: Remove Malware in Wordpress site">&laquo; Remove Malware in Wordpress site</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>I'm Arif Setiawan, primarily working as fullstack web and C++ developer.</p> 
+  <p>I helped development of <a href="http://www.catchk.com/">Catchk</a>, a photo resume platform.</p>
+  <p>I also developed backend service for <a href="http://www.jepret.in/">Jepret Cloud</a>, a platfom for photo collecting and management.<br>And <a href="http://www.cymbidium.co.id/">Cymbidium</a>, a document archiving and processing solution.</p>
+  <p>I worked with many languages: C, C++, C#, Javascript, PHP, HTML, CSS, Objective-C, Java and work on various platforms: Qt, OpenCV, .NET, iOS, Android and Node.js.<p>
+  <p>I also have interest in Machine Learning, Image Processing, and Big Data Processing and Analytics<p>
+</section>
+<section class="twitter2">
+  <h1>
+    <a href="https://twitter.com/ken121f" target="_blank">
+      <img src="/images/logo.png" width="32" height="32">
+      ken121f
+    </a>
+  </h1>
+</section><section class="github2">
+  <h1>
+    <a href="https://github.com/arifsetiawan" target="_blank">
+      <img src="/images/github_64.png" width="32" height="32">
+      arifsetiawan
+    </a>
+  </h1>
+</section><section class="linkedin">
+  <h1>
+    <a href="https://www.linkedin.com/pub/nurul-arif-setiawan/43/b71/311" target="_blank"><img src="/images/linkedin_64.png" width="32" height="32">Arif Setiawan</a>
+  </h1>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/25/customizing-open-edx-settings/">Customizing Open edX - Settings</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/24/remove-malware-in-wordpress-site/">Remove Malware in Wordpress Site</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/05/install-open-edx-on-ubuntu-12-dot-04-at-digital-ocean/">Install Open edX on Ubuntu 12.04 at Digital Ocean</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/oauth2-flows/">OAuth2 Flows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/01/getting-started-with-gulp/">Getting Started With Gulp</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nurul Arif Setiawan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'infinitesquares';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2015/07/25/customizing-open-edx-settings/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2015/07/25/customizing-open-edx-settings/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

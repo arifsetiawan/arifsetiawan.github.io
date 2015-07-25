@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ubuntu | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-07-24T15:49:17+07:00</updated>
+  <updated>2015-07-25T20:32:58+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -275,7 +275,7 @@ Type <code>validate_certs=no</code> in a new line.</p>
 
 <h4>Successful install</h4>
 
-<p>After a while, finally there are no more errors on the installation process, and I have my Open edX running. Next, we will continue on customizing our Open edX instance.</p>
+<p>After a while, finally there are no more errors on the installation process, and I have my Open edX running.</p>
 
 <p>To make our life easier, I have <a href="https://github.com/arifsetiawan/configuration">forked edx configuration repo</a> and you can execute it on Ubuntu 12.04 machine with</p>
 
@@ -284,6 +284,10 @@ Type <code>validate_certs=no</code> in a new line.</p>
 <h1>wget <a href="https://cdn.rawgit.com/arifsetiawan/configuration/master/util/install/sandbox.sh">https://cdn.rawgit.com/arifsetiawan/configuration/master/util/install/sandbox.sh</a> -O &ndash; | bash</h1>
 
 <p>```</p>
+
+<p>I am still learning Open edX and if you find any errors or have question or suggestion, please let me know.</p>
+
+<p>Next, we will continue on exploring how settings work on our Open edX instance.</p>
 ]]></content>
   </entry>
   
