@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Nodejs | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-07-25T20:40:36+07:00</updated>
+  <updated>2015-08-16T06:02:03+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -609,8 +609,9 @@ res.setHeader("Expires", moment().add(1,'y').toDate().toUTCString());
 
 <p>Here, I assume you already have a Nodejs app running. Use forever or pm2 for production server.</p>
 
-<p>Remove the default site file. You can choose to keep this, just make sure the server_name is different.
-<code>
+<p>Remove the default site file. You can choose to keep this, just make sure the server_name is different.</p>
+
+<p><code>
 sudo rm /etc/nginx/sites-available/default
 sudo rm /etc/nginx/sites-enabled/default
 </code></p>
@@ -651,6 +652,12 @@ location / {
 ```</p>
 
 <p>Save and close the nano text editor. Make sure you have created logs folder as shown above.</p>
+
+<p>Then create a symbolic link from <code>sites-available</code> to <code>sites-enabled</code></p>
+
+<p><code>
+sudo ln –s /etc/nginx/sites-available/mysite /etc/nginx/sites-enabled/mysite
+</code></p>
 
 <p>Check your site file
 <code>

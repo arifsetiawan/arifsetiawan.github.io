@@ -4,7 +4,7 @@
   <title><![CDATA[Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-07-25T20:40:36+07:00</updated>
+  <updated>2015-08-16T06:02:03+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -1083,6 +1083,12 @@ Type <code>validate_certs=no</code> in a new line.</p>
 
 
 <p>Save and close the nano text editor. Make sure you have created logs folder as shown above.</p>
+
+<p>Then create a symbolic link from <code>sites-available</code> to <code>sites-enabled</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln –s /etc/nginx/sites-available/mysite /etc/nginx/sites-enabled/mysite</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Check your site file</p>
 

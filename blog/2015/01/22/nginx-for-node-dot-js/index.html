@@ -177,6 +177,12 @@
 
 <p>Save and close the nano text editor. Make sure you have created logs folder as shown above.</p>
 
+<p>Then create a symbolic link from <code>sites-available</code> to <code>sites-enabled</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln –s /etc/nginx/sites-available/mysite /etc/nginx/sites-enabled/mysite</span></code></pre></td></tr></table></div></figure>
+
+
 <p>Check your site file</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
