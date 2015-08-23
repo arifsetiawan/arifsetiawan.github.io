@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Using SSH on Azure Linux VM - Infinite | Squares</title>
+  <title>Update Open edX Codebase - Infinite | Squares</title>
   <meta name="author" content="Nurul Arif Setiawan">
 
   
-  <meta name="description" content="Typing password is a time wasting process. It is recommended to use SSH with public private keys to access Linux VM box. To do that in Azure, first &hellip;">
+  <meta name="description" content="Open edX development is very active and its updated very often. You can update existing Open edX deployment to use the latest codebase. Before we &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2015/01/20/using-ssh-on-azure-linux-vm">
+  <link rel="canonical" href="http://blog.infinitesquares.net/blog/2015/08/23/update-open-edx-codebase">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Infinite | Squares" type="application/atom+xml">
@@ -85,7 +85,7 @@
   
   <header>
     
-      <h1 class="entry-title">Using SSH on Azure Linux VM</h1>
+      <h1 class="entry-title">Update Open edX Codebase</h1>
     
     
       <p class="meta">
@@ -101,37 +101,49 @@
   
 
 
-<time datetime="2015-01-20T09:49:13+07:00" pubdate data-updated="true">Jan 20<span>th</span>, 2015</time>
+<time datetime="2015-08-23T10:48:55+07:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Typing password is a time wasting process. It is recommended to use SSH with public private keys to access Linux VM box. To do that in Azure, first you need to create a key pair using following command</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>openssl req -x509 -nodes -days 36500 -newkey rsa:2048 -keyout MyAzure.key -out MyAzure.pem</span></code></pre></td></tr></table></div></figure>
-
-
-
+<div class="entry-content"><p><a href="https://github.com/edx/edx-platform">Open edX</a> development is very active and its updated very often. You can update existing Open edX deployment to use the latest codebase.</p>
 
 <!-- more -->
 
 
-<p>Then you can :</p>
+<p>Before we continue to update Open edX codebase, please make sure you have backup of current deployment settings file. In previous post I wrote about several methods you can use to <a href="http://blog.infinitesquares.net/blog/2015/07/25/customizing-open-edx-settings/">customize your Open edX settings</a>. All settings defined in JSON files and <code>*.py</code> will reset. Settings stored in <code>server-vars.yml</code> will still be exists. If you only use <code>server-vars.yml</code> then you&rsquo;re good to go. The update process will not affecting your existing database.</p>
 
-<ul>
-<li>Proceed to create VM in using Azure portal (recommended for beginners and when you don&rsquo;t need some sort of automation). You need to upload .pem file.</li>
-<li>Use azure cli to create your VM from command line (advanced user). Details on this available in my <a href="https://gist.github.com/arifsetiawan/afcf9adeb9922066f81f">gist here</a></li>
-</ul>
-
-
-<p>To use SSH key:</p>
+<p>SSH to your Open edX machine and do update</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh -i C:\\FOLDER_NAME\\MyAzure.key USER@DOMAIN.cloudapp.net</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sudo /edx/bin/update configuration release
+</span><span class='line'># sudo /edx/bin/update edx-platform release</span></code></pre></td></tr></table></div></figure>
 
+
+<p>I experienced an error</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error: invalid command 'egg_info'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which can be resolved easily by</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># pip install --upgrade setuptools</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After completed, do migrate for both LMS and CMS</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cd /edx/app/edxapp/edx-platform && sudo -u www-data /edx/bin/python.edxapp manage.py lms syncdb --migrate --settings aws
+</span><span class='line'># cd /edx/app/edxapp/edx-platform && sudo -u www-data /edx/bin/python.edxapp manage.py cms syncdb --migrate --settings aws</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And we are done. You have the latest Open edX code.</p>
 </div>
 
 
@@ -154,12 +166,12 @@
   
 
 
-<time datetime="2015-01-20T09:49:13+07:00" pubdate data-updated="true">Jan 20<span>th</span>, 2015</time>
+<time datetime="2015-08-23T10:48:55+07:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/azure/'>Azure</a>
+    <a class='category' href='/blog/categories/notes/'>Notes</a>, <a class='category' href='/blog/categories/openedx/'>OpenEdX</a>
   
 </span>
 
@@ -168,7 +180,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2015/01/20/using-ssh-on-azure-linux-vm/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2015/01/20/using-ssh-on-azure-linux-vm/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.infinitesquares.net/blog/2015/08/23/update-open-edx-codebase/" data-via="ken121f" data-counturl="http://blog.infinitesquares.net/blog/2015/08/23/update-open-edx-codebase/" >Tweet</a>
   
   
   
@@ -177,10 +189,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/13/issues-on-using-iisnode-on-windows-7/" title="Previous Post: Issues on using iisnode on Windows 7">&laquo; Issues on using iisnode on Windows 7</a>
+        <a class="basic-alignment left" href="/blog/2015/07/25/customizing-open-edx-settings/" title="Previous Post: Customizing Open edX - Settings">&laquo; Customizing Open edX - Settings</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/01/22/nginx-for-node-dot-js/" title="Next Post: Nginx for Node.js">Nginx for Node.js &raquo;</a>
       
     </p>
   </footer>
@@ -268,8 +278,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2015/01/20/using-ssh-on-azure-linux-vm/';
-        var disqus_url = 'http://blog.infinitesquares.net/blog/2015/01/20/using-ssh-on-azure-linux-vm/';
+        var disqus_identifier = 'http://blog.infinitesquares.net/blog/2015/08/23/update-open-edx-codebase/';
+        var disqus_url = 'http://blog.infinitesquares.net/blog/2015/08/23/update-open-edx-codebase/';
         var disqus_script = 'embed.js';
       
     (function () {

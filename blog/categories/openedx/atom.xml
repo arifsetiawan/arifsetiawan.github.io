@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OpenEdX | Infinite | Squares]]></title>
   <link href="http://blog.infinitesquares.net/blog/categories/openedx/atom.xml" rel="self"/>
   <link href="http://blog.infinitesquares.net/"/>
-  <updated>2015-08-16T06:02:03+07:00</updated>
+  <updated>2015-08-23T11:01:24+07:00</updated>
   <id>http://blog.infinitesquares.net/</id>
   <author>
     <name><![CDATA[Nurul Arif Setiawan]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Update Open edX Codebase]]></title>
+    <link href="http://blog.infinitesquares.net/blog/2015/08/23/update-open-edx-codebase/"/>
+    <updated>2015-08-23T10:48:55+07:00</updated>
+    <id>http://blog.infinitesquares.net/blog/2015/08/23/update-open-edx-codebase</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/edx/edx-platform">Open edX</a> development is very active and its updated very often. You can update existing Open edX deployment to use the latest codebase.</p>
+
+<!-- more -->
+
+
+<p>Before we continue to update Open edX codebase, please make sure you have backup of current deployment settings file. In previous post I wrote about several methods you can use to <a href="http://blog.infinitesquares.net/blog/2015/07/25/customizing-open-edx-settings/">customize your Open edX settings</a>. All settings defined in JSON files and <code>*.py</code> will reset. Settings stored in <code>server-vars.yml</code> will still be exists. If you only use <code>server-vars.yml</code> then you&rsquo;re good to go. The update process will not affecting your existing database.</p>
+
+<p>SSH to your Open edX machine and do update
+```</p>
+
+<h1>sudo /edx/bin/update configuration release</h1>
+
+<h1>sudo /edx/bin/update edx-platform release</h1>
+
+<p>```</p>
+
+<p>I experienced an error
+<code>
+error: invalid command 'egg_info'
+</code></p>
+
+<p>which can be resolved easily by
+```</p>
+
+<h1>pip install &mdash;upgrade setuptools</h1>
+
+<p>```</p>
+
+<p>After completed, do migrate for both LMS and CMS
+```</p>
+
+<h1>cd /edx/app/edxapp/edx-platform &amp;&amp; sudo -u www-data /edx/bin/python.edxapp manage.py lms syncdb &mdash;migrate &mdash;settings aws</h1>
+
+<h1>cd /edx/app/edxapp/edx-platform &amp;&amp; sudo -u www-data /edx/bin/python.edxapp manage.py cms syncdb &mdash;migrate &mdash;settings aws</h1>
+
+<p>```</p>
+
+<p>And we are done. You have the latest Open edX code.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Customizing Open edX - Settings]]></title>
@@ -52,12 +98,17 @@ sudo /edx/bin/supervisorctl restart edxapp:
 
 <p>Then run database migration with (see <a href="https://github.com/edx/configuration/wiki/edX-Managing-the-Full-Stack">here</a> for how to manage Open edX full stack):</p>
 
-<p><code>
-sudo su edxapp -s /bin/bash
-cd ~
-source edxapp_env
-python /edx/app/edxapp/edx-platform/manage.py {lms/cms} syncdb --migrate --settings aws
-</code></p>
+<p>```</p>
+
+<h1>sudo su edxapp -s /bin/bash</h1>
+
+<h1>cd ~</h1>
+
+<h1>source edxapp_env</h1>
+
+<h1>python /edx/app/edxapp/edx-platform/manage.py {lms/cms} syncdb &mdash;migrate &mdash;settings aws</h1>
+
+<p>```</p>
 
 <p>Now, do all the methods is related? And what is recommended approach?</p>
 
@@ -90,17 +141,12 @@ python /edx/app/edxapp/edx-platform/manage.py {lms/cms} syncdb --migrate --setti
 
 <p>It will create a four JSON config files:</p>
 
-<p>```</p>
-
-<h1>lms.env.json</h1>
-
-<h1>lms.auth.json</h1>
-
-<h1>cms.env.json</h1>
-
-<h1>cms.auth.json</h1>
-
-<p>```</p>
+<p><code>
+lms.env.json
+lms.auth.json
+cms.env.json
+cms.auth.json
+</code></p>
 
 <p>Those json files is then read when <code>aws.py</code> is loaded.</p>
 
@@ -112,7 +158,7 @@ python /edx/app/edxapp/edx-platform/manage.py {lms/cms} syncdb --migrate --setti
 
 <p>Or we can start with modifying JSON file in <code>/edx/app/edxapp/*.json</code> and check in <code>aws.py</code> that the variable is read (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). This is also fast because we only need to restart the app after settings update.</p>
 
-<p>For long-term development purposes, it is better if we use <code>server-vars.yml</code> and to ensure that each variable is actually read in by <code>aws.py</code> (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). <code>server-vars.yml</code> will then be read and used by the update command. Note that update command will run ansible playbook and it can take a while.</p>
+<p>For long-term development purposes, it is better if we use <code>server-vars.yml</code> and to ensure that each variable is actually read in by <code>aws.py</code> (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). <code>server-vars.yml</code> will then be read and used by the update command. Note that update command will run ansible playbook and it can take a while. Also if you updated your Open edX with the latest code from git, both JSON config files and envs folder will be reset. So its better to use <code>server-vars.yml</code>.</p>
 
 <p>I am still learning Open edX and if you find any errors or have question or suggestion, please let me know.</p>
 

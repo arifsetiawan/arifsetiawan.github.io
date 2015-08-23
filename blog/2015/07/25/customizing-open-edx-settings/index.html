@@ -146,10 +146,10 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo su edxapp -s /bin/bash
-</span><span class='line'>cd ~
-</span><span class='line'>source edxapp_env
-</span><span class='line'>python /edx/app/edxapp/edx-platform/manage.py {lms/cms} syncdb --migrate --settings aws</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sudo su edxapp -s /bin/bash
+</span><span class='line'># cd ~
+</span><span class='line'># source edxapp_env
+</span><span class='line'># python /edx/app/edxapp/edx-platform/manage.py {lms/cms} syncdb --migrate --settings aws</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Now, do all the methods is related? And what is recommended approach?</p>
@@ -185,10 +185,10 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># lms.env.json
-</span><span class='line'># lms.auth.json
-</span><span class='line'># cms.env.json
-</span><span class='line'># cms.auth.json</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lms.env.json
+</span><span class='line'>lms.auth.json
+</span><span class='line'>cms.env.json
+</span><span class='line'>cms.auth.json</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Those json files is then read when <code>aws.py</code> is loaded.</p>
@@ -201,7 +201,7 @@
 
 <p>Or we can start with modifying JSON file in <code>/edx/app/edxapp/*.json</code> and check in <code>aws.py</code> that the variable is read (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). This is also fast because we only need to restart the app after settings update.</p>
 
-<p>For long-term development purposes, it is better if we use <code>server-vars.yml</code> and to ensure that each variable is actually read in by <code>aws.py</code> (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). <code>server-vars.yml</code> will then be read and used by the update command. Note that update command will run ansible playbook and it can take a while.</p>
+<p>For long-term development purposes, it is better if we use <code>server-vars.yml</code> and to ensure that each variable is actually read in by <code>aws.py</code> (if not, make sure that happens, and send in a Patch Request to contribute to Open edX). <code>server-vars.yml</code> will then be read and used by the update command. Note that update command will run ansible playbook and it can take a while. Also if you updated your Open edX with the latest code from git, both JSON config files and envs folder will be reset. So its better to use <code>server-vars.yml</code>.</p>
 
 <p>I am still learning Open edX and if you find any errors or have question or suggestion, please let me know.</p>
 
@@ -254,6 +254,8 @@
         <a class="basic-alignment left" href="/blog/2015/07/24/remove-malware-in-wordpress-site/" title="Previous Post: Remove Malware in Wordpress site">&laquo; Remove Malware in Wordpress site</a>
       
       
+        <a class="basic-alignment right" href="/blog/2015/08/23/update-open-edx-codebase/" title="Next Post: Update Open edX Codebase">Update Open edX Codebase &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -299,6 +301,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/23/update-open-edx-codebase/">Update Open edX Codebase</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/25/customizing-open-edx-settings/">Customizing Open edX - Settings</a>
       </li>
     
@@ -312,10 +318,6 @@
     
       <li class="post">
         <a href="/blog/2015/06/01/oauth2-flows/">OAuth2 Flows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/01/getting-started-with-gulp/">Getting Started With Gulp</a>
       </li>
     
   </ul>
